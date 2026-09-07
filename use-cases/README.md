@@ -1,6 +1,10 @@
 # Reflexivity ユースケース
 
-英語版の canonical 構造に合わせて、ペルソナ別・インサイトタイプ別にユースケースを整理します。翻訳コンテンツは順次追加します。
+英語版の canonical 構造に合わせて、ペルソナ別・インサイトタイプ別にユースケースを整理します。
+
+> **レビュー用:** [Reflexivity Insights Proof Set — Sales Enablement 日本語ドラフト](insights-proof-set-sales-enablement.md)
+
+このレビュー用ページには、提供された原資料の28件のユースケースを日本語化し、初稿日・Resource・サービスバージョン・元のLive Insightリンクを付けています。著者情報は原資料から確定できないため、現在は要確認です。
 
 ## ペルソナ別
 
