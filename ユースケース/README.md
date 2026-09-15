@@ -18,9 +18,15 @@ Reflexivity の実例を、**運用者別**または**運用資産別**の2つ�
 
 > 以下は日付時点のプラットフォーム出力をもとにした例です。利用時には最新の市場データと照合するか、説明用の事例としてご利用ください。
 
+## 提供元
+
+ユースケースにはReflexivityが整理した例に加え、パートナーから提供された活用例も掲載しています。
+
+**株式会社QUICK提供**のページには、各記事の冒頭に **提供: 株式会社QUICK** と **提供日** を明記しています。元のメール本文、送受信者情報、顧客名、署名等は公開せず、活用例の内容だけを公開用に再構成しています。
+
 ## Resource
 
-既存のユースケースコレクションは **Reflexivity Insights Proof Set — Sales Enablement.docx**（2026-09-07提供）および追加のReflexivity research examplesをもとに整理しています。
+既存のユースケースコレクションは **Reflexivity Insights Proof Set — Sales Enablement.docx**（2026-09-07提供）、追加のReflexivity research examples、およびパートナー提供の活用例をもとに整理しています。
 
 元資料の確認、出典、元ファイルへのアクセスに関するお問い合わせは **jim@reflexivity.com** までご連絡ください。
 
