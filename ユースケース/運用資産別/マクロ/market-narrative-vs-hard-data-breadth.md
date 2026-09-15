@@ -12,7 +12,7 @@ source_text_status: faithful_japanese_rendering_from_platform_research
 publication_mode: faithful-source-preserving
 -->
 
-# 市場ナラティブとハードデータの乖離を複数市場から検証する
+# 市場の語りと実データの乖離を複数市場から検証する
 
 **著者:** Reflexivity Research  
 **主な運用資産:** マクロ、株式、債券、クロスアセット  
@@ -22,35 +22,35 @@ publication_mode: faithful-source-preserving
 
 ## 調査の問い
 
-**「Strong US Economy」という市場の語りは、本当に幅広い証拠に支えられて広がりしているのか、それとも一部の強い見出しに依存しているのか。**
-原資料は直近60日程度のMacro News、Fed関連情報、予測市場、株式テーマのけん引構造、実データを一つの評価表にまとめています。
+**「米国景気は強い」という市場の語りは、本当に幅広い証拠に支えられて裾野が広がっているのか、それとも一部の強い見出しに依存しているのか。**
+原資料は直近60日程度のマクロ関連ニュース、FRB関連情報、予測市場、株式テーマのけん引構造、実データを一つの評価表にまとめています。
 
 ## 結論
 
-原資料の結論は**広がりは限定的**です。実データはMixed、予測市場はCleanなGrowthよりInflation/Hike Riskを意識し、Equity Leadershipは集中していると評価しています。
+原資料の結論は**広がりは限定的**です。実データは強弱が入り混じり、予測市場は素直な成長シナリオよりインフレや追加利上げのリスクを意識し、株式市場のけん引役も集中していると評価しています。
 
 ## 3つの大きな乖離
 
 ### 1. 雇用: ヘッドラインと広がり
 
-- August Payroll: **162k vs 56k expected**
-- Private ADP Hiring: **38k**
+- 8月雇用者数: **16.2万人（市場予想5.6万人）**
+- ADP民間雇用: **3.8万人**
 見出しは強いが、より広い雇用指標との整合性が弱いという指摘です。
 
 ### 2. 金融政策見通し: 市場織り込みとディスインフレ期待
 
-- Hold: **50.5%**
-- 25bp Hike: **49.5%**
-- Cut: **約0.5%**
+- 据え置き: **50.5%**
+- 25bp利上げ: **49.5%**
+- 利下げ: **約0.5%**
 - Core PCE: **3.3%**
-Soft/Strong Economyの市場の語りならEasing期待が強まるはずなのに、市場はむしろ追加Tighteningの可能性を織り込んでいる点をContradictionとしています。
+景気が強いまま物価が落ち着くという語りなら緩和期待が強まるはずですが、市場はむしろ追加引き締めの可能性を織り込んでおり、そこに矛盾があると見ています。
 
 ### 3. 株式のけん引役: 指数高値と内部の狭さ
 
-- 1か月Theme PerformanceのLeader-to-Laggard Gap: **48pt**（+33.4%〜-14.7%）
-- 調査したThemeのうち**10テーマがNegative**
+- 1か月のテーマ別騰落率で、首位と最下位の差は **48ポイント**（+33.4%〜-14.7%）
+- 調査対象のうち**10テーマがマイナス**
 - S&P 500: **7,718.6**、52週高値7,799の約99%
-Indexは高値圏でも内部Breadthが広がっていないという読みです。
+指数は高値圏でも市場内部の広がりが伴っていないという読みです。
 ニュースの語り口と、実際の経済指標・テーマ別リターンを横に並べると、どこまで同じ方向を向いているかが見えやすくなります。
 
 ![市場ナラティブとハードデータの主要図表](../../../画像/ユースケース/reflexivity/RX-USECASE-0036/source-figures.webp)
@@ -61,27 +61,27 @@ Indexは高値圏でも内部Breadthが広がっていないという読みで�
 
 | 証拠の種類 | 市場ナラティブ | ハードデータ | 判定 |
 |---|---|---|---|
-| Labor | Hot Payroll | ADP / broader gauge softer | Narrow |
-| Fed / 予測市場s | Benign, cuts coming | Hold/Hikeほぼ五分、Core PCE 3.3% | Contradicted |
-| Equity Leadership | Broad rally | 48pt dispersion、10 themes negative | Narrow |
-| News Tone | Strong Economy | Hike/Inflation-risk framingが約3.5倍 | Cautious |
-| Manufacturing / Growth | Expansion intact | ISM New Orders 56.0→53.7、Retail Sales低下 | Decelerating |
-| EOY State | Soft Landing | Soft Landing 55%、Overheating 42.5% | Split |
+| 雇用 | 雇用者数は強い | ADPなど広い指標は弱い | 広がりは限定的 |
+| FRB・予測市場 | 利下げ期待 | 据え置きと利上げがほぼ五分、コアPCE 3.3% | 矛盾 |
+| 株式のけん引構造 | 幅広い上昇 | 48ポイントの格差、10テーマがマイナス | 広がりは限定的 |
+| ニュースの論調 | 景気は強い | 利上げ・インフレ懸念の見出しが約3.5倍 | 慎重 |
+| 製造業・成長 | 拡張継続 | ISM新規受注 56.0→53.7、小売売上高も低下 | 減速 |
+| 年末時点の景気像 | ソフトランディング | ソフトランディング55%、過熱42.5% | 見方が割れる |
 
 ## 補足シグナル
 
-- 30件のMacro 見出し Sampleでは、Strong-dataより**Hike / Inflation-risk framingが約3.5倍**
+- 30件のマクロ関連ニュース見出しでは、強い経済指標を強調するものより**利上げ・インフレリスクを強調するものが約3.5倍**
 - ISM New Ordersは**56.0 → 53.7**
 - Polymarket: Soft Landing **55%**、Overheating **42.5%**
-- Initial Jobless Claims **206k**、Unemployment **4.1%**はStabilizerとして残る
+- 新規失業保険申請 **20.6万件**、失業率 **4.1%**は景気を支える材料として残る
 
 ## 分析上の留意点
 
-- 対象期間のFed一次資料がDocument Indexから完全には取得できず、一部はCalendar / Newsから推定
-- Equity Theme名が匿名化され、Named SectorではなくReturn DispersionでBreadthを測定
-- News ToneはKeyword-based 見出し Tallyで、校正済みSentiment Scoreではない
-- Economic Calendar SurpriseはTool Range制約により直近週中心
-「市場の語り」をNewsだけで判断せず、**Macro Data・Rates・Equity Internals・予測市場を同じ問いの下で横断する**調査です。
+- 対象期間のFed一次資料が文書インデックスから完全には取得できず、一部は経済カレンダーやニュースから推定
+- 株式テーマ名が匿名化されているため、個別セクター名ではなく騰落率のばらつきで市場の広がりを測定
+- ニュースの論調はキーワードに基づく見出し件数であり、校正済みのセンチメント指標ではない
+- 経済指標の予想比サプライズは、取得範囲の制約から直近週が中心
+「市場の語り」をNewsだけで判断せず、**マクロデータ・金利・株式市場内部・予測市場を同じ問いの下で横断する**調査です。
 
 ## このユースケースで確認できること
 

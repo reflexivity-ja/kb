@@ -31,16 +31,16 @@ publication_mode: faithful-source-preserving
 
 - Real final sales to private domestic purchasers: **Q2 2026 +8.5% SAAR**
 - 実質GDPの総合値: **+1.48%**
-Net ExportとInventoryが見出しを押し下げており、Domestic Demandは見出しより強い。これはRollover仮説に対する最も強い反証材料です。
+純輸出と在庫がGDPの総合値を押し下げており、国内民間需要は総合値より強い。これはRollover仮説に対する最も強い反証材料です。
 
 ### 2. 労働市場と実質賃金
 
 - NFP 3か月平均: 約**71k**
-- 原資料のBreakeven目安: 約**150k**
-- 実質賃金 Growth: **-0.07% YoY**
-- Unemployment: **4.1%**
+- 雇用を維持するための目安: 約**150k**
+- 実質賃金の前年比伸び率: **-0.07% YoY**
+- 失業率: **4.1%**
 - ADP: **+38k**
-ここを「最も明確なCrack」と評価しています。
+ここを景気の強さに現れた「最も明確なほころび」と評価しています。
 
 ### 3. 景況感指標とPMI
 
@@ -48,13 +48,13 @@ Net ExportとInventoryが見出しを押し下げており、Domestic Demandは�
 - S&P Global Manufacturing PMI **53.9**
 - ISM New Orders **53.7**
 - JOLTS Openings **7.27m**
-Expansion域ではあるがMomentumは低下、という中間的な読みです。
+拡張圏にはあるものの、勢いは低下、という中間的な読みです。
 
 ### 4. 信用環境と延滞率
 
 - C&I Tightening: **0.0**（1年前9.5）
 - Credit Card Delinquency: **2.85%**（2年前3.22%）
-Credit Stressはまだ中心リスクではない、と整理しています。
+信用ストレスはまだ中心的なリスクではない、と整理しています。
 
 ### 5. 金利と金融政策の波及
 
@@ -62,17 +62,17 @@ Credit Stressはまだ中心リスクではない、と整理しています。
 - 10y-3m: **+0.87pp**
 - 10y Real Yield: **2.42%**
 - Fed Funds: **3.63%**
-CurveはDis-invertしたが、Real RateがRestrictiveで、過去のTightening Lagが残るという読みです。
+イールドカーブの逆転は解消したものの、実質金利はなお引き締め的で、過去の金融引き締めの遅行効果が残るという読みです。
 
 ## 5つの検証軸の評価
 
 | 検証軸 | 元資料のシグナル | 読み |
 |---|---|---|
-| 民間需要 | + Supportive | 見出し GDPよりPrivate Coreが強い |
-| Labor & 実質賃金s | - Softening | Hiringと実質賃金が弱い |
-| Surveys / PMI | ~ Expansion, easing | 50超だが高度低下 |
-| Credit | + No stress yet | Standards / DelinquencyはまだStressでない |
-| Rates & Transmission | - Restrictive | Real RateとLagが重石 |
+| 民間需要 | 支持材料 | GDPの総合値より民間需要の中身が強い |
+| 雇用・実質賃金 | 弱含み | 採用と実質賃金が弱い |
+| 景況感・PMI | 拡張圏だが鈍化 | 50を上回るが勢いは低下 |
+| 信用環境 | まだ大きなストレスなし | 融資基準・延滞率に強い悪化は見られない |
+| 金利・政策波及 | 引き締め的 | 実質金利と遅行効果が重石 |
 
 ここまでの需要、雇用、実質所得、景況感、信用・金利の証拠を並べると、元の調査では次の図表と確率評価に集約されました。
 
@@ -85,11 +85,11 @@ CurveはDis-invertしたが、Real RateがRestrictiveで、過去のTightening L
 - **景気後期: 50%**
 - **持続的成長: 30%**
 - **すでに減速局面: 20%**
-結論は、「強さは本物だが広がりが狭くなり、Policy-sensitiveになっている」です。
+結論は、「強さは本物だが広がりが狭くなり、金融政策の影響を受けやすくなっている」です。
 
 ## 分析上の留意点
 
-原資料はISM / NFIB等の一部SeriesがLicensed Feedで取得できず、Survey Coverageに制約があること、Quarterly 民間需要がRevisionを受けること、Regional Fed Surveyを個別に取れなかったことを明示しています。
+原資料はISMやNFIBなど一部系列をライセンス付きデータから取得できず景況感指標の網羅性に限界があること、四半期の民間需要は改定され得ること、地区連銀調査を個別には取得できなかったことを明示しています。
 この例は、調査を**自分のThesisを補強する道具ではなく、反対仮説を検証する役割として使う**方法をそのまま示しています。
 
 ## このユースケースで確認できること
