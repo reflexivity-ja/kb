@@ -1,0 +1,159 @@
+name: Format Japanese publication pages
+
+on:
+  push:
+    paths:
+      - '.github/workflows/format-publication-markdown.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  format:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Polish Japanese research wording and Markdown spacing
+        shell: python
+        run: |
+          from pathlib import Path
+          import re
+
+          reflexivity_docs = [
+              Path('ユースケース/運用資産別/債券/french-sovereign-corporate-yield-inversion-trade-ideas.md'),
+              Path('ユースケース/運用資産別/債券/us-yield-curve-relative-value-screen.md'),
+              Path('ユースケース/運用資産別/債券/us-2s10s-recession-signal-validation.md'),
+              Path('ユースケース/運用資産別/FX/eurusd-systematic-investment-checklist.md'),
+              Path('ユースケース/運用資産別/マルチアセット/bond-signals-vs-forward-equity-returns.md'),
+              Path('ユースケース/運用資産別/マルチアセット/hawkish-policy-beneficiaries-knowledge-graph.md'),
+              Path('ユースケース/運用資産別/マクロ/challenge-strong-us-economy-thesis.md'),
+              Path('ユースケース/運用資産別/マクロ/market-narrative-vs-hard-data-breadth.md'),
+              Path('ユースケース/運用資産別/FX/eurusd-rsi-walk-forward-backtest.md'),
+          ]
+
+          for p in reflexivity_docs:
+              if not p.exists():
+                  continue
+              t = p.read_text(encoding='utf-8')
+              replacements = {
+                  'Reflexivity上で実際に生成されたResearch出力': 'Reflexivity上で実際に生成された調査結果',
+                  '原Research実行時点': '元の調査を実行した時点',
+                  'このResearchは': 'この調査は',
+                  'このResearchの': 'この調査の',
+                  'というResearchです': 'という調査です',
+                  'したResearchです': 'した調査です',
+                  '原資料のBottom Line': '元資料の結論',
+                  'Bottom Lineは': '結論は',
+                  '## 元Research': '## 元の調査',
+                  '## 原Research': '## 元の調査',
+                  '| Dimension | 原資料のSignal | 読み |': '| 検証軸 | 元資料のシグナル | 読み |',
+                  '| Evidence Stream | Narrative | Hard Data | 判定 |': '| 証拠の種類 | 市場ナラティブ | ハードデータ | 判定 |',
+              }
+              for a, b in replacements.items():
+                  t = t.replace(a, b)
+              p.write_text(t, encoding='utf-8')
+
+          def format_md(text):
+              # Collapse accidental runs of blank lines first.
+              text = re.sub(r'\n{3,}', '\n\n', text)
+              lines = text.splitlines()
+              out = []
+              in_comment = False
+              in_fence = False
+
+              def blank():
+                  if out and out[-1] != '':
+                      out.append('')
+
+              i = 0
+              while i < len(lines):
+                  line = lines[i]
+                  stripped = line.strip()
+
+                  if stripped.startswith('<!--'):
+                      in_comment = True
+                  if in_comment:
+                      out.append(line)
+                      if '-->' in line:
+                          in_comment = False
+                          if i + 1 < len(lines) and lines[i+1].strip():
+                              out.append('')
+                      i += 1
+                      continue
+
+                  if stripped.startswith('```'):
+                      if not in_fence:
+                          blank()
+                          in_fence = True
+                      out.append(line)
+                      if in_fence and stripped.startswith('```') and len(out) > 1 and out[-2].strip().startswith('```') is False:
+                          # fence state is toggled below only when this is a closing fence
+                          pass
+                      # Toggle based on whether we were already in a fence before this line.
+                      if sum(1 for x in out if x.strip().startswith('```')) % 2 == 0:
+                          in_fence = False
+                          out.append('')
+                      i += 1
+                      continue
+
+                  if in_fence:
+                      out.append(line)
+                      i += 1
+                      continue
+
+                  is_heading = bool(re.match(r'^#{1,6}\s+', line))
+                  is_image = stripped.startswith('![')
+                  is_rule = stripped == '---'
+                  is_table = stripped.startswith('|') and stripped.endswith('|')
+
+                  if is_heading or is_image or is_rule:
+                      blank()
+                      out.append(line)
+                      # Images and headings read better as separate blocks.
+                      if i + 1 < len(lines) and lines[i+1].strip():
+                          out.append('')
+                      i += 1
+                      continue
+
+                  if is_table:
+                      # Keep consecutive table rows together, with whitespace around the table.
+                      blank()
+                      while i < len(lines):
+                          row = lines[i]
+                          s = row.strip()
+                          if not (s.startswith('|') and s.endswith('|')):
+                              break
+                          out.append(row)
+                          i += 1
+                      if i < len(lines) and lines[i].strip():
+                          out.append('')
+                      continue
+
+                  if stripped == '':
+                      if out and out[-1] != '':
+                          out.append('')
+                  else:
+                      out.append(line)
+                  i += 1
+
+              result = '\n'.join(out)
+              result = re.sub(r'\n{3,}', '\n\n', result)
+              return result.strip() + '\n'
+
+          for root in [Path('ユースケース'), Path('利用ガイド')]:
+              if not root.exists():
+                  continue
+              for p in root.rglob('*.md'):
+                  p.write_text(format_md(p.read_text(encoding='utf-8')), encoding='utf-8')
+
+          Path('.github/workflows/format-publication-markdown.yml').unlink()
+
+      - name: Commit formatting cleanup
+        run: |
+          git config user.name "Reflexivity KB Automation"
+          git config user.email "actions@users.noreply.github.com"
+          git add -A
+          git commit -m "Polish Japanese research copy and restore Markdown spacing"
+          git push
