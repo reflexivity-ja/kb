@@ -23,9 +23,25 @@ publication_mode: faithful-source-preserving
 
 ## 原Researchの出力イメージ
 
-原資料の全ページを順番にまとめています。英語原文の表・チャート・数値を確認できます。
+原資料の各ページを元の順番で掲載しています。各画像を開くと、英語原文の表・チャート・数値を確認できます。
 
-![EUR/USDのRSI戦略をパラメータ別・アウトオブサンプルで検証する - Reflexivity Research原資料](../../../画像/ユースケース/reflexivity/RX-USECASE-0037/source-visuals.webp)
+### 1 / 6
+![EUR/USD RSI Research 原資料 1](../../../画像/ユースケース/reflexivity/RX-USECASE-0037/page-1.webp)
+
+### 2 / 6
+![EUR/USD RSI Research 原資料 2](../../../画像/ユースケース/reflexivity/RX-USECASE-0037/page-2.webp)
+
+### 3 / 6
+![EUR/USD RSI Research 原資料 3](../../../画像/ユースケース/reflexivity/RX-USECASE-0037/page-3.webp)
+
+### 4 / 6
+![EUR/USD RSI Research 原資料 4](../../../画像/ユースケース/reflexivity/RX-USECASE-0037/page-4.webp)
+
+### 5 / 6
+![EUR/USD RSI Research 原資料 5](../../../画像/ユースケース/reflexivity/RX-USECASE-0037/page-5.webp)
+
+### 6 / 6
+![EUR/USD RSI Research 原資料 6](../../../画像/ユースケース/reflexivity/RX-USECASE-0037/page-6.webp)
 
 ## 実際に行ったBacktest
 
