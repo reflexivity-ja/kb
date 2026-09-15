@@ -11,15 +11,21 @@ original_language: en
 source_text_status: faithful_japanese_rendering_from_platform_research
 publication_mode: faithful-source-preserving
 -->
+
 # 米国イールドカーブからスティープナー／フラットナー候補をスクリーニングする
+
 **著者:** Reflexivity Research  
 **主な運用資産:** 債券（米国金利）  
 **想定利用者:** 債券PM、Rates PM、相対価値運用  
 **分析タイプ:** イールドカーブ、相対価値、スクリーニング
-> 本ページは、Reflexivity上で実際に生成されたResearch出力を日本語で読みやすくしたものです。結論だけに要約せず、問い、データ、途中の判断、反証、前提・留意点、最終的な読みまで元のストーリーをできる限り保持しています。数値・市場環境は原Research実行時点のものです。
+> 本ページは、Reflexivity上で実際に生成された調査結果を日本語で読みやすくしたものです。結論だけに要約せず、問い、データ、途中の判断、反証、前提・留意点、最終的な読みまで元のストーリーをできる限り保持しています。数値・市場環境は元の調査を実行した時点のものです。
+
 ## この原資料の位置づけ
+
 このPDFはResearch全体ではなく、**前の出力でStrategy色とロジックが一致していなかった点を訂正したフォローアップ**です。そのため、ここでは「完成済みの元Researchがすべて残っている」とは扱わず、提供された訂正表と判断ロジックをそのまま残します。
+
 ## 訂正版スクリーニング表
+
 | ペア | Curve Spread | Annualized Spread | Historical Percentile | Roll Down | 判定 |
 |---|---:|---:|---:|---:|---|
 | 3y-2y | -9.7bp | -9.7bp | 9.6% | 23.6bp | 🟡 Neutral |
@@ -31,15 +37,23 @@ publication_mode: faithful-source-preserving
 | 20y-12y | 20.3bp | 2.5bp | 51.9% | 0.2bp | 🟡 Neutral |
 | 25y-20y | -0.7bp | -0.1bp | 21.9% | -21.0bp | 🔴 Steepen (Pay) |
 | 30y-25y | -4.7bp | -0.9bp | 12.9% | -4.0bp | 🔴 Steepen (Pay) |
+
 ## なぜ3y-2yと4y-3yはNeutralなのか
+
 元の誤りは、低いHistorical Percentileだけを見てSteepen候補の色を付けた一方、**Roll Downが大きく、保有コストが反対方向に効く**ことを表示に反映できていなかった点です。
 訂正版では、3y-2yは9.6% percentileでもRoll Down 23.6bp、4y-3yは15.2% percentileでもRoll Down 8.8bpのため、シグナルが相殺されるとしてNeutralに修正されています。
+
 ## 訂正版の分布
+
 - **Steepen (Pay): 3組** - 5y-4y、25y-20y、30y-25y
 - **Flatten (Receive): 1組** - 12y-8y
 - **Neutral: 5組** - 3y-2y、4y-3y、7y-5y、8y-7y、20y-12y
 この例の価値は、単に「低percentileだからSteepen」とせず、**歴史的位置とCarry/Roll Downを同時に見て、魅力的に見えるTradeをNeutralへ落とす**ところにあります。
+
 ## このユースケースで確認できること
-このResearchは、最終結論だけでなく、**どの問いから始め、どのデータを組み合わせ、途中で何を支持・反証材料とし、どの前提・留意点を明示したか**まで含めて再利用できる調査プロセスとして掲載しています。
+
+この調査は、最終結論だけでなく、**どの問いから始め、どのデータを組み合わせ、途中で何を支持・反証材料とし、どの前提・留意点を明示したか**まで含めて再利用できる調査プロセスとして掲載しています。
+
 ---
+
 [← 運用資産別ユースケース](../README.md) · [ユースケース一覧](../../README.md)
