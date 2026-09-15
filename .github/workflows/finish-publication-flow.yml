@@ -1,0 +1,139 @@
+name: Finish Japanese publication flow
+
+on:
+  push:
+    paths:
+      - '.github/workflows/finish-publication-flow.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Blend existing figures into narration and polish Japanese headings
+        shell: python
+        run: |
+          from pathlib import Path
+          import re
+
+          usecases = Path('ユースケース')
+
+          heading_map = {
+              '## QUICK提供内容': '',
+              '### 元資料の図表・画面': '',
+              '## Researchの起点': '## 調査の起点',
+              '## Researchの狙い': '## 調査の狙い',
+              '## Researchの問い': '## 調査の問い',
+              '## Researchの出発点': '## 調査の出発点',
+              '## Key Findings': '## 主な結果',
+              '## Method': '## 検証方法',
+              '## Summary': '## 要約',
+              '## Conclusion': '## 結論',
+              '## Bottom Line': '## 結論',
+              '## Current Snapshot': '## 足元の状況',
+              '## Supporting Signals': '## 補足シグナル',
+              '## Scenario Analysis': '## シナリオ分析',
+              '## Risk Management': '## リスク管理',
+              '## Follow-up': '## 追加検証',
+              '## Limitations': '## 分析上の留意点',
+              '## Data Limitations': '## データ上の留意点',
+              '## Important Data Limitation': '## 重要なデータ上の留意点',
+              '## Limitations & Caveats': '## 前提・留意点',
+          }
+
+          for p in usecases.rglob('*.md'):
+              text = p.read_text(encoding='utf-8')
+              lines = text.splitlines()
+              out = []
+              seen_h1 = False
+              for line in lines:
+                  # A use-case page has one page title. Titles copied from the source output
+                  # should sit inside the story, not become a second page title.
+                  if line.startswith('# '):
+                      if not seen_h1:
+                          seen_h1 = True
+                      else:
+                          line = '## ' + line[2:]
+                  line = heading_map.get(line, line)
+                  if line == '':
+                      continue
+                  out.append(line)
+              text = '\n'.join(out)
+
+              # Remove the publication-only gallery narration. Keep the image itself exactly
+              # where it appeared in the surrounding story.
+              text = re.sub(
+                  r'\n?元資料(?:で本文中)?に掲載されていた(?:図表・画面|画面・図表)を、(?:登場順にまとめて|登場順を保って)掲載しています。\n?',
+                  '\n', text
+              )
+              text = re.sub(
+                  r'\n?元資料で本文中に掲載されていた図表・画面を、登場順にまとめて掲載しています。\n?',
+                  '\n', text
+              )
+
+              # Visible Japanese prose should not use Limitations as a structural label.
+              text = text.replace('どこにLimitationsを置いたか', 'どの前提・留意点を明示したか')
+              text = text.replace('Limitationsを置いたか', '前提・留意点を明示したか')
+
+              # A few recurring mixed-language structural phrases.
+              text = text.replace('## 元資料のLead Time別結果', '## 元資料の先行期間別結果')
+              text = text.replace('## 元調査の読み', '## 元の調査の読み')
+              text = text.replace('## 元Research', '## 元の調査')
+              text = text.replace('## 原Research', '## 元の調査')
+              text = text.replace('## Walk-forward', '## ウォークフォワード')
+              text = text.replace('## Backtest', '## バックテスト')
+              text = text.replace('## Scatter Plot', '## 散布図')
+              text = text.replace('## Knowledge Graph', '## ナレッジグラフ')
+              text = text.replace('## Market Context', '## 市場環境')
+              text = text.replace('## Investment Implications', '## 投資上の示唆')
+              text = text.replace('## What to Watch', '## 今後の注目点')
+
+              p.write_text(text.rstrip() + '\n', encoding='utf-8')
+
+          # Repair two Reflexivity figures whose earlier anchor wording changed during localization.
+          p = Path('ユースケース/運用資産別/債券/us-2s10s-recession-signal-validation.md')
+          text = p.read_text(encoding='utf-8')
+          if 'chart-1.webp' not in text:
+              anchor = '## 原資料の先行期間別結果\n'
+              insert = (
+                  'まず、2年・10年金利差を長期系列の中に置き、その後のカーブ変化と並べて確認します。\n\n'
+                  '![2年・10年金利差とその後のカーブ変化](../../../画像/ユースケース/reflexivity/RX-USECASE-0031/chart-1.webp)\n\n'
+                  '*2年・10年金利差と、その後の5年・10年のカーブ変化を比較した元の調査の図表。*\n\n'
+              )
+              text = text.replace(anchor, insert + anchor, 1)
+          p.write_text(text, encoding='utf-8')
+
+          p = Path('ユースケース/運用資産別/マルチアセット/bond-signals-vs-forward-equity-returns.md')
+          text = p.read_text(encoding='utf-8')
+          if 'chart-1.webp' not in text:
+              anchor = '## 元の調査の読み\n'
+              insert = (
+                  'この設定で1,244個の観測値を散布図にすると、最新値が過去分布のどこに位置するかと、同じ水準で将来リターンがどれほどばらついたかを同時に見られます。\n\n'
+                  '![債券シグナルと株式の先行リターン](../../../画像/ユースケース/reflexivity/RX-USECASE-0033/chart-1.webp)\n\n'
+                  '*債券市場のシグナルと、その後の株式リターンを観測値ごとに比較した散布図。*\n\n'
+              )
+              text = text.replace(anchor, insert + anchor, 1)
+          p.write_text(text, encoding='utf-8')
+
+          # The current public RSI page includes the actual strategy chart, not the old
+          # six-page temporary rendering. Do not claim the full 18-grid is visible in an image.
+          p = Path('ユースケース/運用資産別/FX/eurusd-rsi-walk-forward-backtest.md')
+          text = p.read_text(encoding='utf-8')
+          text = text.replace('Full 18-gridは原資料画像にそのまま残しています。\n\n', '')
+          p.write_text(text, encoding='utf-8')
+
+          # One-shot workflow.
+          Path('.github/workflows/finish-publication-flow.yml').unlink()
+
+      - name: Commit cleanup
+        run: |
+          git config user.name "Reflexivity KB Automation"
+          git config user.email "actions@users.noreply.github.com"
+          git add -A
+          git commit -m "Polish Japanese headings and blend figures into narrative flow"
+          git push
