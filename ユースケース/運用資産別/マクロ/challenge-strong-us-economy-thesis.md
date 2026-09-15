@@ -90,7 +90,7 @@ CurveはDis-invertしたが、Real RateがRestrictiveで、過去のTightening L
 ## 分析上の留意点
 
 原資料はISM / NFIB等の一部SeriesがLicensed Feedで取得できず、Survey Coverageに制約があること、Quarterly Private DemandがRevisionを受けること、Regional Fed Surveyを個別に取れなかったことを明示しています。
-この例は、Researchを**自分のThesisを補強する道具ではなく、Devil's Advocateとして使う**方法をそのまま示しています。
+この例は、調査を**自分のThesisを補強する道具ではなく、Devil's Advocateとして使う**方法をそのまま示しています。
 
 ## このユースケースで確認できること
 

@@ -28,7 +28,6 @@ publication_mode: faithful-source-preserving
 
 ![主要国の10年国債利回りを横断比較する - QUICK提供原資料](../../../画像/ユースケース/quick/RX-USECASE-0040/source-visuals.webp)
 
-## QUICK提供コンテンツ
 
 日本を含む主要各国の長期金利（国債）の過去1年間の推移を分析してください。  
 

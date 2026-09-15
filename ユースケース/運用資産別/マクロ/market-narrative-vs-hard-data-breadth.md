@@ -81,7 +81,7 @@ Indexは高値圏でも内部Breadthが広がっていないという読みで�
 - Equity Theme名が匿名化され、Named SectorではなくReturn DispersionでBreadthを測定
 - News ToneはKeyword-based Headline Tallyで、校正済みSentiment Scoreではない
 - Economic Calendar SurpriseはTool Range制約により直近週中心
-「Narrative」をNewsだけで判断せず、**Macro Data・Rates・Equity Internals・Prediction Marketを同じ問いの下で横断する**Researchです。
+「Narrative」をNewsだけで判断せず、**Macro Data・Rates・Equity Internals・Prediction Marketを同じ問いの下で横断する**調査です。
 
 ## このユースケースで確認できること
 

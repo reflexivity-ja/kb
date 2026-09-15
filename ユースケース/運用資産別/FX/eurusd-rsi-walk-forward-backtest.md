@@ -17,7 +17,7 @@ publication_mode: faithful-source-preserving
 **著者:** Reflexivity Research  
 **主な運用資産:** FX（EUR/USD）  
 **想定利用者:** FX PM、クオンツ、システマティック運用  
-**分析タイプ:** バックテスト、Walk-forward分析、Robustness検証
+**分析タイプ:** バックテスト、ウォークフォワード分析、頑健性検証
 > 本ページは、Reflexivity上で実際に生成された調査結果を日本語で読みやすくしたものです。結論だけに要約せず、問い、データ、途中の判断、反証、前提・留意点、最終的な読みまで元のストーリーをできる限り保持しています。数値・市場環境は元の調査を実行した時点のものです。
 
 ## 実際に行ったバックテスト
@@ -32,7 +32,7 @@ EUR/USD Spotで、Pure RSI Mean-Reversion Strategyを2年間検証。以下を�
 
 ## 重要なデータ上の留意点
 
-依頼には4時間足も含まれていましたが、取得できたEUR/USD SeriesはDaily Barのみでした。Researchは**4時間足を合成・捏造せず、Dailyだけで実行した**ことを明示しています。
+依頼には4時間足も含まれていましたが、取得できたEUR/USD SeriesはDaily Barのみでした。調査では**4時間足を合成・捏造せず、Dailyだけで実行した**ことを明示しています。
 
 ## 主な結果
 
@@ -57,7 +57,6 @@ EUR/USD Spotで、Pure RSI Mean-Reversion Strategyを2年間検証。以下を�
 | RSI-21 20/80 touch | 1.37 | 0.6% | 0.33 | 0.4% | 1.04 |
 | RSI-21 25/75 touch | 1.20 | 1.0% | -0.64 | -0.9% | 1.84 |
 
-Full 18-gridは原資料画像にそのまま残しています。
 
 ## 検証方法
 
