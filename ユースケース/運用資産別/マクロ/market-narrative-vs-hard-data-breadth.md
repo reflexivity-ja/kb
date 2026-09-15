@@ -1,72 +1,99 @@
----
+<!--
 id: RX-USECASE-0036
-title: "市場ナラティブとハードデータの乖離を複数市場から検証する"
 type: use-case
-asset_class:
-  - "マクロ"
-  - "株式"
-  - "債券"
-  - "クロスアセット"
-roles:
-  - "CIO"
-  - "マクロ運用"
-  - "マルチアセット運用"
-  - "ストラテジスト"
-analysis_type:
-  - "ナラティブ分析"
-  - "クロスアセット分析"
-  - "市場モニタリング"
 language: ja
 locale: ja
+author: Reflexivity Research
 published: 2026-09-15
-updated: 2026-09-15
 status: published
+translation_status: local-only
 original_language: en
-source_text_status: interpreted_from_platform_research
----
+source_text_status: faithful_japanese_rendering_from_platform_research
+publication_mode: faithful-source-preserving
+-->
 
 # 市場ナラティブとハードデータの乖離を複数市場から検証する
 
-**主な分析対象:** マクロ  
-**使用する資産・市場:** 株式、債券・金利、予測市場、経済データ、ニュース  
+**著者:** Reflexivity Research  
+**主な運用資産:** マクロ、株式、債券、クロスアセット  
 **想定利用者:** CIO、マクロPM、マルチアセットPM、ストラテジスト  
 **分析タイプ:** ナラティブ分析、クロスアセット分析、市場モニタリング
 
-> 以下は特定時点のプラットフォーム出力をもとにした説明用の事例です。掲載数値は当時のスナップショットであり、現在の市場判断を示すものではありません。
+> 本ページは、Reflexivity上で実際に生成されたResearch出力を日本語で読みやすくしたものです。結論だけに要約せず、問い、データ、途中の判断、反証、制約、最終的な読みまで元のストーリーをできる限り保持しています。数値・市場環境は原Research実行時点のものです。
 
-## どのような業務に使えるか
+## 原Researchの出力イメージ
 
-市場では「景気が強い」「ソフトランディング」「ラリーが広がっている」といったナラティブが短期間で形成されます。運用者にとって重要なのは、その物語が雇用、インフレ、金利、株式の市場内部、ニュース、予測市場など複数の独立した証拠によって本当に裏付けられているかを確認することです。
+原資料の全ページを順番にまとめています。英語原文の表・チャート・数値を確認できます。
 
-この例では「強い米国経済」というナラティブが広がっているのか、それとも少数の強いヘッドラインに依存しているのかを、直近60日程度の複数データストリームから比較しています。
+![市場ナラティブとハードデータの乖離を複数市場から検証する - Reflexivity Research原資料](../../../画像/ユースケース/reflexivity/RX-USECASE-0036/source-visuals.svg)
 
-## Reflexivityでの進め方
+## Researchの問い
 
-1. 検証したい市場ナラティブを一文で定義します。
-2. 雇用、製造業、消費、インフレ等のハードデータを確認します。
-3. 金利見通しや予測市場が同じ方向を織り込んでいるか比較します。
-4. 株式市場では指数水準だけでなく、テーマやセクターの騰落の広がりを確認します。
-5. ニュースの見出しがどのリスクを強調しているかを集計します。
-6. 各証拠をscorecard化し、Broadening / Narrow / Contradicted等の形で整理します。
+**「Strong US Economy」というNarrativeは、本当に幅広い証拠に支えられてBroadeningしているのか、それとも一部の強いHeadlineに依存しているのか。**
 
-## 得られるアウトプットのイメージ
+原資料は直近60日程度のMacro News、Fed関連情報、Prediction Market、Equity Theme Leadership、Hard Dataを一つのScorecardにまとめています。
 
-- 「市場が語っていること」と「データが示すこと」の対照表
-- ヘッドライン雇用と労働市場の広がりの乖離
-- 金利市場が示す政策リスク
-- 株式指数の高値と市場内部のbreadthの比較
-- ニュース、予測市場、経済データを横断したコンセンサスの強弱
+## Bottom Line
 
-## この例のポイント
+原資料の結論は**Narrow, not broadening**です。Hard DataはMixed、Prediction MarketはCleanなGrowthよりInflation/Hike Riskを意識し、Equity Leadershipは集中していると評価しています。
 
-一つのデータベースだけを見るのではなく、**ニュース、マクロ時系列、金利、株式テーマ、予測市場を同じ問いの下で横断的に組み合わせる**点が特徴です。市場コンセンサスが本当に広い証拠に支えられているかを短時間で確認できます。
+## 3つの大きなDivergence
 
-## 使用データの例
+### 1. Labor: Headline vs Breadth
 
-元の分析では、雇用・失業率・PCE・CPI・小売売上・ISM新規受注・S&P 500等の時系列、経済イベント、ニュース、予測市場を組み合わせています。元資料ではFedコメントの完全な一次資料が対象期間について取得できなかったこと、テーマ名が匿名化されていたこと等の制約も明示しています。
+- August Payroll: **162k vs 56k expected**
+- Private ADP Hiring: **38k**
+
+Headlineは強いが、より広い雇用指標との整合性が弱いという指摘です。
+
+### 2. Fed Path: Pricing vs Benign Disinflation Narrative
+
+- Hold: **50.5%**
+- 25bp Hike: **49.5%**
+- Cut: **約0.5%**
+- Core PCE: **3.3%**
+
+Soft/Strong EconomyのNarrativeならEasing期待が強まるはずなのに、市場はむしろ追加Tighteningの可能性を織り込んでいる点をContradictionとしています。
+
+### 3. Equity Leadership: Index High vs Narrow Internals
+
+- 1か月Theme PerformanceのLeader-to-Laggard Gap: **48pt**（+33.4%〜-14.7%）
+- 調査したThemeのうち**10テーマがNegative**
+- S&P 500: **7,718.6**、52週高値7,799の約99%
+
+Indexは高値圏でも内部Breadthが広がっていないという読みです。
+
+## 60-Day Scorecard
+
+| Evidence Stream | Narrative | Hard Data | 判定 |
+|---|---|---|---|
+| Labor | Hot Payroll | ADP / broader gauge softer | Narrow |
+| Fed / Prediction Markets | Benign, cuts coming | Hold/Hikeほぼ五分、Core PCE 3.3% | Contradicted |
+| Equity Leadership | Broad rally | 48pt dispersion、10 themes negative | Narrow |
+| News Tone | Strong Economy | Hike/Inflation-risk framingが約3.5倍 | Cautious |
+| Manufacturing / Growth | Expansion intact | ISM New Orders 56.0→53.7、Retail Sales低下 | Decelerating |
+| EOY State | Soft Landing | Soft Landing 55%、Overheating 42.5% | Split |
+
+## Supporting Signals
+
+- 30件のMacro Headline Sampleでは、Strong-dataより**Hike / Inflation-risk framingが約3.5倍**
+- ISM New Ordersは**56.0 → 53.7**
+- Polymarket: Soft Landing **55%**、Overheating **42.5%**
+- Initial Jobless Claims **206k**、Unemployment **4.1%**はStabilizerとして残る
+
+## Limitations
+
+- 対象期間のFed一次資料がDocument Indexから完全には取得できず、一部はCalendar / Newsから推定
+- Equity Theme名が匿名化され、Named SectorではなくReturn DispersionでBreadthを測定
+- News ToneはKeyword-based Headline Tallyで、校正済みSentiment Scoreではない
+- Economic Calendar SurpriseはTool Range制約により直近週中心
+
+「Narrative」をNewsだけで判断せず、**Macro Data・Rates・Equity Internals・Prediction Marketを同じ問いの下で横断する**Researchです。
+
+## このユースケースで確認できること
+
+このResearchは、最終結論だけでなく、**どの問いから始め、どのデータを組み合わせ、途中で何を支持・反証材料とし、どこにLimitationsを置いたか**まで含めて再利用できるResearch workflowとして掲載しています。
 
 ---
 
-[← マクロユースケース](README.md) · [ユースケース一覧](../../README.md)
-
-ご質問や詳細については **gtm@reflexivity.com** までお問い合わせください。
+[← 運用資産別ユースケース](../README.md) · [ユースケース一覧](../../README.md)
