@@ -19,30 +19,15 @@ publication_mode: faithful-source-preserving
 **想定利用者:** FX PM、クオンツ、システマティック運用  
 **分析タイプ:** バックテスト、Walk-forward分析、Robustness検証
 
-> 本ページは、Reflexivity上で実際に生成されたResearch出力を日本語で読みやすくしたものです。結論だけに要約せず、問い、データ、途中の判断、反証、制約、最終的な読みまで元のストーリーをできる限り保持しています。数値・市場環境は原Research実行時点のものです。
+> 本ページは、Reflexivity上で実際に生成されたResearch出力を日本語で読みやすくしたものです。結論だけに要約せず、問い、データ、途中の判断、反証、前提・留意点、最終的な読みまで元のストーリーをできる限り保持しています。数値・市場環境は原Research実行時点のものです。
 
-## 原Researchの出力イメージ
+## 原Researchの図表
 
-原資料の各ページを元の順番で掲載しています。各画像を開くと、英語原文の表・チャート・数値を確認できます。
+原Researchに含まれていた主要な図表を、元資料から抽出して掲載しています。
 
-### 1 / 6
-![EUR/USD RSI Research 原資料 1](../../../画像/ユースケース/reflexivity/RX-USECASE-0037/page-1.webp)
+![EUR/USD RSI戦略とBuy & Holdの比較](../../../画像/ユースケース/reflexivity/RX-USECASE-0037/chart-1.webp)
 
-### 2 / 6
-![EUR/USD RSI Research 原資料 2](../../../画像/ユースケース/reflexivity/RX-USECASE-0037/page-2.webp)
-
-### 3 / 6
-![EUR/USD RSI Research 原資料 3](../../../画像/ユースケース/reflexivity/RX-USECASE-0037/page-3.webp)
-
-### 4 / 6
-![EUR/USD RSI Research 原資料 4](../../../画像/ユースケース/reflexivity/RX-USECASE-0037/page-4.webp)
-
-### 5 / 6
-![EUR/USD RSI Research 原資料 5](../../../画像/ユースケース/reflexivity/RX-USECASE-0037/page-5.webp)
-
-### 6 / 6
-![EUR/USD RSI Research 原資料 6](../../../画像/ユースケース/reflexivity/RX-USECASE-0037/page-6.webp)
-
+*図: RSI-14・20/80・crossback戦略のネット成長率とEUR/USD Buy & Holdを比較した原Researchの図表。*
 ## 実際に行ったBacktest
 
 EUR/USD Spotで、Pure RSI Mean-Reversion Strategyを2年間検証。以下を総当たりしています。
@@ -54,7 +39,7 @@ EUR/USD Spotで、Pure RSI Mean-Reversion Strategyを2年間検証。以下を�
 - 取引コスト: **1 pip round-trip**
 - 1年目をCalibration、2年目をOut-of-sampleとするWalk-forward
 
-## 重要なData Limitation
+## 重要なデータ上の留意点
 
 依頼には4時間足も含まれていましたが、取得できたEUR/USD SeriesはDaily Barのみでした。Researchは**4時間足を合成・捏造せず、Dailyだけで実行した**ことを明示しています。
 
@@ -87,7 +72,7 @@ Full 18-gridは原資料画像にそのまま残しています。
 - Crossback Rule: Thresholdを再び跨いだところでEntryしMidlineでExit
 - SignalはNext BarでTradeし、Look-aheadを避ける
 
-## Limitations
+## 分析上の留意点
 
 - Daily-only。4h legは未実行
 - 2年はParameter Sweepとして短い
@@ -99,7 +84,7 @@ Full 18-gridは原資料画像にそのまま残しています。
 
 ## このユースケースで確認できること
 
-このResearchは、最終結論だけでなく、**どの問いから始め、どのデータを組み合わせ、途中で何を支持・反証材料とし、どこにLimitationsを置いたか**まで含めて再利用できるResearch workflowとして掲載しています。
+このResearchは、最終結論だけでなく、**どの問いから始め、どのデータを組み合わせ、途中で何を支持・反証材料とし、どの前提・留意点を明示したか**まで含めて再利用できるResearch workflowとして掲載しています。
 
 ---
 

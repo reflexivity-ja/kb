@@ -19,14 +19,15 @@ publication_mode: faithful-source-preserving
 **想定利用者:** マクロPM、マルチアセットPM、株式PM  
 **分析タイプ:** Knowledge Graph、テーマ分析、投資ユニバース構築
 
-> 本ページは、Reflexivity上で実際に生成されたResearch出力を日本語で読みやすくしたものです。結論だけに要約せず、問い、データ、途中の判断、反証、制約、最終的な読みまで元のストーリーをできる限り保持しています。数値・市場環境は原Research実行時点のものです。
+> 本ページは、Reflexivity上で実際に生成されたResearch出力を日本語で読みやすくしたものです。結論だけに要約せず、問い、データ、途中の判断、反証、前提・留意点、最終的な読みまで元のストーリーをできる限り保持しています。数値・市場環境は原Research実行時点のものです。
 
-## 原Researchの出力イメージ
+## 原Researchの図表
 
-原資料の全ページを順番にまとめています。英語原文の表・チャート・数値を確認できます。
+原Researchに含まれていた主要な図表を、元資料から抽出して掲載しています。
 
-![金融政策のタカ派転換から恩恵を受ける資産・業種・企業をたどる - Reflexivity Research原資料](../../../画像/ユースケース/reflexivity/RX-USECASE-0034/source-visuals.webp)
+![Knowledge Graphによる波及経路](../../../画像/ユースケース/reflexivity/RX-USECASE-0034/chart-1.webp)
 
+*図: タカ派的な政策ショックからテーマ、セクター、企業へ波及する経路をKnowledge Graphで可視化した原Researchの図表。*
 ## Researchの問い
 
 Hawkishな金融政策転換を「金利が上がる」で終わらせず、**1st orderのMacro Channel → 2nd orderのSector → 3rd orderのNamed Company**までKnowledge Graphで落としていく例です。
@@ -68,7 +69,7 @@ Link Widthは実際のCash FlowやEarnings Sensitivityではありません。
 
 という**説明用Proxy**です。
 
-## Limitations
+## 分析上の留意点
 
 - 1st / 2nd / 3rd orderという階層はAnalyst側のFrameであり、KG自体が「一次効果」を保証しているわけではない
 - KG Linkは企業の利益感応度を直接測定しない
@@ -79,7 +80,7 @@ Link Widthは実際のCash FlowやEarnings Sensitivityではありません。
 
 ## このユースケースで確認できること
 
-このResearchは、最終結論だけでなく、**どの問いから始め、どのデータを組み合わせ、途中で何を支持・反証材料とし、どこにLimitationsを置いたか**まで含めて再利用できるResearch workflowとして掲載しています。
+このResearchは、最終結論だけでなく、**どの問いから始め、どのデータを組み合わせ、途中で何を支持・反証材料とし、どの前提・留意点を明示したか**まで含めて再利用できるResearch workflowとして掲載しています。
 
 ---
 

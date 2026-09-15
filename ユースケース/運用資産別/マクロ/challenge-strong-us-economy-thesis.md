@@ -19,14 +19,15 @@ publication_mode: faithful-source-preserving
 **想定利用者:** CIO、マクロPM、マルチアセットPM、ストラテジスト  
 **分析タイプ:** 反証分析、投資仮説検証、シナリオ分析
 
-> 本ページは、Reflexivity上で実際に生成されたResearch出力を日本語で読みやすくしたものです。結論だけに要約せず、問い、データ、途中の判断、反証、制約、最終的な読みまで元のストーリーをできる限り保持しています。数値・市場環境は原Research実行時点のものです。
+> 本ページは、Reflexivity上で実際に生成されたResearch出力を日本語で読みやすくしたものです。結論だけに要約せず、問い、データ、途中の判断、反証、前提・留意点、最終的な読みまで元のストーリーをできる限り保持しています。数値・市場環境は原Research実行時点のものです。
 
-## 原Researchの出力イメージ
+## 原Researchの図表
 
-原資料の全ページを順番にまとめています。英語原文の表・チャート・数値を確認できます。
+原Researchに含まれていた主要な図表を、元資料から抽出して掲載しています。
 
-![「米国景気は強い」という投資仮説を反証方向から検証する - Reflexivity Research原資料](../../../画像/ユースケース/reflexivity/RX-USECASE-0035/source-visuals.webp)
+![米国景気の強さを反証方向から検証する主要図表](../../../画像/ユースケース/reflexivity/RX-USECASE-0035/source-figures.webp)
 
+*図: 原Researchで使用した主要な比較図と、最終的な景気局面の確率評価（Late-cycle 50%、Durable 30%、Already rolling over 20%）。*
 ## Researchの出発点
 
 問いは「米国景気は強い」というBullishなHeadlineを支持することではなく、**その見方がどこで壊れ始めているかを反証方向から探す**ことです。
@@ -95,7 +96,7 @@ CurveはDis-invertしたが、Real RateがRestrictiveで、過去のTightening L
 
 Bottom Lineは、「強さは本物だが広がりが狭くなり、Policy-sensitiveになっている」です。
 
-## Limitations
+## 分析上の留意点
 
 原資料はISM / NFIB等の一部SeriesがLicensed Feedで取得できず、Survey Coverageに制約があること、Quarterly Private DemandがRevisionを受けること、Regional Fed Surveyを個別に取れなかったことを明示しています。
 
@@ -103,7 +104,7 @@ Bottom Lineは、「強さは本物だが広がりが狭くなり、Policy-sensi
 
 ## このユースケースで確認できること
 
-このResearchは、最終結論だけでなく、**どの問いから始め、どのデータを組み合わせ、途中で何を支持・反証材料とし、どこにLimitationsを置いたか**まで含めて再利用できるResearch workflowとして掲載しています。
+このResearchは、最終結論だけでなく、**どの問いから始め、どのデータを組み合わせ、途中で何を支持・反証材料とし、どの前提・留意点を明示したか**まで含めて再利用できるResearch workflowとして掲載しています。
 
 ---
 

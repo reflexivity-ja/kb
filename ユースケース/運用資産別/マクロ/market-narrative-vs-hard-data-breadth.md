@@ -19,14 +19,15 @@ publication_mode: faithful-source-preserving
 **想定利用者:** CIO、マクロPM、マルチアセットPM、ストラテジスト  
 **分析タイプ:** ナラティブ分析、クロスアセット分析、市場モニタリング
 
-> 本ページは、Reflexivity上で実際に生成されたResearch出力を日本語で読みやすくしたものです。結論だけに要約せず、問い、データ、途中の判断、反証、制約、最終的な読みまで元のストーリーをできる限り保持しています。数値・市場環境は原Research実行時点のものです。
+> 本ページは、Reflexivity上で実際に生成されたResearch出力を日本語で読みやすくしたものです。結論だけに要約せず、問い、データ、途中の判断、反証、前提・留意点、最終的な読みまで元のストーリーをできる限り保持しています。数値・市場環境は原Research実行時点のものです。
 
-## 原Researchの出力イメージ
+## 原Researchの図表
 
-原資料の全ページを順番にまとめています。英語原文の表・チャート・数値を確認できます。
+原Researchに含まれていた主要な図表を、元資料から抽出して掲載しています。
 
-![市場ナラティブとハードデータの乖離を複数市場から検証する - Reflexivity Research原資料](../../../画像/ユースケース/reflexivity/RX-USECASE-0036/source-visuals.webp)
+![市場ナラティブとハードデータの主要図表](../../../画像/ユースケース/reflexivity/RX-USECASE-0036/source-figures.webp)
 
+*図: 経済指標の実績対コンセンサスと、テーマ別の1カ月リターンを比較した原Researchの主要図表。*
 ## Researchの問い
 
 **「Strong US Economy」というNarrativeは、本当に幅広い証拠に支えられてBroadeningしているのか、それとも一部の強いHeadlineに依存しているのか。**
@@ -81,7 +82,7 @@ Indexは高値圏でも内部Breadthが広がっていないという読みで�
 - Polymarket: Soft Landing **55%**、Overheating **42.5%**
 - Initial Jobless Claims **206k**、Unemployment **4.1%**はStabilizerとして残る
 
-## Limitations
+## 分析上の留意点
 
 - 対象期間のFed一次資料がDocument Indexから完全には取得できず、一部はCalendar / Newsから推定
 - Equity Theme名が匿名化され、Named SectorではなくReturn DispersionでBreadthを測定
@@ -92,7 +93,7 @@ Indexは高値圏でも内部Breadthが広がっていないという読みで�
 
 ## このユースケースで確認できること
 
-このResearchは、最終結論だけでなく、**どの問いから始め、どのデータを組み合わせ、途中で何を支持・反証材料とし、どこにLimitationsを置いたか**まで含めて再利用できるResearch workflowとして掲載しています。
+このResearchは、最終結論だけでなく、**どの問いから始め、どのデータを組み合わせ、途中で何を支持・反証材料とし、どの前提・留意点を明示したか**まで含めて再利用できるResearch workflowとして掲載しています。
 
 ---
 

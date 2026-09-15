@@ -19,14 +19,15 @@ publication_mode: faithful-source-preserving
 **想定利用者:** マルチアセットPM、クオンツ、アセットアロケーター  
 **分析タイプ:** クロスアセット分析、時系列分析、仮説検証
 
-> 本ページは、Reflexivity上で実際に生成されたResearch出力を日本語で読みやすくしたものです。結論だけに要約せず、問い、データ、途中の判断、反証、制約、最終的な読みまで元のストーリーをできる限り保持しています。数値・市場環境は原Research実行時点のものです。
+> 本ページは、Reflexivity上で実際に生成されたResearch出力を日本語で読みやすくしたものです。結論だけに要約せず、問い、データ、途中の判断、反証、前提・留意点、最終的な読みまで元のストーリーをできる限り保持しています。数値・市場環境は原Research実行時点のものです。
 
-## 原Researchの出力イメージ
+## 原Researchの図表
 
-原資料の全ページを順番にまとめています。英語原文の表・チャート・数値を確認できます。
+原Researchに含まれていた主要な図表を、元資料から抽出して掲載しています。
 
-![債券市場の動きが株式の先行リターンと関係するか検証する - Reflexivity Research原資料](../../../画像/ユースケース/reflexivity/RX-USECASE-0033/source-visuals.webp)
+![債券シグナルと株式の先行リターン](../../../画像/ユースケース/reflexivity/RX-USECASE-0033/chart-1.webp)
 
+*図: 債券市場のシグナルと、その後の株式リターンの関係を観測値ごとに比較した原Researchの散布図。*
 ## 実際に検証したこと
 
 「債券側のSpreadが大きく動いたとき、その後のS&P 500リターンに傾向があるか」を、**現在値を過去分布の中に置く**形で検証したResearchです。
@@ -51,7 +52,7 @@ publication_mode: faithful-source-preserving
 
 最新値MarkerはY=0に置かれていますが、これは**現在のSpreadがX軸のどこにあるかを示す視覚上の基準**です。まだ観測できない未来20日Returnの予測値ではありません。
 
-## Limitations
+## 分析上の留意点
 
 - Forward Windowが重複している
 - -0.22は全Sampleを一本のLinear Relationshipで要約した値にすぎない
@@ -62,7 +63,7 @@ publication_mode: faithful-source-preserving
 
 ## このユースケースで確認できること
 
-このResearchは、最終結論だけでなく、**どの問いから始め、どのデータを組み合わせ、途中で何を支持・反証材料とし、どこにLimitationsを置いたか**まで含めて再利用できるResearch workflowとして掲載しています。
+このResearchは、最終結論だけでなく、**どの問いから始め、どのデータを組み合わせ、途中で何を支持・反証材料とし、どの前提・留意点を明示したか**まで含めて再利用できるResearch workflowとして掲載しています。
 
 ---
 
