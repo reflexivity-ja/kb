@@ -1,0 +1,173 @@
+name: Polish Japanese use-case narrative
+
+on:
+  push:
+    paths:
+      - '.github/workflows/polish-ja-usecase-narrative.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  polish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Localize headings and remove publication scaffolding
+        shell: python
+        run: |
+          from pathlib import Path
+          import re
+
+          root = Path('ユースケース')
+
+          exact_heading = {
+              'Summary': '要約',
+              'Key Findings': '主な結果',
+              'Key Finding': '主な結果',
+              'Method': '分析方法',
+              'Methodology': '分析方法',
+              'Limitations': '分析上の留意点',
+              'Limitations & Caveats': '前提・留意点',
+              'Data Limitations': 'データ上の留意点',
+              'Important Data Limitation': '重要なデータ上の留意点',
+              'Researchの起点': '調査の起点',
+              'Researchの狙い': '調査の狙い',
+              'Researchの問い': '調査の問い',
+              'Researchの流れ': '調査の流れ',
+              'Researchの進め方': '調査の進め方',
+              'Researchの構成': '調査の構成',
+              '原Researchの構成': '元の調査の構成',
+              '原Researchの図表': '元の調査の図表',
+              '原Researchの出力イメージ': '元の調査結果',
+              'Risk Management': 'リスク管理',
+              'Fixed Incomeでの4つの表現': '債券での4つの表現',
+              'Cross-Assetへ展開': '複数資産への展開',
+              'Relative Value / Volatilityまで拡張': '相対価値・ボラティリティへの展開',
+              'Actual Research Flow': '実際の調査の流れ',
+              'Data & Charts': 'データと図表',
+              'Scenario Analysis': 'シナリオ分析',
+              'Backtest': 'バックテスト',
+              'Walk-forward Analysis': 'ウォークフォワード分析',
+          }
+
+          token_map = [
+              ('Key Findings', '主な結果'),
+              ('Key Finding', '主な結果'),
+              ('Limitations & Caveats', '前提・留意点'),
+              ('Data Limitations', 'データ上の留意点'),
+              ('Important Data Limitation', '重要なデータ上の留意点'),
+              ('Limitations', '分析上の留意点'),
+              ('Risk Management', 'リスク管理'),
+              ('Fixed Income', '債券'),
+              ('Cross-Asset', '複数資産'),
+              ('Relative Value', '相対価値'),
+              ('Knowledge Graph', 'ナレッジグラフ'),
+              ('Company Catalyst', '企業カタリスト'),
+              ('Market Catalyst', '市場カタリスト'),
+              ('Backtest', 'バックテスト'),
+              ('Walk-forward', 'ウォークフォワード'),
+              ('Methodology', '分析方法'),
+              ('Method', '分析方法'),
+              ('Summary', '要約'),
+              ('Research', '調査'),
+          ]
+
+          body_replacements = [
+              ('反証、制約、最終的な読み', '反証、前提・留意点、最終的な読み'),
+              ('どこにLimitationsを置いたか', 'どの前提・留意点を明示したか'),
+              ('Limitationsを置いたか', '前提・留意点を明示したか'),
+              ('Long、', 'ロング、'),
+              ('Short、', 'ショート、'),
+              ('をLong', 'をロング'),
+              ('をShort', 'をショート'),
+              ('Safe Haven通貨', '安全通貨'),
+              ('Risk/Reward', 'リスク・リターン'),
+              ('BullishなHeadline', '強気の見出し'),
+              ('Headline Real GDP', '実質GDPの総合値'),
+              ('Private Demand', '民間需要'),
+              ('Labor Momentum', '雇用の勢い'),
+              ('Real Wage', '実質賃金'),
+              ('Monetary Transmission', '金融政策の波及'),
+              ('Late-cycle', '景気後期'),
+              ('Durably Strong', '持続的に強い状態'),
+              ('Already Rolling Over', 'すでに減速局面'),
+              ('Durable Growth', '持続的成長'),
+              ('Narrative', '市場の語り'),
+              ('Hard Data', '実データ'),
+              ('Broadening', '広がり'),
+              ('Headline', '見出し'),
+              ('Prediction Market', '予測市場'),
+              ('Equity Theme Leadership', '株式テーマのけん引構造'),
+              ('Scorecard', '評価表'),
+              ('Narrow, not broadening', '広がりは限定的'),
+              ('Cross-Asset Heuristic', '複数資産にまたがる経験則'),
+              ('Macro View', 'マクロの見方'),
+              ('Fundamental Research', '企業のファンダメンタル調査'),
+              ('Devil\'s Advocate', '反対仮説を検証する役割'),
+              ('Time Horizon', '想定期間'),
+              ('Conviction', '確信度'),
+              ('Bias', '方向感'),
+          ]
+
+          for md in root.rglob('*.md'):
+              text = md.read_text(encoding='utf-8')
+              lines = text.splitlines()
+              out = []
+              in_comment = False
+              for line in lines:
+                  if '<!--' in line:
+                      in_comment = True
+                  if in_comment:
+                      out.append(line)
+                      if '-->' in line:
+                          in_comment = False
+                      continue
+
+                  if line.startswith('#'):
+                      m = re.match(r'^(#{1,6})\s+(.*)$', line)
+                      if m:
+                          marks, title = m.groups()
+                          title = exact_heading.get(title, title)
+                          for a, b in token_map:
+                              title = title.replace(a, b)
+                          line = f'{marks} {title}'
+                  elif not line.startswith('**著者:**'):
+                      for a, b in body_replacements:
+                          line = line.replace(a, b)
+                  out.append(line)
+
+              new = '\n'.join(out) + ('\n' if text.endswith('\n') else '')
+              if new != text:
+                  md.write_text(new, encoding='utf-8')
+
+          # Remove generic publication-only image headings from the nine Reflexivity examples.
+          reflexivity_docs = [
+              Path('ユースケース/運用資産別/債券/french-sovereign-corporate-yield-inversion-trade-ideas.md'),
+              Path('ユースケース/運用資産別/債券/us-yield-curve-relative-value-screen.md'),
+              Path('ユースケース/運用資産別/債券/us-2s10s-recession-signal-validation.md'),
+              Path('ユースケース/運用資産別/FX/eurusd-systematic-investment-checklist.md'),
+              Path('ユースケース/運用資産別/マルチアセット/bond-signals-vs-forward-equity-returns.md'),
+              Path('ユースケース/運用資産別/マルチアセット/hawkish-policy-beneficiaries-knowledge-graph.md'),
+              Path('ユースケース/運用資産別/マクロ/challenge-strong-us-economy-thesis.md'),
+              Path('ユースケース/運用資産別/マクロ/market-narrative-vs-hard-data-breadth.md'),
+              Path('ユースケース/運用資産別/FX/eurusd-rsi-walk-forward-backtest.md'),
+          ]
+          for md in reflexivity_docs:
+              text = md.read_text(encoding='utf-8')
+              text = re.sub(r'\n## (?:元の調査の結果|元の調査の図表|元の調査の構成)\n+', '\n', text)
+              md.write_text(text, encoding='utf-8')
+
+          # One-shot workflow.
+          Path('.github/workflows/polish-ja-usecase-narrative.yml').unlink()
+
+      - name: Commit editorial cleanup
+        run: |
+          git config user.name "Reflexivity KB Automation"
+          git config user.email "actions@users.noreply.github.com"
+          git add -A
+          git commit -m "Blend research visuals into narrative and localize Japanese headings"
+          git push
