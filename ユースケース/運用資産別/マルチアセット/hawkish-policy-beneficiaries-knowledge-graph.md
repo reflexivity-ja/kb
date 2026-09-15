@@ -1,70 +1,86 @@
----
+<!--
 id: RX-USECASE-0034
-title: "金融政策のタカ派転換から恩恵を受ける資産・業種・企業をたどる"
 type: use-case
-asset_class:
-  - "株式"
-  - "債券"
-  - "FX"
-  - "クロスアセット"
-roles:
-  - "マクロ運用"
-  - "マルチアセット運用"
-  - "株式運用"
-analysis_type:
-  - "Knowledge Graph"
-  - "テーマ分析"
-  - "投資ユニバース構築"
 language: ja
 locale: ja
+author: Reflexivity Research
 published: 2026-09-15
-updated: 2026-09-15
 status: published
+translation_status: local-only
 original_language: en
-source_text_status: interpreted_from_platform_research
----
+source_text_status: faithful_japanese_rendering_from_platform_research
+publication_mode: faithful-source-preserving
+-->
 
 # 金融政策のタカ派転換から恩恵を受ける資産・業種・企業をたどる
 
-**主な運用資産:** 株式  
-**関連資産:** 債券、FX、クロスアセット  
+**著者:** Reflexivity Research  
+**主な運用資産:** 株式、債券、FX、クロスアセット  
 **想定利用者:** マクロPM、マルチアセットPM、株式PM  
 **分析タイプ:** Knowledge Graph、テーマ分析、投資ユニバース構築
 
-> 以下は特定時点のプラットフォーム出力をもとにした説明用の事例です。企業・資産への影響は市場環境や事業構成によって変化します。
+> 本ページは、Reflexivity上で実際に生成されたResearch出力を日本語で読みやすくしたものです。結論だけに要約せず、問い、データ、途中の判断、反証、制約、最終的な読みまで元のストーリーをできる限り保持しています。数値・市場環境は原Research実行時点のものです。
 
-## どのような業務に使えるか
+## 原Researchの出力イメージ
 
-「中央銀行が想定よりタカ派になる」といったマクロビューを持っていても、それだけでは具体的な投資ユニバースにはなりません。実務では、金利、通貨、金融機関、資本集約産業、借入依存度など複数の伝達経路を考え、どの資産・業種・企業が一次的または間接的に影響を受けるかを整理します。
+原資料の全ページを順番にまとめています。英語原文の表・チャート・数値を確認できます。
 
-この例では、マクロイベントを起点にKnowledge Graph上の関係をたどり、影響チャネルから業種、個別企業へと調査範囲を展開しています。
+![金融政策のタカ派転換から恩恵を受ける資産・業種・企業をたどる - Reflexivity Research原資料](../../../画像/ユースケース/reflexivity/RX-USECASE-0034/source-visuals.svg)
 
-## Reflexivityでの進め方
+## Researchの問い
 
-1. 金融政策変更が市場へ伝わる主要チャネルを整理します。
-2. 金利、利ざや、資金調達コスト、通貨等との関係をKnowledge Graphでたどります。
-3. 直接影響を受ける資産・業種を抽出します。
-4. さらに取引先、競合、事業エクスポージャー等を通じた間接的な企業候補へ展開します。
-5. 各候補について、なぜ影響を受けるのかという関係説明と根拠を確認します。
+Hawkishな金融政策転換を「金利が上がる」で終わらせず、**1st orderのMacro Channel → 2nd orderのSector → 3rd orderのNamed Company**までKnowledge Graphで落としていく例です。
 
-## 得られるアウトプットのイメージ
+## 1st Order: Macro Channel
 
-- マクロイベントから市場へ至る影響チャネル
-- 直接的な受益／逆風セクター
-- 二次的・間接的に影響を受ける企業候補
-- 各企業がテーマと結び付く理由
-- 追加調査すべき投資ユニバース
+原資料はBeneficiaryを生む主要な伝達経路を3つに整理しています。
 
-## この例のポイント
+1. **Higher-for-longer yields**
+2. **Energy / inflation**
+3. **Geopolitical spend**
 
-**マクロビューを具体的な投資ユニバースに変換する**使い方です。単純なキーワード検索ではなく、企業、テーマ、業種、商品、地域等の関係をたどることで、最初の仮説から離れた二次的な候補まで探索できます。
+## 2nd Order: Sector
 
-## 注意点
+- Higher-for-longer → 銀行・Diversified Financials、保険、Asset / Money Managers
+- Energy / Inflation → Energy Producers
+- Geopolitical Spend → Aerospace & Defense
 
-「一次・二次・三次効果」という整理は分析上のフレームであり、Knowledge Graphのリンク自体が利益感応度や株価インパクトの大きさを直接示すものではありません。候補抽出後には個別企業のファンダメンタルズ確認が必要です。
+特に金利Channelは、銀行のNIM、保険会社のFloat再投資利回り、Money Fund / Cash Yield等を通じて最も広いBeneficiary群へつながるという読みです。
+
+## 3rd Order: Named Companies
+
+原資料で上位KG Constituentとして挙げられた例:
+
+- Financials: **CBOE、SCHW、Morgan Stanley**
+- Insurers: **Chubb、Progressive、Swiss Re**
+- Asset Managers: **BlackRock、Franklin Resources、Invesco**
+- Energy: **ConocoPhillips、SLB、Saudi Arabian Oil**
+- Defense: **Lockheed Martin、Northrop Grumman、RTX**
+
+原資料にはさらにConsumer Lending、Sustainable Utilities、Commercial Real Estate、Homebuilding、Automakers、Credit & Lending等、多数のKG候補が表示されています。
+
+## Sankeyの読み方
+
+Link Widthは実際のCash FlowやEarnings Sensitivityではありません。
+
+- Root → Channel: そのChannelが何Sectorへ波及するか
+- Sector → Company: Knowledge GraphのExposure Rank
+
+という**説明用Proxy**です。
+
+## Limitations
+
+- 1st / 2nd / 3rd orderという階層はAnalyst側のFrameであり、KG自体が「一次効果」を保証しているわけではない
+- KG Linkは企業の利益感応度を直接測定しない
+- Higher-for-longerは金融機関のMarginに追い風でも、同時にCredit Qualityや需要悪化リスクを伴う
+- Constituentごとの実際の感応度は異なる
+
+つまりこのResearchは、Macro Viewから**「次に読むべき会社のUniverse」**を作り、その後Fundamental Researchへ渡すための探索です。
+
+## このユースケースで確認できること
+
+このResearchは、最終結論だけでなく、**どの問いから始め、どのデータを組み合わせ、途中で何を支持・反証材料とし、どこにLimitationsを置いたか**まで含めて再利用できるResearch workflowとして掲載しています。
 
 ---
 
-[← マルチアセットユースケース](README.md) · [ユースケース一覧](../../README.md)
-
-ご質問や詳細については **gtm@reflexivity.com** までお問い合わせください。
+[← 運用資産別ユースケース](../README.md) · [ユースケース一覧](../../README.md)
