@@ -21,29 +21,23 @@ publication_mode: faithful-source-preserving
 
 > 本ページは、Reflexivity上で実際に生成されたResearch出力を日本語で読みやすくしたものです。結論だけに要約せず、問い、データ、途中の判断、反証、前提・留意点、最終的な読みまで元のストーリーをできる限り保持しています。数値・市場環境は原Research実行時点のものです。
 
-## 原Researchの図表
 
-原Researchに含まれていた主要な図表を、元資料から抽出して掲載しています。
-
-![米国景気の強さを反証方向から検証する主要図表](../../../画像/ユースケース/reflexivity/RX-USECASE-0035/source-figures.webp)
-
-*図: 原Researchで使用した主要な比較図と、最終的な景気局面の確率評価（Late-cycle 50%、Durable 30%、Already rolling over 20%）。*
-## Researchの出発点
+## 調査の出発点
 
 問いは「米国景気は強い」というBullishなHeadlineを支持することではなく、**その見方がどこで壊れ始めているかを反証方向から探す**ことです。
 
 原資料のBottom Lineは、Private Demandは強い一方、Labor Momentum、Real Wage、Monetary Transmissionが弱まりつつあり、景気は「Durably Strong」より**Late-cycle寄り**というものです。
 
-## 5つのDimension
+## 5つの検証軸
 
-### 1. Private Demand vs Headline GDP
+### 1. 民間需要とヘッドラインGDP
 
 - Real final sales to private domestic purchasers: **Q2 2026 +8.5% SAAR**
 - Headline Real GDP: **+1.48%**
 
 Net ExportとInventoryがHeadlineを押し下げており、Domestic DemandはHeadlineより強い。これはRollover仮説に対する最も強い反証材料です。
 
-### 2. Labor & Real Wages
+### 2. 労働市場と実質賃金
 
 - NFP 3か月平均: 約**71k**
 - 原資料のBreakeven目安: 約**150k**
@@ -53,7 +47,7 @@ Net ExportとInventoryがHeadlineを押し下げており、Domestic DemandはHe
 
 ここを「最も明確なCrack」と評価しています。
 
-### 3. Surveys / PMI
+### 3. 景況感指標とPMI
 
 - ISM Manufacturing **54.6**
 - S&P Global Manufacturing PMI **53.9**
@@ -62,14 +56,14 @@ Net ExportとInventoryがHeadlineを押し下げており、Domestic DemandはHe
 
 Expansion域ではあるがMomentumは低下、という中間的な読みです。
 
-### 4. Credit & Delinquencies
+### 4. 信用環境と延滞率
 
 - C&I Tightening: **0.0**（1年前9.5）
 - Credit Card Delinquency: **2.85%**（2年前3.22%）
 
 Credit Stressはまだ中心リスクではない、と整理しています。
 
-### 5. Rates & Transmission
+### 5. 金利と金融政策の波及
 
 - 10y-2y: **+0.41pp**
 - 10y-3m: **+0.87pp**
@@ -78,7 +72,7 @@ Credit Stressはまだ中心リスクではない、と整理しています。
 
 CurveはDis-invertしたが、Real RateがRestrictiveで、過去のTightening Lagが残るという読みです。
 
-## 5-Dimension Scorecard
+## 5つの検証軸の評価
 
 | Dimension | 原資料のSignal | 読み |
 |---|---|---|
@@ -88,7 +82,13 @@ CurveはDis-invertしたが、Real RateがRestrictiveで、過去のTightening L
 | Credit | + No stress yet | Standards / DelinquencyはまだStressでない |
 | Rates & Transmission | - Restrictive | Real RateとLagが重石 |
 
-## Probability-weighted Cycle Assessment
+ここまでの需要、雇用、実質所得、景況感、信用・金利の証拠を並べると、元の調査では次の図表と確率評価に集約されました。
+
+![米国景気の強さを反証方向から検証した主要図表](../../../画像/ユースケース/reflexivity/RX-USECASE-0035/source-figures.webp)
+
+*元の調査で用いた主要比較図と、景気局面の確率評価。*
+
+## 確率加重した景気局面の評価
 
 - **Late-cycle: 50%**
 - **Durable Growth: 30%**
@@ -104,7 +104,7 @@ Bottom Lineは、「強さは本物だが広がりが狭くなり、Policy-sensi
 
 ## このユースケースで確認できること
 
-このResearchは、最終結論だけでなく、**どの問いから始め、どのデータを組み合わせ、途中で何を支持・反証材料とし、どの前提・留意点を明示したか**まで含めて再利用できるResearch workflowとして掲載しています。
+このResearchは、最終結論だけでなく、**どの問いから始め、どのデータを組み合わせ、途中で何を支持・反証材料とし、どの前提・留意点を明示したか**まで含めて再利用できる調査プロセスとして掲載しています。
 
 ---
 

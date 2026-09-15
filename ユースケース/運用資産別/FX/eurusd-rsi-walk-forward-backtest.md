@@ -21,14 +21,8 @@ publication_mode: faithful-source-preserving
 
 > 本ページは、Reflexivity上で実際に生成されたResearch出力を日本語で読みやすくしたものです。結論だけに要約せず、問い、データ、途中の判断、反証、前提・留意点、最終的な読みまで元のストーリーをできる限り保持しています。数値・市場環境は原Research実行時点のものです。
 
-## 原Researchの図表
 
-原Researchに含まれていた主要な図表を、元資料から抽出して掲載しています。
-
-![EUR/USD RSI戦略とBuy & Holdの比較](../../../画像/ユースケース/reflexivity/RX-USECASE-0037/chart-1.webp)
-
-*図: RSI-14・20/80・crossback戦略のネット成長率とEUR/USD Buy & Holdを比較した原Researchの図表。*
-## 実際に行ったBacktest
+## 実際に行ったバックテスト
 
 EUR/USD Spotで、Pure RSI Mean-Reversion Strategyを2年間検証。以下を総当たりしています。
 
@@ -43,14 +37,20 @@ EUR/USD Spotで、Pure RSI Mean-Reversion Strategyを2年間検証。以下を�
 
 依頼には4時間足も含まれていましたが、取得できたEUR/USD SeriesはDaily Barのみでした。Researchは**4時間足を合成・捏造せず、Dailyだけで実行した**ことを明示しています。
 
-## Key Findings
+## 主な結果
 
 1. **Medium Lookbackが最も安定**。Short LookbackはTurnoverが高くNoiseが多く、Long LookbackはTrade数が少ない。  
 2. **Walk-forwardでOverfittingが露出**。Calibration BestのSharpe **2.47**がOOSで**0.57**まで低下。Degradation **1.90**。  
 3. EUR/USDのSpreadが狭いため、このSampleではCost Impactは平均でCAGR約**0.11pp**にとどまり、問題はCostよりEdgeの弱さ。  
 4. Full WindowのBest ComboでもNet CAGRは数%台で、絶対的なEdgeは大きくない。
 
-## Walk-forwardの代表例
+全期間で最も良く見える組み合わせも、買い持ちとの比較やアウト・オブ・サンプルでの崩れ方まで一緒に見る必要があります。
+
+![EUR/USD RSI戦略と買い持ちの比較](../../../画像/ユースケース/reflexivity/RX-USECASE-0037/chart-1.webp)
+
+*RSI-14・20/80・crossback戦略のネット成長率とEUR/USDの買い持ちを比較した元の調査の図表。*
+
+## ウォークフォワード分析の代表例
 
 | Combo | Cal Sharpe Y1 | Cal Net CAGR | OOS Sharpe Y2 | OOS Net CAGR | Sharpe Degradation |
 |---|---:|---:|---:|---:|---:|
@@ -63,7 +63,7 @@ EUR/USD Spotで、Pure RSI Mean-Reversion Strategyを2年間検証。以下を�
 
 Full 18-gridは原資料画像にそのまま残しています。
 
-## Method
+## 検証方法
 
 - Window: **520 daily bars**, 2024-09-09〜2026-09-04
 - Walk-forward split: **2025-09-07**
@@ -84,7 +84,7 @@ Full 18-gridは原資料画像にそのまま残しています。
 
 ## このユースケースで確認できること
 
-このResearchは、最終結論だけでなく、**どの問いから始め、どのデータを組み合わせ、途中で何を支持・反証材料とし、どの前提・留意点を明示したか**まで含めて再利用できるResearch workflowとして掲載しています。
+このResearchは、最終結論だけでなく、**どの問いから始め、どのデータを組み合わせ、途中で何を支持・反証材料とし、どの前提・留意点を明示したか**まで含めて再利用できる調査プロセスとして掲載しています。
 
 ---
 

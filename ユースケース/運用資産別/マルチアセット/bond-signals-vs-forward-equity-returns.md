@@ -21,18 +21,12 @@ publication_mode: faithful-source-preserving
 
 > 本ページは、Reflexivity上で実際に生成されたResearch出力を日本語で読みやすくしたものです。結論だけに要約せず、問い、データ、途中の判断、反証、前提・留意点、最終的な読みまで元のストーリーをできる限り保持しています。数値・市場環境は原Research実行時点のものです。
 
-## 原Researchの図表
 
-原Researchに含まれていた主要な図表を、元資料から抽出して掲載しています。
-
-![債券シグナルと株式の先行リターン](../../../画像/ユースケース/reflexivity/RX-USECASE-0033/chart-1.webp)
-
-*図: 債券市場のシグナルと、その後の株式リターンの関係を観測値ごとに比較した原Researchの散布図。*
 ## 実際に検証したこと
 
 「債券側のSpreadが大きく動いたとき、その後のS&P 500リターンに傾向があるか」を、**現在値を過去分布の中に置く**形で検証したResearchです。
 
-## Scatter Plotの作り方
+## 散布図の作り方
 
 - Sample: **1,244 daily observations**
 - 期間: **2021年9月〜2026年8月**
@@ -40,7 +34,7 @@ publication_mode: faithful-source-preserving
 - Y軸: **20 trading days aheadのSPX return**
 - 最新Spreadを別Seriesとして強調表示
 
-## 元Researchの読み
+## 元調査の読み
 
 - 最新Spread: **+7.72**（2026-09-01時点）
 - 5年間のSpreadと20日先SPX Returnの相関: **-0.22**
@@ -48,7 +42,7 @@ publication_mode: faithful-source-preserving
 
 重要なのは、Researchが「債券Signalが株を予測できる」と強い結論を作らなかったことです。むしろ、**仮説を定量化した結果、相関が弱いこと自体を結論として残している**点がこのユースケースの核です。
 
-## Markerの意味
+## 最新値マーカーの意味
 
 最新値MarkerはY=0に置かれていますが、これは**現在のSpreadがX軸のどこにあるかを示す視覚上の基準**です。まだ観測できない未来20日Returnの予測値ではありません。
 
@@ -63,7 +57,7 @@ publication_mode: faithful-source-preserving
 
 ## このユースケースで確認できること
 
-このResearchは、最終結論だけでなく、**どの問いから始め、どのデータを組み合わせ、途中で何を支持・反証材料とし、どの前提・留意点を明示したか**まで含めて再利用できるResearch workflowとして掲載しています。
+このResearchは、最終結論だけでなく、**どの問いから始め、どのデータを組み合わせ、途中で何を支持・反証材料とし、どの前提・留意点を明示したか**まで含めて再利用できる調査プロセスとして掲載しています。
 
 ---
 
