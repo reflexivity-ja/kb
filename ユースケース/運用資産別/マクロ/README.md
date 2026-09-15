@@ -1,17 +1,12 @@
 # マクロユースケース
-
 景気、金融政策、市場ナラティブ、複数データの整合性を検証する調査例です。
-
 ## ユースケース
-
 - [「米国景気は強い」という投資仮説を反証方向から検証する](challenge-strong-us-economy-thesis.md)
 - [市場ナラティブとハードデータの乖離を複数市場から検証する](market-narrative-vs-hard-data-breadth.md)
 - [2年・10年金利差は本当に景気後退を予測できるか検証する](../債券/us-2s10s-recession-signal-validation.md)
 - [金融政策のタカ派転換から恩恵を受ける資産・業種・企業をたどる](../マルチアセット/hawkish-policy-beneficiaries-knowledge-graph.md)
 - [EUR/USDの投資判断を体系的なチェックリストに落とし込む](../FX/eurusd-systematic-investment-checklist.md)
-
 ## パートナー社提供コンテンツ
-
 - [長い調査指示で複雑なテーマを構造化する](structured-long-form-research-prompts.md) - 著者: QUICK | 提供日: 2026-06-18
 - [FOMC前に利上げシナリオと市場への波及を整理する](fomc-rate-hike-scenarios.md) - 著者: QUICK | 提供日: 2026-09-15
 - [今週の米国市場イベントを重要度順に整理する](weekly-us-market-events.md) - 著者: QUICK | 提供日: 2026-09-08
@@ -22,5 +17,4 @@
 - [原油高の原因を局面別に比較し、影響業種までたどる](../マルチアセット/oil-price-surge-regime-comparison.md) - 著者: QUICK | 提供日: 2026-09-14
 - [米長期金利上昇が日本の金利・景気・株式へどう波及するか分析する](../マルチアセット/us-rates-impact-on-japan.md) - 著者: QUICK | 提供日: 2026-08-20
 - [イラン攻撃シナリオの原油・金・株式・ドルへの影響を分析する](../マルチアセット/iran-attack-cross-asset-impact.md) - 著者: QUICK | 提供日: 2026-03-02
-
 [← 運用資産別](../README.md) · [ユースケース一覧](../../README.md)
