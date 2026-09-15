@@ -1,64 +1,110 @@
----
+<!--
 id: RX-USECASE-0035
-title: "『米国景気は強い』という投資仮説を反証方向から検証する"
 type: use-case
-asset_class:
-  - "マクロ"
-  - "クロスアセット"
-roles:
-  - "CIO"
-  - "マクロ運用"
-  - "マルチアセット運用"
-analysis_type:
-  - "反証分析"
-  - "投資仮説検証"
-  - "シナリオ分析"
 language: ja
 locale: ja
+author: Reflexivity Research
 published: 2026-09-15
-updated: 2026-09-15
 status: published
+translation_status: local-only
 original_language: en
-source_text_status: interpreted_from_platform_research
----
+source_text_status: faithful_japanese_rendering_from_platform_research
+publication_mode: faithful-source-preserving
+-->
 
 # 「米国景気は強い」という投資仮説を反証方向から検証する
 
-**主な分析対象:** マクロ  
-**関連運用資産:** 株式、債券、クレジット等のクロスアセット  
+**著者:** Reflexivity Research  
+**主な運用資産:** マクロ、クロスアセット  
 **想定利用者:** CIO、マクロPM、マルチアセットPM、ストラテジスト  
 **分析タイプ:** 反証分析、投資仮説検証、シナリオ分析
 
-> 以下は特定時点のプラットフォーム出力をもとにした説明用の事例です。マクロ環境は変化するため、当時の結論ではなく調査方法をご参照ください。
+> 本ページは、Reflexivity上で実際に生成されたResearch出力を日本語で読みやすくしたものです。結論だけに要約せず、問い、データ、途中の判断、反証、制約、最終的な読みまで元のストーリーをできる限り保持しています。数値・市場環境は原Research実行時点のものです。
 
-## どのような業務に使えるか
+## 原Researchの出力イメージ
 
-投資委員会やポートフォリオ構築では、自分たちの中心シナリオを支持する材料だけでなく、「この見方が間違っているとすれば何が見えるはずか」を確認する必要があります。
+原資料の全ページを順番にまとめています。英語原文の表・チャート・数値を確認できます。
 
-この例では「米国景気は強い」という市場の見方をあえて反証する方向から調査し、需要、労働市場、企業景況感、クレジット、金利など複数の軸に分解して検証しています。
+![「米国景気は強い」という投資仮説を反証方向から検証する - Reflexivity Research原資料](../../../画像/ユースケース/reflexivity/RX-USECASE-0035/source-visuals.svg)
 
-## Reflexivityでの進め方
+## Researchの出発点
 
-1. 検証したい中心仮説を明示します。
-2. その仮説が成立するために必要なデータ条件を複数の軸へ分解します。
-3. 各軸について支持材料と反証材料を並行して収集します。
-4. データ間の不一致や、ヘッドラインと内部の弱さを確認します。
-5. 単一の結論ではなく、複数シナリオとその成立確率・条件を整理します。
+問いは「米国景気は強い」というBullishなHeadlineを支持することではなく、**その見方がどこで壊れ始めているかを反証方向から探す**ことです。
 
-## 得られるアウトプットのイメージ
+原資料のBottom Lineは、Private Demandは強い一方、Labor Momentum、Real Wage、Monetary Transmissionが弱まりつつあり、景気は「Durably Strong」より**Late-cycle寄り**というものです。
 
-- 中心投資仮説を構成する要因の分解
-- 仮説を支持するデータと反証するデータ
-- 労働、需要、PMI、クレジット、金利等のクロスチェック
-- Late-cycle、durable growth、rollover等のシナリオ整理
-- どのデータが変われば投資判断を修正すべきかという監視項目
+## 5つのDimension
 
-## この例のポイント
+### 1. Private Demand vs Headline GDP
 
-Reflexivityを「自分の見方を裏付ける検索」に限定せず、**反対側の証拠を積極的に探すリサーチ・パートナー**として使う例です。投資委員会前のdevil's advocate、既存ポジションのstress test、コンセンサスへの反証調査に利用できます。
+- Real final sales to private domestic purchasers: **Q2 2026 +8.5% SAAR**
+- Headline Real GDP: **+1.48%**
+
+Net ExportとInventoryがHeadlineを押し下げており、Domestic DemandはHeadlineより強い。これはRollover仮説に対する最も強い反証材料です。
+
+### 2. Labor & Real Wages
+
+- NFP 3か月平均: 約**71k**
+- 原資料のBreakeven目安: 約**150k**
+- Real Wage Growth: **-0.07% YoY**
+- Unemployment: **4.1%**
+- ADP: **+38k**
+
+ここを「最も明確なCrack」と評価しています。
+
+### 3. Surveys / PMI
+
+- ISM Manufacturing **54.6**
+- S&P Global Manufacturing PMI **53.9**
+- ISM New Orders **53.7**
+- JOLTS Openings **7.27m**
+
+Expansion域ではあるがMomentumは低下、という中間的な読みです。
+
+### 4. Credit & Delinquencies
+
+- C&I Tightening: **0.0**（1年前9.5）
+- Credit Card Delinquency: **2.85%**（2年前3.22%）
+
+Credit Stressはまだ中心リスクではない、と整理しています。
+
+### 5. Rates & Transmission
+
+- 10y-2y: **+0.41pp**
+- 10y-3m: **+0.87pp**
+- 10y Real Yield: **2.42%**
+- Fed Funds: **3.63%**
+
+CurveはDis-invertしたが、Real RateがRestrictiveで、過去のTightening Lagが残るという読みです。
+
+## 5-Dimension Scorecard
+
+| Dimension | 原資料のSignal | 読み |
+|---|---|---|
+| Private Demand | + Supportive | Headline GDPよりPrivate Coreが強い |
+| Labor & Real Wages | - Softening | HiringとReal Wageが弱い |
+| Surveys / PMI | ~ Expansion, easing | 50超だが高度低下 |
+| Credit | + No stress yet | Standards / DelinquencyはまだStressでない |
+| Rates & Transmission | - Restrictive | Real RateとLagが重石 |
+
+## Probability-weighted Cycle Assessment
+
+- **Late-cycle: 50%**
+- **Durable Growth: 30%**
+- **Already Rolling Over: 20%**
+
+Bottom Lineは、「強さは本物だが広がりが狭くなり、Policy-sensitiveになっている」です。
+
+## Limitations
+
+原資料はISM / NFIB等の一部SeriesがLicensed Feedで取得できず、Survey Coverageに制約があること、Quarterly Private DemandがRevisionを受けること、Regional Fed Surveyを個別に取れなかったことを明示しています。
+
+この例は、Researchを**自分のThesisを補強する道具ではなく、Devil's Advocateとして使う**方法をそのまま示しています。
+
+## このユースケースで確認できること
+
+このResearchは、最終結論だけでなく、**どの問いから始め、どのデータを組み合わせ、途中で何を支持・反証材料とし、どこにLimitationsを置いたか**まで含めて再利用できるResearch workflowとして掲載しています。
 
 ---
 
-[← マクロユースケース](README.md) · [ユースケース一覧](../../README.md)
-
-ご質問や詳細については **gtm@reflexivity.com** までお問い合わせください。
+[← 運用資産別ユースケース](../README.md) · [ユースケース一覧](../../README.md)
