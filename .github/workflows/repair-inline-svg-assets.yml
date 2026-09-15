@@ -30,9 +30,11 @@ jobs:
               if not m:
                   raise SystemExit(f'No embedded image payload found in {svg}')
               fmt = m.group(1)
+              payload = re.sub(r'\s+', '', m.group(2))
+              payload += '=' * (-len(payload) % 4)
               ext = '.jpg' if fmt == 'jpeg' else f'.{fmt}'
               out = svg.with_suffix(ext)
-              out.write_bytes(base64.b64decode(m.group(2)))
+              out.write_bytes(base64.b64decode(payload))
               replacements[svg.as_posix()] = out.as_posix()
               svg.unlink()
 
@@ -40,12 +42,10 @@ jobs:
               text = md.read_text(encoding='utf-8')
               new = text
               for old, out in replacements.items():
-                  # Markdown paths are relative, but basename replacement is sufficient here
                   new = new.replace(Path(old).name, Path(out).name)
               if new != text:
                   md.write_text(new, encoding='utf-8')
 
-          # This is a one-shot repair workflow; remove it from the resulting repository state.
           Path('.github/workflows/repair-inline-svg-assets.yml').unlink()
       - name: Commit repaired assets
         run: |
