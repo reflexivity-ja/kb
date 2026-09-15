@@ -1,4 +1,4 @@
----
+<!--
 id: RX-USECASE-0004
 title: "Instacart：Arpalus買収で棚情報インテリジェンスを強化 (CART)"
 type: use-case
@@ -15,7 +15,7 @@ source_url: "https://reflexivity.com/app/kg-insight?insightId=0b72cda9-18ac-423b
 canonical_path: "use-cases/hedge-fund-tier-3/instacart-buys-arpalus-to-deepen-shelf-intelligence-stack-cart.md"
 translation_status: review-needed
 resource: "Reflexivity Insights Proof Set — Sales Enablement.docx"
----
+-->
 
 # Instacart：Arpalus買収で棚情報インテリジェンスを強化 (CART) — 強気
 

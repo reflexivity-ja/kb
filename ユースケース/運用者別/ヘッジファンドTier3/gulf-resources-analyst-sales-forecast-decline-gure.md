@@ -1,4 +1,4 @@
----
+<!--
 id: RX-USECASE-0001
 title: "Gulf Resources：アナリスト売上予想の低下 (GURE)"
 type: use-case
@@ -15,7 +15,7 @@ source_url: "https://reflexivity.com/app/stream/focus?activeDrawer=insights&enti
 canonical_path: "use-cases/hedge-fund-tier-3/gulf-resources-analyst-sales-forecast-decline-gure.md"
 translation_status: review-needed
 resource: "Reflexivity Insights Proof Set — Sales Enablement.docx"
----
+-->
 
 # Gulf Resources：アナリスト売上予想の低下 (GURE) — 弱気シグナル
 

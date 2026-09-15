@@ -1,4 +1,4 @@
----
+<!--
 id: RX-USECASE-0003
 title: "Fortrea：異例の大幅下落 (FTRE)"
 type: use-case
@@ -15,7 +15,7 @@ source_url: "https://reflexivity.com/app/kg-insight?insightId=a5e0b764-a45f-4f90
 canonical_path: "use-cases/hedge-fund-tier-3/fortrea-unusually-large-selloff-ftre.md"
 translation_status: review-needed
 resource: "Reflexivity Insights Proof Set — Sales Enablement.docx"
----
+-->
 
 # Fortrea：異例の大幅下落 (FTRE) — 弱気シグナル
 
