@@ -25,7 +25,7 @@ publication_mode: faithful-source-preserving
 
 原資料の全ページを順番にまとめています。英語原文の表・チャート・数値を確認できます。
 
-![米国イールドカーブからスティープナー／フラットナー候補をスクリーニングする - Reflexivity Research原資料](../../../画像/ユースケース/reflexivity/RX-USECASE-0030/source-visuals.svg)
+![米国イールドカーブからスティープナー／フラットナー候補をスクリーニングする - Reflexivity Research原資料](../../../画像/ユースケース/reflexivity/RX-USECASE-0030/source-visuals.webp)
 
 ## この原資料の位置づけ
 

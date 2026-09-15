@@ -33,7 +33,7 @@ publication_mode: faithful-source-preserving
 
 元資料にはCompany Catalystの画面が多数含まれていたため、登場順を保って掲載しています。トップ5の要点、リーダーシップの引用、イベントと市場反応、Reflexivity Graph、地域エクスポージャーなど、元の閲覧フローを追える構成です。
 
-![Company CatalystでNVIDIA関連ニュースの株価影響を確認する - 元資料の図表・画面](../../../画像/ユースケース/quick/RX-USECASE-0057/source-visuals.svg)
+![Company CatalystでNVIDIA関連ニュースの株価影響を確認する - 元資料の図表・画面](../../../画像/ユースケース/quick/RX-USECASE-0057/source-visuals.webp)
 
 ## トップ 5 の要点
 

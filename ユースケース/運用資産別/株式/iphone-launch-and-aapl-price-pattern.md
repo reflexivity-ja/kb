@@ -37,7 +37,7 @@ iPhoneの新モデル発表タイミングと株価についてAlfredで分析�
 
 元資料に掲載されていた画面・図表を、登場順を保って掲載しています。
 
-![新型iPhone発表前後のAAPL株価を過去5年で検証する - 元資料の図表・画面](../../../画像/ユースケース/quick/RX-USECASE-0046/source-visuals.svg)
+![新型iPhone発表前後のAAPL株価を過去5年で検証する - 元資料の図表・画面](../../../画像/ユースケース/quick/RX-USECASE-0046/source-visuals.webp)
 
 # AAPLの新型iPhone発表と株価:過去5年の傾向と今回のDuo発表分析
 

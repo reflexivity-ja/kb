@@ -27,7 +27,7 @@ publication_mode: faithful-source-preserving
 
 原資料に含まれていたReflexivityの画面・チャートを、掲載順を保ってまとめています。
 
-![注目テーマから米国・日本の関連企業をピックアップする - QUICK提供原資料](../../../画像/ユースケース/quick/RX-USECASE-0047/source-visuals.svg)
+![注目テーマから米国・日本の関連企業をピックアップする - QUICK提供原資料](../../../画像/ユースケース/quick/RX-USECASE-0047/source-visuals.webp)
 
 ## QUICK提供コンテンツ
 

@@ -35,7 +35,7 @@ publication_mode: faithful-source-preserving
 
 元資料に掲載されていた画面・図表を、登場順を保って掲載しています。
 
-![米国IPO市場を実績と今後の大型案件から分析する - 元資料の図表・画面](../../../画像/ユースケース/quick/RX-USECASE-0048/source-visuals.svg)
+![米国IPO市場を実績と今後の大型案件から分析する - 元資料の図表・画面](../../../画像/ユースケース/quick/RX-USECASE-0048/source-visuals.webp)
 
 ## サマリー
 

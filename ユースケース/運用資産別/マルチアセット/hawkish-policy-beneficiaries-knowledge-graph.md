@@ -25,7 +25,7 @@ publication_mode: faithful-source-preserving
 
 原資料の全ページを順番にまとめています。英語原文の表・チャート・数値を確認できます。
 
-![金融政策のタカ派転換から恩恵を受ける資産・業種・企業をたどる - Reflexivity Research原資料](../../../画像/ユースケース/reflexivity/RX-USECASE-0034/source-visuals.svg)
+![金融政策のタカ派転換から恩恵を受ける資産・業種・企業をたどる - Reflexivity Research原資料](../../../画像/ユースケース/reflexivity/RX-USECASE-0034/source-visuals.webp)
 
 ## Researchの問い
 

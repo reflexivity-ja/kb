@@ -25,7 +25,7 @@ publication_mode: faithful-source-preserving
 
 原資料の全ページを順番にまとめています。英語原文の表・チャート・数値を確認できます。
 
-![2年・10年金利差は本当に景気後退を予測できるか検証する - Reflexivity Research原資料](../../../画像/ユースケース/reflexivity/RX-USECASE-0031/source-visuals.svg)
+![2年・10年金利差は本当に景気後退を予測できるか検証する - Reflexivity Research原資料](../../../画像/ユースケース/reflexivity/RX-USECASE-0031/source-visuals.webp)
 
 ## 実際の問い
 

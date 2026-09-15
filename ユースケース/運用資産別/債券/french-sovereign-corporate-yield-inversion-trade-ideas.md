@@ -25,7 +25,7 @@ publication_mode: faithful-source-preserving
 
 原資料の全ページを順番にまとめています。英語原文の表・チャート・数値を確認できます。
 
-![フランス国債の信用不安から相対価値トレードを構築する - Reflexivity Research原資料](../../../画像/ユースケース/reflexivity/RX-USECASE-0029/source-visuals.svg)
+![フランス国債の信用不安から相対価値トレードを構築する - Reflexivity Research原資料](../../../画像/ユースケース/reflexivity/RX-USECASE-0029/source-visuals.webp)
 
 ## Researchの起点
 

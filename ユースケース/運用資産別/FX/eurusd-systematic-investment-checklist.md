@@ -25,7 +25,7 @@ publication_mode: faithful-source-preserving
 
 原資料の全ページを順番にまとめています。英語原文の表・チャート・数値を確認できます。
 
-![EUR/USDの投資判断を体系的なチェックリストに落とし込む - Reflexivity Research原資料](../../../画像/ユースケース/reflexivity/RX-USECASE-0032/source-visuals.svg)
+![EUR/USDの投資判断を体系的なチェックリストに落とし込む - Reflexivity Research原資料](../../../画像/ユースケース/reflexivity/RX-USECASE-0032/source-visuals.webp)
 
 ## Researchの狙い
 

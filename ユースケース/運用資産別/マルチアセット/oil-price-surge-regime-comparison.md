@@ -33,7 +33,7 @@ publication_mode: faithful-source-preserving
 
 元資料に掲載されていた画面・図表を、登場順を保って掲載しています。
 
-![原油高の原因を局面別に比較し、影響業種までたどる - 元資料の図表・画面](../../../画像/ユースケース/quick/RX-USECASE-0045/source-visuals.svg)
+![原油高の原因を局面別に比較し、影響業種までたどる - 元資料の図表・画面](../../../画像/ユースケース/quick/RX-USECASE-0045/source-visuals.webp)
 
 ## 概要
 

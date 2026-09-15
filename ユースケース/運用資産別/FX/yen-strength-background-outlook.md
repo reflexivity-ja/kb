@@ -33,7 +33,7 @@ publication_mode: faithful-source-preserving
 
 元資料に掲載されていた画面・図表を、登場順を保って掲載しています。
 
-![急速な円高の背景と他通貨への広がりを分析する - 元資料の図表・画面](../../../画像/ユースケース/quick/RX-USECASE-0044/source-visuals.svg)
+![急速な円高の背景と他通貨への広がりを分析する - 元資料の図表・画面](../../../画像/ユースケース/quick/RX-USECASE-0044/source-visuals.webp)
 
 USD/JPYに軸足を置いて、値動き・背景・他通貨・今後の見通しを整理します。データは足元まで反映しています。
 

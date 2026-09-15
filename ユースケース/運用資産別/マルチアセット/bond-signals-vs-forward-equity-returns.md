@@ -25,7 +25,7 @@ publication_mode: faithful-source-preserving
 
 原資料の全ページを順番にまとめています。英語原文の表・チャート・数値を確認できます。
 
-![債券市場の動きが株式の先行リターンと関係するか検証する - Reflexivity Research原資料](../../../画像/ユースケース/reflexivity/RX-USECASE-0033/source-visuals.svg)
+![債券市場の動きが株式の先行リターンと関係するか検証する - Reflexivity Research原資料](../../../画像/ユースケース/reflexivity/RX-USECASE-0033/source-visuals.webp)
 
 ## 実際に検証したこと
 

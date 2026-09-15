@@ -25,7 +25,7 @@ publication_mode: faithful-source-preserving
 
 原資料の全ページを順番にまとめています。英語原文の表・チャート・数値を確認できます。
 
-![EUR/USDのRSI戦略をパラメータ別・アウトオブサンプルで検証する - Reflexivity Research原資料](../../../画像/ユースケース/reflexivity/RX-USECASE-0037/source-visuals.svg)
+![EUR/USDのRSI戦略をパラメータ別・アウトオブサンプルで検証する - Reflexivity Research原資料](../../../画像/ユースケース/reflexivity/RX-USECASE-0037/source-visuals.webp)
 
 ## 実際に行ったBacktest
 

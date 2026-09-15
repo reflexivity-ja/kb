@@ -25,7 +25,7 @@ publication_mode: faithful-source-preserving
 
 原資料の全ページを順番にまとめています。英語原文の表・チャート・数値を確認できます。
 
-![「米国景気は強い」という投資仮説を反証方向から検証する - Reflexivity Research原資料](../../../画像/ユースケース/reflexivity/RX-USECASE-0035/source-visuals.svg)
+![「米国景気は強い」という投資仮説を反証方向から検証する - Reflexivity Research原資料](../../../画像/ユースケース/reflexivity/RX-USECASE-0035/source-visuals.webp)
 
 ## Researchの出発点
 

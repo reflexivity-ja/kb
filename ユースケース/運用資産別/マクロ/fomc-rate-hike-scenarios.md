@@ -33,7 +33,7 @@ publication_mode: faithful-source-preserving
 
 元資料に掲載されていた画面・図表を、登場順を保って掲載しています。
 
-![FOMC前に利上げシナリオと市場への波及を整理する - 元資料の図表・画面](../../../画像/ユースケース/quick/RX-USECASE-0041/source-visuals.svg)
+![FOMC前に利上げシナリオと市場への波及を整理する - 元資料の図表・画面](../../../画像/ユースケース/quick/RX-USECASE-0041/source-visuals.webp)
 
 # 今週のFOMC：ウォーシュ議長のコメント想定シナリオ
 
