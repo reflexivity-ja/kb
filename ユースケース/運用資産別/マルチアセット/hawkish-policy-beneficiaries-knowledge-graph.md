@@ -66,7 +66,7 @@ Link Widthは実際のCash FlowやEarnings Sensitivityではありません。
 - KG Linkは企業の利益感応度を直接測定しない
 - Higher-for-longerは金融機関のMarginに追い風でも、同時にCredit Qualityや需要悪化リスクを伴う
 - Constituentごとの実際の感応度は異なる
-つまりこの調査は、Macro Viewから**「次に読むべき会社のUniverse」**を作り、その後Fundamental Researchへ渡すための探索です。
+つまりこの調査は、マクロの見方から**「次に読むべき会社のUniverse」**を作り、その後企業のファンダメンタル調査へ渡すための探索です。
 
 ## このユースケースで確認できること
 

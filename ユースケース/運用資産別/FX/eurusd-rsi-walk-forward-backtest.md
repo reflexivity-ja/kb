@@ -63,7 +63,7 @@ EUR/USD Spotで、Pure RSI Mean-Reversion Strategyを2年間検証。以下を�
 - Window: **520 daily bars**, 2024-09-09〜2026-09-04
 - Walk-forward split: **2025-09-07**
 - RSI: Wilder smoothing
-- Touch Rule: Oversold以下でLong、Overbought以上でShort
+- Touch Rule: Oversold以下でロング、Overbought以上でShort
 - Crossback Rule: Thresholdを再び跨いだところでEntryしMidlineでExit
 - SignalはNext BarでTradeし、Look-aheadを避ける
 

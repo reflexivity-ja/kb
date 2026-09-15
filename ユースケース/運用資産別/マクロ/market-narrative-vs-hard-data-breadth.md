@@ -22,12 +22,12 @@ publication_mode: faithful-source-preserving
 
 ## 調査の問い
 
-**「Strong US Economy」というNarrativeは、本当に幅広い証拠に支えられてBroadeningしているのか、それとも一部の強いHeadlineに依存しているのか。**
-原資料は直近60日程度のMacro News、Fed関連情報、Prediction Market、Equity Theme Leadership、Hard Dataを一つのScorecardにまとめています。
+**「Strong US Economy」という市場の語りは、本当に幅広い証拠に支えられて広がりしているのか、それとも一部の強い見出しに依存しているのか。**
+原資料は直近60日程度のMacro News、Fed関連情報、予測市場、株式テーマのけん引構造、実データを一つの評価表にまとめています。
 
 ## 結論
 
-原資料の結論は**Narrow, not broadening**です。Hard DataはMixed、Prediction MarketはCleanなGrowthよりInflation/Hike Riskを意識し、Equity Leadershipは集中していると評価しています。
+原資料の結論は**広がりは限定的**です。実データはMixed、予測市場はCleanなGrowthよりInflation/Hike Riskを意識し、Equity Leadershipは集中していると評価しています。
 
 ## 3つの大きな乖離
 
@@ -35,7 +35,7 @@ publication_mode: faithful-source-preserving
 
 - August Payroll: **162k vs 56k expected**
 - Private ADP Hiring: **38k**
-Headlineは強いが、より広い雇用指標との整合性が弱いという指摘です。
+見出しは強いが、より広い雇用指標との整合性が弱いという指摘です。
 
 ### 2. 金融政策見通し: 市場織り込みとディスインフレ期待
 
@@ -43,7 +43,7 @@ Headlineは強いが、より広い雇用指標との整合性が弱いという
 - 25bp Hike: **49.5%**
 - Cut: **約0.5%**
 - Core PCE: **3.3%**
-Soft/Strong EconomyのNarrativeならEasing期待が強まるはずなのに、市場はむしろ追加Tighteningの可能性を織り込んでいる点をContradictionとしています。
+Soft/Strong Economyの市場の語りならEasing期待が強まるはずなのに、市場はむしろ追加Tighteningの可能性を織り込んでいる点をContradictionとしています。
 
 ### 3. 株式のけん引役: 指数高値と内部の狭さ
 
@@ -62,7 +62,7 @@ Indexは高値圏でも内部Breadthが広がっていないという読みで�
 | 証拠の種類 | 市場ナラティブ | ハードデータ | 判定 |
 |---|---|---|---|
 | Labor | Hot Payroll | ADP / broader gauge softer | Narrow |
-| Fed / Prediction Markets | Benign, cuts coming | Hold/Hikeほぼ五分、Core PCE 3.3% | Contradicted |
+| Fed / 予測市場s | Benign, cuts coming | Hold/Hikeほぼ五分、Core PCE 3.3% | Contradicted |
 | Equity Leadership | Broad rally | 48pt dispersion、10 themes negative | Narrow |
 | News Tone | Strong Economy | Hike/Inflation-risk framingが約3.5倍 | Cautious |
 | Manufacturing / Growth | Expansion intact | ISM New Orders 56.0→53.7、Retail Sales低下 | Decelerating |
@@ -70,7 +70,7 @@ Indexは高値圏でも内部Breadthが広がっていないという読みで�
 
 ## 補足シグナル
 
-- 30件のMacro Headline Sampleでは、Strong-dataより**Hike / Inflation-risk framingが約3.5倍**
+- 30件のMacro 見出し Sampleでは、Strong-dataより**Hike / Inflation-risk framingが約3.5倍**
 - ISM New Ordersは**56.0 → 53.7**
 - Polymarket: Soft Landing **55%**、Overheating **42.5%**
 - Initial Jobless Claims **206k**、Unemployment **4.1%**はStabilizerとして残る
@@ -79,9 +79,9 @@ Indexは高値圏でも内部Breadthが広がっていないという読みで�
 
 - 対象期間のFed一次資料がDocument Indexから完全には取得できず、一部はCalendar / Newsから推定
 - Equity Theme名が匿名化され、Named SectorではなくReturn DispersionでBreadthを測定
-- News ToneはKeyword-based Headline Tallyで、校正済みSentiment Scoreではない
+- News ToneはKeyword-based 見出し Tallyで、校正済みSentiment Scoreではない
 - Economic Calendar SurpriseはTool Range制約により直近週中心
-「Narrative」をNewsだけで判断せず、**Macro Data・Rates・Equity Internals・Prediction Marketを同じ問いの下で横断する**調査です。
+「市場の語り」をNewsだけで判断せず、**Macro Data・Rates・Equity Internals・予測市場を同じ問いの下で横断する**調査です。
 
 ## このユースケースで確認できること
 

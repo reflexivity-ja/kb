@@ -22,22 +22,22 @@ publication_mode: faithful-source-preserving
 
 ## 調査の出発点
 
-問いは「米国景気は強い」というBullishなHeadlineを支持することではなく、**その見方がどこで壊れ始めているかを反証方向から探す**ことです。
-元資料の結論は、Private Demandは強い一方、Labor Momentum、Real Wage、Monetary Transmissionが弱まりつつあり、景気は「Durably Strong」より**Late-cycle寄り**というものです。
+問いは「米国景気は強い」という強気の見出しを支持することではなく、**その見方がどこで壊れ始めているかを反証方向から探す**ことです。
+元資料の結論は、民間需要は強い一方、雇用の勢い、実質賃金、金融政策の波及が弱まりつつあり、景気は「持続的に強い状態」より**景気後期寄り**というものです。
 
 ## 5つの検証軸
 
 ### 1. 民間需要とヘッドラインGDP
 
 - Real final sales to private domestic purchasers: **Q2 2026 +8.5% SAAR**
-- Headline Real GDP: **+1.48%**
-Net ExportとInventoryがHeadlineを押し下げており、Domestic DemandはHeadlineより強い。これはRollover仮説に対する最も強い反証材料です。
+- 実質GDPの総合値: **+1.48%**
+Net ExportとInventoryが見出しを押し下げており、Domestic Demandは見出しより強い。これはRollover仮説に対する最も強い反証材料です。
 
 ### 2. 労働市場と実質賃金
 
 - NFP 3か月平均: 約**71k**
 - 原資料のBreakeven目安: 約**150k**
-- Real Wage Growth: **-0.07% YoY**
+- 実質賃金 Growth: **-0.07% YoY**
 - Unemployment: **4.1%**
 - ADP: **+38k**
 ここを「最も明確なCrack」と評価しています。
@@ -68,8 +68,8 @@ CurveはDis-invertしたが、Real RateがRestrictiveで、過去のTightening L
 
 | 検証軸 | 元資料のシグナル | 読み |
 |---|---|---|
-| Private Demand | + Supportive | Headline GDPよりPrivate Coreが強い |
-| Labor & Real Wages | - Softening | HiringとReal Wageが弱い |
+| 民間需要 | + Supportive | 見出し GDPよりPrivate Coreが強い |
+| Labor & 実質賃金s | - Softening | Hiringと実質賃金が弱い |
 | Surveys / PMI | ~ Expansion, easing | 50超だが高度低下 |
 | Credit | + No stress yet | Standards / DelinquencyはまだStressでない |
 | Rates & Transmission | - Restrictive | Real RateとLagが重石 |
@@ -82,15 +82,15 @@ CurveはDis-invertしたが、Real RateがRestrictiveで、過去のTightening L
 
 ## 確率加重した景気局面の評価
 
-- **Late-cycle: 50%**
-- **Durable Growth: 30%**
-- **Already Rolling Over: 20%**
+- **景気後期: 50%**
+- **持続的成長: 30%**
+- **すでに減速局面: 20%**
 結論は、「強さは本物だが広がりが狭くなり、Policy-sensitiveになっている」です。
 
 ## 分析上の留意点
 
-原資料はISM / NFIB等の一部SeriesがLicensed Feedで取得できず、Survey Coverageに制約があること、Quarterly Private DemandがRevisionを受けること、Regional Fed Surveyを個別に取れなかったことを明示しています。
-この例は、調査を**自分のThesisを補強する道具ではなく、Devil's Advocateとして使う**方法をそのまま示しています。
+原資料はISM / NFIB等の一部SeriesがLicensed Feedで取得できず、Survey Coverageに制約があること、Quarterly 民間需要がRevisionを受けること、Regional Fed Surveyを個別に取れなかったことを明示しています。
+この例は、調査を**自分のThesisを補強する道具ではなく、反対仮説を検証する役割として使う**方法をそのまま示しています。
 
 ## このユースケースで確認できること
 

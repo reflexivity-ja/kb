@@ -14,7 +14,7 @@ roles: ウェルスマネジメント / RIA、ロングオンリー・アセッ�
 publication_mode: faithful-source-preserving
 -->
 
-# Company CatalystでNVIDIA関連ニュースの株価影響を確認する
+# 企業カタリストでNVIDIA関連ニュースの株価影響を確認する
 
 **著者:** 株式会社QUICK  
 **提供日:** 2026-09-04  

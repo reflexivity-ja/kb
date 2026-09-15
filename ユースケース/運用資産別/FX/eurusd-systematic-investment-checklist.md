@@ -95,7 +95,7 @@ publication_mode: faithful-source-preserving
 
 ## 元資料の総合評価
 
-原資料は当時のBiasを**Bearish EUR**、ConvictionをHigh、Time Horizonを3〜6か月と整理し、Rate Differential、US優位のEconomic Momentum、Regression上のEUR割高、Policy Divergence、Technical、Risk Sentimentを同じ方向の根拠として並べています。
+原資料は当時の方向感を**Bearish EUR**、確信度をHigh、想定期間を3〜6か月と整理し、Rate Differential、US優位のEconomic Momentum、Regression上のEUR割高、Policy Divergence、Technical、Risk Sentimentを同じ方向の根拠として並べています。
 原資料には具体的なPosition Size、Stop、Target、Trade Recommendationも含まれますが、これらは**2025-08-28時点のResearch出力の記録**であり、現在の投資助言ではありません。
 
 ## このユースケースで確認できること
