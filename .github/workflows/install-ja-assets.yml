@@ -3,7 +3,7 @@ name: Install Japanese KB assets
 on:
   push:
     paths:
-      - '.tmp/ja-assets-*.b64'
+      - '.tmp/final-ja-assets/READY'
 
 permissions:
   contents: write
@@ -13,16 +13,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Restore public assets
+      - name: Restore final public assets and clean staging
         shell: bash
         run: |
           set -euo pipefail
-          cat .tmp/ja-assets-*.b64 > /tmp/ja-assets.b64
+          cat .tmp/final-ja-assets/chunk-*.b64 > /tmp/ja-assets.b64
           base64 -d /tmp/ja-assets.b64 > /tmp/ja-assets.zip
           unzip -o /tmp/ja-assets.zip -d .
-          rm -f .tmp/ja-assets-*.b64 .tmp/test.txt .github/workflows/inspect-publication-source-bundle.yml .github/workflows/install-ja-assets.yml
+          rm -rf .tmp
+          rm -f .github/workflows/install-ja-assets.yml .github/workflows/install-today-onboarding-assets.yml .github/workflows/inspect-publication-source-bundle.yml
           git config user.name 'Reflexivity KB automation'
           git config user.email 'gtm@reflexivity.com'
           git add -A
-          git commit -m 'Restore Japanese KB source visuals and clean temporary files'
+          git commit -m 'Restore final Japanese KB source visuals and clean staging'
           git push
