@@ -3,7 +3,7 @@ name: Install Japanese KB assets
 on:
   push:
     paths:
-      - '.tmp/final-ja-assets/READY'
+      - '.tmp/final-ja-assets.zip'
 
 permissions:
   contents: write
@@ -17,9 +17,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          cat .tmp/final-ja-assets/chunk-*.b64 > /tmp/ja-assets.b64
-          base64 -d /tmp/ja-assets.b64 > /tmp/ja-assets.zip
-          unzip -o /tmp/ja-assets.zip -d .
+          unzip -o .tmp/final-ja-assets.zip -d .
           rm -rf .tmp
           rm -f .github/workflows/install-ja-assets.yml .github/workflows/install-today-onboarding-assets.yml .github/workflows/inspect-publication-source-bundle.yml
           git config user.name 'Reflexivity KB automation'
