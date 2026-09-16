@@ -1,4 +1,4 @@
-name: Verify historical Sep 16 onboarding asset archive
+name: Locate missing historical onboarding chunks
 
 on:
   push:
@@ -9,48 +9,47 @@ permissions:
   contents: read
 
 jobs:
-  verify:
+  locate:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Rebuild archive from repaired historical snapshot
+      - name: Search Git object history by expected SHA-256
         shell: python
         run: |
-          from pathlib import Path
-          import base64, hashlib, io, subprocess, zipfile
+          import hashlib, subprocess
 
-          ref = 'e256ead2887bd96b05f768bcb97966238f262f93'
-          names = [
-              'chunk-00.b64','chunk-01.b64','chunk-02.b64','chunk-03.b64',
-              'rem-00.b64','rem-01.b64','rem-02.b64','rem-03.b64',
-              'rem-04.b64','rem-05.b64','rem-06.b64','rem-07.b64',
-          ]
-          parts = []
-          for name in names:
-              path = f'.tmp/today-assets/{name}'
-              data = subprocess.check_output(['git','show',f'{ref}:{path}'])
-              print(name, len(data), hashlib.sha256(data).hexdigest())
-              parts.append(data)
-
-          encoded = b''.join(parts)
-          raw = base64.b64decode(encoded, validate=True)
-          print('zip_bytes', len(raw), 'sha256', hashlib.sha256(raw).hexdigest())
-          with zipfile.ZipFile(io.BytesIO(raw)) as z:
-              bad = z.testzip()
-              print('testzip', bad)
-              print('members:')
-              for info in z.infolist():
-                  print(info.filename, info.file_size, f'{info.CRC:08x}')
-              if bad is not None:
-                  raise SystemExit('Archive failed CRC at ' + bad)
-              for info in z.infolist():
-                  if info.filename.startswith('画像/ユースケース/quick/RX-USECASE-0054/') and info.filename.endswith('.webp'):
-                      data = z.read(info.filename)
-                      if not (data[:4] == b'RIFF' and data[8:12] == b'WEBP'):
-                          raise SystemExit('Invalid WebP header: ' + info.filename)
-                      declared = int.from_bytes(data[4:8], 'little') + 8
-                      if declared != len(data):
-                          raise SystemExit(f'Invalid RIFF length {info.filename}: {declared} vs {len(data)}')
-                      print('verified_webp', info.filename, len(data), hashlib.sha256(data).hexdigest())
+          targets = {
+              '6e06018660fdd907aeb28bdb1badc49acfb471462d6c5d76957fbc545ff33ce0': 'rem-04 desired',
+              'a21c3171f461406347db0c1e4cb6b32d84e91965432f338246208a40d44fa49c': 'rem-05 desired',
+          }
+          out = subprocess.check_output(['git','rev-list','--objects','--all'], text=True, errors='replace')
+          seen = set()
+          hits = 0
+          for line in out.splitlines():
+              if not line.strip():
+                  continue
+              parts = line.split(' ', 1)
+              oid = parts[0]
+              path = parts[1] if len(parts) > 1 else ''
+              if oid in seen:
+                  continue
+              seen.add(oid)
+              try:
+                  typ = subprocess.check_output(['git','cat-file','-t',oid], text=True).strip()
+                  if typ != 'blob':
+                      continue
+                  size = int(subprocess.check_output(['git','cat-file','-s',oid], text=True).strip())
+              except Exception:
+                  continue
+              if size != 4000:
+                  continue
+              data = subprocess.check_output(['git','cat-file','blob',oid])
+              sha = hashlib.sha256(data).hexdigest()
+              if sha in targets:
+                  print('FOUND', targets[sha], 'git_oid', oid, 'path_hint', path, 'sha256', sha)
+                  hits += 1
+          print('hits', hits)
+          if hits != len(targets):
+              print('Not all target chunks were found in reachable Git object history.')
