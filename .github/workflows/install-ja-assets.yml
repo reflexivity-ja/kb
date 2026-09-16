@@ -1,4 +1,4 @@
-name: Inspect staged Japanese KB asset archive
+name: Inspect staged Japanese KB asset fragments
 
 on:
   push:
@@ -13,48 +13,81 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Read local ZIP headers without modifying repository
+      - name: Scan decoded staging fragments for ZIP member paths
         shell: python
         run: |
           from pathlib import Path
-          import hashlib, struct
+          import base64, re, string, struct
 
-          p = Path('.tmp/final-ja-assets.zip')
-          data = p.read_bytes()
-          print('bytes', len(data))
-          print('sha256', hashlib.sha256(data).hexdigest())
+          alphabet = set(string.ascii_letters + string.digits + '+/=')
 
-          sig = b'PK\x03\x04'
-          pos = 0
-          found = 0
-          while True:
-              i = data.find(sig, pos)
-              if i < 0:
-                  break
-              if i + 30 > len(data):
-                  print('truncated_header_at', i)
-                  break
-              fields = struct.unpack_from('<IHHHHHIIIHH', data, i)
-              _, ver, flags, method, mtime, mdate, crc, csize, usize, nlen, xlen = fields
-              name_start = i + 30
-              name_end = name_start + nlen
-              extra_end = name_end + xlen
-              if extra_end > len(data):
-                  print('truncated_name_at', i)
-                  break
-              name_bytes = data[name_start:name_end]
+          def clean_b64(path):
+              text = path.read_text(encoding='utf-8', errors='ignore')
+              text = ''.join(ch for ch in text if ch in alphabet)
+              text += '=' * ((4 - len(text) % 4) % 4)
               try:
-                  name = name_bytes.decode('utf-8')
-              except UnicodeDecodeError:
-                  name = name_bytes.decode('cp437', errors='replace')
-              print(f'entry[{found}] offset={i} method={method} csize={csize} usize={usize} flags={flags:#x} name={name}')
-              found += 1
-              if flags & 0x08:
-                  pos = extra_end + 1
-              else:
-                  pos = extra_end + csize
-              if pos <= i:
-                  pos = i + 4
-          print('local_header_count', found)
-          if found == 0:
-              raise SystemExit('No local ZIP headers found')
+                  return base64.b64decode(text, validate=False)
+              except Exception as e:
+                  print(path, 'decode_error', repr(e))
+                  return b''
+
+          def scan(label, data):
+              print('\n###', label, 'decoded_bytes', len(data))
+              sig = b'PK\x03\x04'
+              start = 0
+              seen = 0
+              while True:
+                  i = data.find(sig, start)
+                  if i < 0:
+                      break
+                  start = i + 4
+                  if i + 30 > len(data):
+                      continue
+                  try:
+                      fields = struct.unpack_from('<IHHHHHIIIHH', data, i)
+                  except struct.error:
+                      continue
+                  _, ver, flags, method, mtime, mdate, crc, csize, usize, nlen, xlen = fields
+                  ns = i + 30
+                  ne = ns + nlen
+                  if ne > len(data) or nlen == 0 or nlen > 500:
+                      continue
+                  nameb = data[ns:ne]
+                  try:
+                      name = nameb.decode('utf-8')
+                  except Exception:
+                      continue
+                  if 'RX-USECASE-' in name or name.startswith('画像/'):
+                      print(f'local_header offset={i} csize={csize} usize={usize} name={name}')
+                      seen += 1
+              for m in re.finditer(rb'RX-USECASE-[0-9]{4}', data):
+                  lo = max(0, m.start()-80); hi = min(len(data), m.end()+160)
+                  snippet = data[lo:hi]
+                  printable = ''.join(chr(b) if 32 <= b < 127 else '.' for b in snippet)
+                  print('ascii_hit', m.group().decode(), 'offset', m.start(), printable)
+              print('headers_seen', seen)
+
+          zip_path = Path('.tmp/final-ja-assets.zip')
+          if zip_path.exists():
+              scan(str(zip_path), zip_path.read_bytes())
+
+          for root in [Path('.tmp/final-assets'), Path('.tmp/today-assets')]:
+              for p in sorted(root.glob('*.b64')):
+                  scan(str(p), clean_b64(p))
+
+          # Also concatenate each family after cleaning; even a partially damaged stream may retain local headers.
+          for root in [Path('.tmp/final-assets'), Path('.tmp/today-assets')]:
+              parts = sorted(root.glob('*.b64'))
+              if not parts:
+                  continue
+              text = ''
+              for p in parts:
+                  raw = p.read_text(encoding='utf-8', errors='ignore')
+                  text += ''.join(ch for ch in raw if ch in alphabet)
+              text += '=' * ((4 - len(text) % 4) % 4)
+              try:
+                  data = base64.b64decode(text, validate=False)
+              except Exception as e:
+                  print(root, 'concat_decode_error', repr(e))
+                  continue
+              scan(str(root) + '/CONCAT', data)
