@@ -1,0 +1,28 @@
+name: Install Japanese KB assets
+
+on:
+  push:
+    paths:
+      - '.tmp/ja-assets-*.b64'
+
+permissions:
+  contents: write
+
+jobs:
+  install:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Restore public assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat .tmp/ja-assets-*.b64 > /tmp/ja-assets.b64
+          base64 -d /tmp/ja-assets.b64 > /tmp/ja-assets.zip
+          unzip -o /tmp/ja-assets.zip -d .
+          rm -f .tmp/ja-assets-*.b64 .tmp/test.txt .github/workflows/inspect-publication-source-bundle.yml .github/workflows/install-ja-assets.yml
+          git config user.name 'Reflexivity KB automation'
+          git config user.email 'gtm@reflexivity.com'
+          git add -A
+          git commit -m 'Restore Japanese KB source visuals and clean temporary files'
+          git push
