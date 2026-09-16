@@ -1,50 +1,28 @@
-name: Install Japanese KB assets
+name: Inspect staged Japanese KB assets
 
 on:
   push:
     paths:
       - '.github/workflows/install-ja-assets.yml'
-  workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
-  install:
+  inspect:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Restore staged source visuals and clean staging
+      - name: Inspect chunk boundaries
         shell: python
         run: |
           from pathlib import Path
-          import base64, io, string, subprocess, zipfile
-
+          import string
           alphabet = set(string.ascii_letters + string.digits + '+/=')
-          parts = sorted(Path('.tmp/today-assets').glob('chunk-*.b64')) + sorted(Path('.tmp/today-assets').glob('rem-*.b64'))
-          text = ''.join(p.read_text(encoding='utf-8') for p in parts)
-          clean = ''.join(ch for ch in text if ch in alphabet)
-          clean += '=' * (-len(clean) % 4)
-          print('parts=', [p.name for p in parts], 'raw=', len(text), 'clean+padded=', len(clean))
-          raw = base64.b64decode(clean, validate=True)
-          with zipfile.ZipFile(io.BytesIO(raw)) as z:
-              bad = z.testzip()
-              if bad:
-                  raise RuntimeError(f'corrupt member {bad}')
-              print('members=', z.namelist())
-              z.extractall('.')
-
-          Path('画像/ユースケース/quick/RX-USECASE-0053/01.webp.b64').unlink(missing_ok=True)
-          subprocess.run(['rm','-rf','.tmp'], check=True)
-          for path in [
-              Path('.github/workflows/install-ja-assets.yml'),
-              Path('.github/workflows/install-today-onboarding-assets.yml'),
-              Path('.github/workflows/inspect-publication-source-bundle.yml'),
-          ]:
-              path.unlink(missing_ok=True)
-
-          subprocess.run(['git','config','user.name','Reflexivity KB automation'], check=True)
-          subprocess.run(['git','config','user.email','gtm@reflexivity.com'], check=True)
-          subprocess.run(['git','add','-A'], check=True)
-          subprocess.run(['git','commit','-m','Restore Japanese KB source visuals and clean staging'], check=True)
-          subprocess.run(['git','push'], check=True)
+          for group in [Path('.tmp/final-assets'), Path('.tmp/today-assets')]:
+              print('GROUP', group)
+              for p in sorted(group.glob('*.b64')):
+                  text = p.read_text(encoding='utf-8')
+                  clean = ''.join(ch for ch in text if ch in alphabet)
+                  eq = [i for i,ch in enumerate(clean) if ch == '=']
+                  print(p.name, 'raw', len(text), 'clean', len(clean), 'start', clean[:24], 'end', clean[-24:], 'eq_count', len(eq), 'first_eq', eq[0] if eq else None, 'last_eq', eq[-1] if eq else None)
