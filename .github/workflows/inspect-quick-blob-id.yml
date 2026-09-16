@@ -13,20 +13,45 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Inspect WebP blobs
+      - name: Inspect staged source visuals
         shell: bash
         run: |
           set -euo pipefail
-          if ! command -v tesseract >/dev/null 2>&1; then
-            sudo apt-get update -qq
-            sudo apt-get install -y -qq tesseract-ocr
-          fi
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq tesseract-ocr tesseract-ocr-jpn imagemagick
+
+          echo '===== VALID ZIP MEMBERS ====='
+          python - <<'PY'
+          from pathlib import Path
+          import hashlib, zipfile
+
+          def git_blob_sha(data: bytes) -> str:
+              header = f'blob {len(data)}\0'.encode()
+              return hashlib.sha1(header + data).hexdigest()
+
+          zpath = Path('.tmp/final-ja-assets.zip')
+          with zipfile.ZipFile(zpath) as z:
+              for name in z.namelist():
+                  if name.endswith('/'):
+                      continue
+                  data = z.read(name)
+                  print(f'{name}\tsize={len(data)}\tgit_blob={git_blob_sha(data)}')
+          PY
+
+          echo '===== STAGED BLOB HASHES ====='
+          for f in .tmp/blob-id/*.webp; do
+            printf '%s\t' "$f"
+            git hash-object "$f"
+          done
+
+          echo '===== OCR ====='
+          mkdir -p /tmp/quick-ocr
           for f in .tmp/blob-id/*.webp; do
             echo "===== $f ====="
             file "$f"
-            if command -v identify >/dev/null 2>&1; then
-              identify "$f" || true
-            fi
-            echo "--- OCR ---"
-            tesseract "$f" stdout -l eng 2>/dev/null | head -n 80 || true
+            identify "$f" || true
+            out="/tmp/quick-ocr/$(basename "$f")-up.png"
+            convert "$f" -resize 300% -sharpen 0x1 "$out"
+            echo '--- OCR jpn+eng ---'
+            tesseract "$out" stdout -l jpn+eng --psm 6 2>/dev/null | head -n 120 || true
           done
