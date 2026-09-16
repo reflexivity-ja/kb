@@ -3,7 +3,8 @@ name: Install Japanese KB assets
 on:
   push:
     paths:
-      - '.tmp/final-ja-assets/READY'
+      - '.github/workflows/install-ja-assets.yml'
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -13,19 +14,25 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Restore final public assets and clean staging
+      - name: Restore staged source visuals and clean staging
         shell: bash
         run: |
           set -euo pipefail
-          cat .tmp/final-ja-assets/chunk-*.b64 > /tmp/ja-assets.b64
-          base64 -d /tmp/ja-assets.b64 > /tmp/ja-assets.zip
-          unzip -t /tmp/ja-assets.zip
-          unzip -o /tmp/ja-assets.zip -d .
+          found=0
+          for src in .tmp/final-assets/chunk-*.b64; do
+            [ -f "$src" ] || continue
+            found=1
+            zip="/tmp/$(basename "$src" .b64).zip"
+            base64 -d "$src" > "$zip"
+            unzip -t "$zip"
+            unzip -o "$zip" -d .
+          done
+          [ "$found" -eq 1 ]
           rm -rf .tmp
           rm -f .github/workflows/install-ja-assets.yml .github/workflows/install-today-onboarding-assets.yml .github/workflows/inspect-publication-source-bundle.yml
           rm -f '画像/ユースケース/quick/RX-USECASE-0053/01.webp.b64'
           git config user.name 'Reflexivity KB automation'
           git config user.email 'gtm@reflexivity.com'
           git add -A
-          git commit -m 'Restore final Japanese KB source visuals and clean staging'
+          git commit -m 'Restore Japanese KB source visuals and clean staging'
           git push
