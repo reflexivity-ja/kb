@@ -27,6 +27,7 @@ jobs:
           files = [Path(p.decode('utf-8')) for p in raw.split(b'\0') if p]
           errors = []
           warnings = []
+          stable_ids = {}
           generic = re.compile(r'^#{1,6}\s+(Relevant|Compelling|Insight|Resource|Resources|Summary|Key Findings|Method|Methodology|Limitations|Caveats|Research|Data|Charts|Chart|Output|Outputs|Conclusion|Conclusions|Source|Sources|Notes)(?:\b|（|\s|$)', re.I)
           link_re = re.compile(r'!?\[[^\]]*\]\(([^)]+)\)')
           allowed_heading_tokens = {
@@ -50,6 +51,15 @@ jobs:
 
               meta_end = text.find('-->') if text.startswith('<!--') else -1
               meta = text[:meta_end+3] if meta_end >= 0 else ''
+              id_match = re.search(r'^id:\s*(RX-[A-Z]+-\d{4})\s*$', meta, re.M)
+              if id_match:
+                  stable_id = id_match.group(1)
+                  previous = stable_ids.get(stable_id)
+                  if previous is not None:
+                      errors.append(f'duplicate stable id {stable_id}: {previous} and {path}')
+                  else:
+                      stable_ids[stable_id] = path
+
               if re.search(r'^source_url:\s*["\']?https?://(?:www\.)?reflexivity\.com', meta, re.M | re.I):
                   errors.append(f'{path}: Reflexivity customer navigation URL is hidden in metadata; move it to the visible body')
 
@@ -87,6 +97,7 @@ jobs:
                   errors.append('.tmp contains publication leftovers: ' + ', '.join(leftovers))
 
           print(f'Markdown files checked: {len(files)}')
+          print(f'Stable IDs checked: {len(stable_ids)}')
           if warnings:
               print('\nLanguage review warnings:')
               for item in warnings:
