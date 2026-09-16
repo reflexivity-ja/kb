@@ -25,7 +25,8 @@ jobs:
           def restore(label, parts):
               text = ''.join(p.read_text(encoding='utf-8') for p in parts)
               clean = ''.join(ch for ch in text if ch in alphabet)
-              print(label, 'parts=', [p.name for p in parts], 'raw=', len(text), 'clean=', len(clean), 'mod4=', len(clean) % 4)
+              clean += '=' * (-len(clean) % 4)
+              print(label, 'parts=', [p.name for p in parts], 'raw=', len(text), 'clean+padded=', len(clean), 'mod4=', len(clean) % 4)
               raw = base64.b64decode(clean, validate=True)
               with zipfile.ZipFile(io.BytesIO(raw)) as z:
                   bad = z.testzip()
