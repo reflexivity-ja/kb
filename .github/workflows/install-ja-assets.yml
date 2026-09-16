@@ -1,4 +1,4 @@
-name: Inspect all historical QUICK asset staging snapshots
+name: Restore verified RX-USECASE-0054 source visuals
 
 on:
   push:
@@ -6,149 +6,82 @@ on:
       - '.github/workflows/install-ja-assets.yml'
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
-  inspect:
+  restore:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - name: Find verified QUICK assets across staging history
+      - name: Restore verified 0054 theme and market visuals
         shell: python
         run: |
-          import base64, binascii, re, string, struct, subprocess, zlib
+          from pathlib import Path
+          import base64, binascii, string, struct, subprocess
 
-          TARGET_IDS = {'0049','0053','0054','0055','0057','0059'}
+          expected = {
+              '画像/ユースケース/quick/RX-USECASE-0054/02-theme-performance.webp',
+              '画像/ユースケース/quick/RX-USECASE-0054/03-usdjpy-nikkei.webp',
+          }
+          root = Path('.tmp/today-assets')
+          chunks = sorted(root.glob('chunk-*.b64'))
+          rems = sorted(root.glob('rem-*.b64'))
           alphabet = set(string.ascii_letters + string.digits + '+/=')
-          best = {}
+          text = ''
+          for p in chunks + rems:
+              s = p.read_text(encoding='utf-8', errors='ignore')
+              text += ''.join(ch for ch in s if ch in alphabet)
+          text += '=' * ((4 - len(text) % 4) % 4)
+          data = base64.b64decode(text, validate=False)
 
-          def git_bytes(ref, path):
+          found = {}
+          sig = b'PK\x03\x04'
+          pos = 0
+          while True:
+              i = data.find(sig, pos)
+              if i < 0:
+                  break
+              pos = i + 4
+              if i + 30 > len(data):
+                  continue
+              _, ver, flags, method, mtime, mdate, crc, csize, usize, nlen, xlen = struct.unpack_from('<IHHHHHIIIHH', data, i)
+              ns = i + 30; ne = ns + nlen; ds = ne + xlen
+              if ds > len(data):
+                  continue
               try:
-                  return subprocess.check_output(['git','show',f'{ref}:{path}'])
-              except subprocess.CalledProcessError:
-                  return None
+                  name = data[ns:ne].decode('utf-8')
+              except UnicodeDecodeError:
+                  continue
+              if name not in expected:
+                  continue
+              if method != 0:
+                  raise SystemExit(f'Unexpected compression method for {name}: {method}')
+              raw = data[ds:ds+csize]
+              if len(raw) != csize or len(raw) != usize:
+                  raise SystemExit(f'Truncated asset {name}: {len(raw)} / {usize}')
+              if (binascii.crc32(raw) & 0xffffffff) != crc:
+                  raise SystemExit(f'CRC mismatch for {name}')
+              if not (raw[:4] == b'RIFF' and raw[8:12] == b'WEBP'):
+                  raise SystemExit(f'Invalid WebP header for {name}')
+              if int.from_bytes(raw[4:8], 'little') + 8 != len(raw):
+                  raise SystemExit(f'Invalid RIFF length for {name}')
+              found[name] = raw
+              print('VERIFIED', name, len(raw), 'bytes')
 
-          def tree_paths(ref, prefix):
-              try:
-                  out = subprocess.check_output(['git','ls-tree','-r','--name-only',ref,'--',prefix], text=True, errors='replace')
-              except subprocess.CalledProcessError:
-                  return []
-              return [x for x in out.splitlines() if x]
+          missing = expected - found.keys()
+          if missing:
+              raise SystemExit('Missing expected assets: ' + ', '.join(sorted(missing)))
 
-          def scan(data, label):
-              sig = b'PK\x03\x04'
-              pos = 0
-              while True:
-                  i = data.find(sig, pos)
-                  if i < 0:
-                      break
-                  pos = i + 4
-                  if i + 30 > len(data):
-                      continue
-                  try:
-                      _, ver, flags, method, mtime, mdate, crc, csize, usize, nlen, xlen = struct.unpack_from('<IHHHHHIIIHH', data, i)
-                  except struct.error:
-                      continue
-                  ns = i + 30; ne = ns + nlen; ds = ne + xlen
-                  if ds > len(data) or nlen == 0 or nlen > 600:
-                      continue
-                  try:
-                      name = data[ns:ne].decode('utf-8')
-                  except UnicodeDecodeError:
-                      continue
-                  m = re.search(r'RX-USECASE-(\d{4})', name)
-                  if not m or m.group(1) not in TARGET_IDS or not name.lower().endswith(('.webp','.png')):
-                      continue
-                  available = max(0, min(csize, len(data)-ds))
-                  status = 'TRUNCATED'
-                  raw = None
-                  if available == csize:
-                      payload = data[ds:ds+csize]
-                      try:
-                          if method == 0:
-                              raw = payload
-                          elif method == 8:
-                              raw = zlib.decompress(payload, -15)
-                          else:
-                              status = f'UNSUPPORTED_METHOD_{method}'
-                      except Exception:
-                          status = 'DECOMPRESS_ERROR'
-                      if raw is not None:
-                          crc_ok = (binascii.crc32(raw) & 0xffffffff) == crc
-                          size_ok = len(raw) == usize
-                          image_ok = False
-                          if name.lower().endswith('.webp'):
-                              image_ok = len(raw) >= 12 and raw[:4] == b'RIFF' and raw[8:12] == b'WEBP' and int.from_bytes(raw[4:8], 'little') + 8 == len(raw)
-                          elif name.lower().endswith('.png'):
-                              image_ok = raw.startswith(b'\x89PNG\r\n\x1a\n')
-                          status = 'VERIFIED' if crc_ok and size_ok and image_ok else f'INVALID crc={crc_ok} size={size_ok} image={image_ok}'
-                  rec = (status, usize, csize, available, crc, label)
-                  old = best.get(name)
-                  rank = {'VERIFIED':3, 'INVALID':2, 'TRUNCATED':1}
-                  def score(r):
-                      s = r[0]
-                      return (3 if s == 'VERIFIED' else 2 if s.startswith('INVALID') else 1 if s == 'TRUNCATED' else 0, r[3])
-                  if old is None or score(rec) > score(old):
-                      best[name] = rec
-                  print(f'{label}\t{name}\tstatus={status}\tusize={usize}\tcsize={csize}\tavailable={available}\tcrc={crc:08x}')
+          for name, raw in found.items():
+              p = Path(name)
+              p.parent.mkdir(parents=True, exist_ok=True)
+              p.write_bytes(raw)
 
-          commits = subprocess.check_output([
-              'git','log','--all','--format=%H','--',
-              '.tmp/final-assets','.tmp/today-assets','.tmp/final-ja-assets.zip'
-          ], text=True).splitlines()
-          refs = []
-          seen = set()
-          for ref in commits + ['main','origin/main','origin/tmp-ignore']:
-              if ref and ref not in seen:
-                  seen.add(ref); refs.append(ref)
-          print('snapshot_count', len(refs))
-
-          for ref in refs:
-              for prefix in ['.tmp/final-assets','.tmp/today-assets']:
-                  paths = [p for p in tree_paths(ref, prefix) if p.endswith('.b64')]
-                  if not paths:
-                      continue
-                  # Test common intended orderings. Some staging families used chunk-* followed by rem-*.
-                  groups = []
-                  chunks = sorted(p for p in paths if '/chunk-' in p)
-                  rems = sorted(p for p in paths if '/rem-' in p)
-                  if chunks:
-                      groups.append(('chunks', chunks))
-                  if chunks or rems:
-                      groups.append(('chunks+rems', chunks + rems))
-                  for kind, plist in groups:
-                      text = ''
-                      ok = True
-                      for p in plist:
-                          b = git_bytes(ref, p)
-                          if b is None:
-                              ok = False; break
-                          t = b.decode('utf-8', errors='ignore')
-                          text += ''.join(ch for ch in t if ch in alphabet)
-                      if not ok or not text:
-                          continue
-                      text += '=' * ((4 - len(text) % 4) % 4)
-                      try:
-                          data = base64.b64decode(text, validate=False)
-                      except Exception:
-                          continue
-                      scan(data, f'{ref[:10]}:{prefix}:{kind}')
-
-              raw = git_bytes(ref, '.tmp/final-ja-assets.zip')
-              if raw:
-                  scan(raw, f'{ref[:10]}:final-ja-assets.zip')
-
-          print('\n===== BEST BY ASSET =====')
-          for name in sorted(best):
-              status, usize, csize, available, crc, label = best[name]
-              print(f'{name}\t{status}\tusize={usize}\tcsize={csize}\tavailable={available}\tcrc={crc:08x}\tfrom={label}')
-
-          print('\n===== TARGET COVERAGE =====')
-          for rid in sorted(TARGET_IDS):
-              names = [n for n in best if f'RX-USECASE-{rid}/' in n]
-              verified = [n for n in names if best[n][0] == 'VERIFIED']
-              print(f'RX-USECASE-{rid}: discovered={len(names)} verified={len(verified)}')
-              for n in sorted(verified):
-                  print('  VERIFIED', n)
+          subprocess.run(['git','config','user.name','Reflexivity KB automation'], check=True)
+          subprocess.run(['git','config','user.email','gtm@reflexivity.com'], check=True)
+          subprocess.run(['git','add', *sorted(expected)], check=True)
+          if subprocess.run(['git','diff','--cached','--quiet']).returncode == 0:
+              print('No asset changes needed.')
+              raise SystemExit(0)
+          subprocess.run(['git','commit','-m','Restore verified RX-USECASE-0054 source visuals'], check=True)
+          subprocess.run(['git','push'], check=True)
