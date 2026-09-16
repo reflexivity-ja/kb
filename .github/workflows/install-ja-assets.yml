@@ -82,3 +82,5 @@ jobs:
           subprocess.run(['git','add','-A'], check=True)
           subprocess.run(['git','commit','-m','Restore Japanese KB source visuals and clean staging'], check=True)
           subprocess.run(['git','push'], check=True)
+
+# Triggered to finalize staged public assets and cleanup on 2026-09-16.
