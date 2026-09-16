@@ -23,7 +23,8 @@ jobs:
           import re
           import subprocess
 
-          files = [Path(p) for p in subprocess.check_output(['git','ls-files','*.md'], text=True).splitlines()]
+          raw = subprocess.check_output(['git', '-c', 'core.quotepath=false', 'ls-files', '-z', '*.md'])
+          files = [Path(p.decode('utf-8')) for p in raw.split(b'\0') if p]
           errors = []
           warnings = []
           generic = re.compile(r'^#{1,6}\s+(Relevant|Compelling|Insight|Resource|Resources|Summary|Key Findings|Method|Methodology|Limitations|Caveats|Research|Data|Charts|Chart|Output|Outputs|Conclusion|Conclusions|Source|Sources|Notes)(?:\b|（|\s|$)', re.I)
