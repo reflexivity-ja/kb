@@ -15,26 +15,39 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Restore staged source visuals and clean staging
-        shell: bash
+        shell: python
         run: |
-          set -euo pipefail
+          from pathlib import Path
+          import base64, io, string, subprocess, zipfile
 
-          cat .tmp/final-assets/chunk-*.b64 > /tmp/final-assets.b64
-          base64 -d /tmp/final-assets.b64 > /tmp/final-assets.zip
-          unzip -t /tmp/final-assets.zip
-          unzip -o /tmp/final-assets.zip -d .
+          alphabet = set(string.ascii_letters + string.digits + '+/=')
 
-          cat .tmp/today-assets/chunk-*.b64 .tmp/today-assets/rem-*.b64 > /tmp/today-assets.b64
-          base64 -d /tmp/today-assets.b64 > /tmp/today-assets.zip
-          unzip -t /tmp/today-assets.zip
-          unzip -o /tmp/today-assets.zip -d .
+          def restore(label, parts):
+              text = ''.join(p.read_text(encoding='utf-8') for p in parts)
+              clean = ''.join(ch for ch in text if ch in alphabet)
+              print(label, 'parts=', [p.name for p in parts], 'raw=', len(text), 'clean=', len(clean), 'mod4=', len(clean) % 4)
+              raw = base64.b64decode(clean, validate=True)
+              with zipfile.ZipFile(io.BytesIO(raw)) as z:
+                  bad = z.testzip()
+                  if bad:
+                      raise RuntimeError(f'{label}: corrupt member {bad}')
+                  print(label, 'members=', z.namelist())
+                  z.extractall('.')
 
-          rm -rf .tmp
-          rm -f .github/workflows/install-ja-assets.yml .github/workflows/install-today-onboarding-assets.yml .github/workflows/inspect-publication-source-bundle.yml
-          rm -f '画像/ユースケース/quick/RX-USECASE-0053/01.webp.b64'
+          restore('final-assets', sorted(Path('.tmp/final-assets').glob('chunk-*.b64')))
+          restore('today-assets', sorted(Path('.tmp/today-assets').glob('chunk-*.b64')) + sorted(Path('.tmp/today-assets').glob('rem-*.b64')))
 
-          git config user.name 'Reflexivity KB automation'
-          git config user.email 'gtm@reflexivity.com'
-          git add -A
-          git commit -m 'Restore Japanese KB source visuals and clean staging'
-          git push
+          Path('画像/ユースケース/quick/RX-USECASE-0053/01.webp.b64').unlink(missing_ok=True)
+          subprocess.run(['rm','-rf','.tmp'], check=True)
+          for path in [
+              Path('.github/workflows/install-ja-assets.yml'),
+              Path('.github/workflows/install-today-onboarding-assets.yml'),
+              Path('.github/workflows/inspect-publication-source-bundle.yml'),
+          ]:
+              path.unlink(missing_ok=True)
+
+          subprocess.run(['git','config','user.name','Reflexivity KB automation'], check=True)
+          subprocess.run(['git','config','user.email','gtm@reflexivity.com'], check=True)
+          subprocess.run(['git','add','-A'], check=True)
+          subprocess.run(['git','commit','-m','Restore Japanese KB source visuals and clean staging'], check=True)
+          subprocess.run(['git','push'], check=True)
