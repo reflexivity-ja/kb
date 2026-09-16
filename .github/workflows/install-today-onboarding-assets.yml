@@ -21,16 +21,24 @@ jobs:
           import base64, io, subprocess, zipfile
 
           root = Path('.tmp/today-assets')
-          parts = [*sorted(root.glob('chunk-*.b64')), *sorted(root.glob('rem-*.b64'))]
-          if not parts:
-              raise SystemExit('No staged asset chunks found')
-          encoded = b''.join(p.read_bytes() for p in parts)
-          raw = base64.b64decode(encoded, validate=True)
-          z = zipfile.ZipFile(io.BytesIO(raw))
-          print('Installing source visuals:')
-          for name in z.namelist():
-              print(name)
-          z.extractall('.')
+          groups = [
+              sorted(root.glob('chunk-*.b64')),
+              sorted(root.glob('rem-*.b64')),
+          ]
+          installed = []
+          for i, parts in enumerate(groups, 1):
+              if not parts:
+                  continue
+              encoded = b''.join(p.read_bytes() for p in parts)
+              raw = base64.b64decode(encoded, validate=True)
+              z = zipfile.ZipFile(io.BytesIO(raw))
+              print(f'Bundle {i}:')
+              for name in z.namelist():
+                  print(name)
+                  installed.append(name)
+              z.extractall('.')
+          if not installed:
+              raise SystemExit('No source visuals installed')
 
           bad = Path('画像/ユースケース/quick/RX-USECASE-0053/01.webp.b64')
           if bad.exists():
