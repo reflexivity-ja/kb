@@ -1,0 +1,98 @@
+name: Audit Japanese public KB
+
+on:
+  push:
+    paths:
+      - '**/*.md'
+      - '.github/workflows/audit-ja-public-kb.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check public pages
+        shell: python
+        run: |
+          from pathlib import Path
+          from urllib.parse import unquote
+          import re
+          import subprocess
+
+          files = [Path(p) for p in subprocess.check_output(['git','ls-files','*.md'], text=True).splitlines()]
+          errors = []
+          warnings = []
+          generic = re.compile(r'^#{1,6}\s+(Relevant|Compelling|Insight|Resource|Resources|Summary|Key Findings|Method|Methodology|Limitations|Caveats|Research|Data|Charts|Chart|Output|Outputs|Conclusion|Conclusions|Source|Sources|Notes)(?:\b|（|\s|$)', re.I)
+          link_re = re.compile(r'!?\[[^\]]*\]\(([^)]+)\)')
+          allowed_heading_tokens = {
+              'Reflexivity','QUICK','FX','FOMC','RSI','EUR','USD','EUR/USD','S&P','IPO','NVIDIA','AAPL','RIA',
+              'PM','CIO','KPI','AI','PMI','GDP','PCE','ADP','JOLTS','CAGR','OOS','ETF','WTI','FRB','Fed',
+              'Company','Catalyst','Knowledge','Graph','Russell','Bitcoin','Robinhood','iPhone','Alfred'
+          }
+
+          def visible_text(text):
+              if text.startswith('<!--'):
+                  end = text.find('-->')
+                  if end >= 0:
+                      return text[end+3:]
+              return text
+
+          for path in files:
+              text = path.read_text(encoding='utf-8')
+              visible = visible_text(text)
+              if visible.lstrip().startswith('---'):
+                  errors.append(f'{path}: visible YAML/front matter')
+
+              meta_end = text.find('-->') if text.startswith('<!--') else -1
+              meta = text[:meta_end+3] if meta_end >= 0 else ''
+              if re.search(r'^source_url:\s*["\']?https?://(?:www\.)?reflexivity\.com', meta, re.M | re.I):
+                  errors.append(f'{path}: Reflexivity customer navigation URL is hidden in metadata; move it to the visible body')
+
+              for n, line in enumerate(visible.splitlines(), 1):
+                  if generic.match(line.strip()):
+                      errors.append(f'{path}:{n}: generic English editorial heading: {line.strip()}')
+                  if line.startswith('#'):
+                      heading = re.sub(r'[#*_`]', ' ', line)
+                      words = re.findall(r"[A-Za-z][A-Za-z0-9/&.-]*", heading)
+                      suspicious = [w for w in words if w not in allowed_heading_tokens and not w.isupper() and len(w) > 2]
+                      if suspicious:
+                          warnings.append(f'{path}:{n}: review heading language: {line.strip()}')
+
+              for m in link_re.finditer(visible):
+                  target = m.group(1).strip()
+                  if target.startswith('<') and target.endswith('>'):
+                      target = target[1:-1]
+                  if not target or target.startswith(('http://','https://','mailto:','#','tel:')):
+                      continue
+                  target = target.split('#',1)[0].split('?',1)[0]
+                  if not target:
+                      continue
+                  resolved = (path.parent / unquote(target)).resolve()
+                  try:
+                      resolved.relative_to(Path('.').resolve())
+                  except ValueError:
+                      errors.append(f'{path}: local link escapes repository: {target}')
+                      continue
+                  if not resolved.exists():
+                      errors.append(f'{path}: broken local link/image: {target}')
+
+          if Path('.tmp').exists():
+              leftovers = [str(p) for p in Path('.tmp').rglob('*') if p.is_file()]
+              if leftovers:
+                  errors.append('.tmp contains publication leftovers: ' + ', '.join(leftovers))
+
+          print(f'Markdown files checked: {len(files)}')
+          if warnings:
+              print('\nLanguage review warnings:')
+              for item in warnings:
+                  print('WARN', item)
+          if errors:
+              print('\nAudit errors:')
+              for item in errors:
+                  print('ERROR', item)
+              raise SystemExit(1)
+          print('\nAUDIT PASSED')
