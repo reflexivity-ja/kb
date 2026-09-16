@@ -1,4 +1,4 @@
-name: Restore verified RX-USECASE-0059 risk-return visual
+name: Finalize Japanese KB publication cleanup
 
 on:
   push:
@@ -9,69 +9,26 @@ permissions:
   contents: write
 
 jobs:
-  restore:
+  cleanup:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Extract and verify original 0059 risk-return WebP
-        shell: python
+      - name: Remove publication staging and temporary workflows
+        shell: bash
         run: |
-          from pathlib import Path
-          import binascii, struct, subprocess, zlib
+          set -euo pipefail
+          rm -rf .tmp
+          rm -f .github/workflows/inspect-quick-blob-id.yml
+          rm -f .github/workflows/install-today-onboarding-assets.yml
+          rm -f .github/workflows/inspect-publication-source-bundle.yml
+          rm -f .github/workflows/install-ja-assets.yml
 
-          target = '画像/ユースケース/quick/RX-USECASE-0059/03-risk-return-map.webp'
-          data = Path('.tmp/final-ja-assets.zip').read_bytes()
-          sig = b'PK\x03\x04'
-          pos = 0
-          raw = None
-          while True:
-              i = data.find(sig, pos)
-              if i < 0:
-                  break
-              pos = i + 4
-              if i + 30 > len(data):
-                  continue
-              _, ver, flags, method, mtime, mdate, crc, csize, usize, nlen, xlen = struct.unpack_from('<IHHHHHIIIHH', data, i)
-              ns = i + 30; ne = ns + nlen; ds = ne + xlen
-              if ds > len(data):
-                  continue
-              try:
-                  name = data[ns:ne].decode('utf-8')
-              except UnicodeDecodeError:
-                  continue
-              if name != target:
-                  continue
-              payload = data[ds:ds+csize]
-              if len(payload) != csize:
-                  raise SystemExit(f'Truncated compressed payload: {len(payload)} / {csize}')
-              if method == 8:
-                  raw = zlib.decompress(payload, -15)
-              elif method == 0:
-                  raw = payload
-              else:
-                  raise SystemExit(f'Unsupported compression method: {method}')
-              if len(raw) != usize:
-                  raise SystemExit(f'Uncompressed size mismatch: {len(raw)} / {usize}')
-              if (binascii.crc32(raw) & 0xffffffff) != crc:
-                  raise SystemExit('CRC mismatch')
-              if not (raw[:4] == b'RIFF' and raw[8:12] == b'WEBP'):
-                  raise SystemExit('Invalid WebP header')
-              if int.from_bytes(raw[4:8], 'little') + 8 != len(raw):
-                  raise SystemExit('Invalid RIFF length')
-              print('VERIFIED', target, len(raw), 'bytes')
-              break
-
-          if raw is None:
-              raise SystemExit('Target asset not found')
-
-          p = Path(target)
-          p.parent.mkdir(parents=True, exist_ok=True)
-          p.write_bytes(raw)
-          subprocess.run(['git','config','user.name','Reflexivity KB automation'], check=True)
-          subprocess.run(['git','config','user.email','gtm@reflexivity.com'], check=True)
-          subprocess.run(['git','add',target], check=True)
-          if subprocess.run(['git','diff','--cached','--quiet']).returncode == 0:
-              print('No asset change needed.')
-              raise SystemExit(0)
-          subprocess.run(['git','commit','-m','Restore verified RX-USECASE-0059 risk-return visual'], check=True)
-          subprocess.run(['git','push'], check=True)
+          git config user.name 'Reflexivity KB automation'
+          git config user.email 'gtm@reflexivity.com'
+          git add -A
+          if git diff --cached --quiet; then
+            echo 'No cleanup changes needed.'
+            exit 0
+          fi
+          git commit -m 'Clean Japanese KB publication staging'
+          git push
