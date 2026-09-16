@@ -9,41 +9,38 @@ language: ja
 locale: ja-JP
 published: 2026-08-11
 drafted: 2026-09-07
-revised: null
+revised: 2026-09-16
 status: draft
-source_url: "https://reflexivity.com/app/stream/focus?activeDrawer=insights&entityTag=gure_nasd&activeInsight=1d6ec2d3-63bf-438b-b8bd-1b214f8f19af"
 canonical_path: "use-cases/hedge-fund-tier-3/gulf-resources-analyst-sales-forecast-decline-gure.md"
 translation_status: review-needed
 resource: "Reflexivity Insights Proof Set — Sales Enablement.docx"
 -->
 
-# Gulf Resources：アナリスト売上予想の低下 (GURE) — 弱気シグナル
+# Gulf Resources：アナリスト売上予想の低下 (GURE) - 弱気シグナル
 
-> **レビュー用ドラフト** — 以下は日付時点のプラットフォーム出力です。利用前に現在の市場データと照合するか、例示目的としてご利用ください。
-**ペルソナ:** ヘッジファンド Tier 3（小規模・新興）  
-**インサイトタイプ:** シナリオ・インサイト  
+> **レビュー用ドラフト** - 以下は対象日時点のプラットフォーム出力をもとにした例です。現在の投資判断に使う場合は、最新の市場データとあわせて確認してください。
+
+**想定運用者:** ヘッジファンド Tier 3（小規模・新興）  
+**インサイトの種類:** シナリオ・インサイト  
 **シグナル:** 弱気  
-**対象インサイト日:** 2026年8月11日  
-**初稿:** 2026年9月7日
+**対象日:** 2026年8月11日
 
-## Relevant（関連性）
+アナリストの売上予想が下がるなか、GUREは約2.85ドルで取引され、当日は6.86%下落していました。カバレッジの薄いマイクロキャップでは、こうした予想修正と値動きを短時間で整理し、その下落が一時的な反応なのか、継続しやすいパターンなのかを判断する必要があります。
 
-これは、ソロPMが短時間でポジションサイズを判断しなければならない、カバレッジの薄いマイクロキャップの典型的なシグナルです。アナリストの売上予想が低下する中、GUREは約2.85ドルで取引され、当日は6.86%下落していました。
+Reflexivityはこの局面について、過去16回の類似パターンを比較し、パターン品質を8/8と評価しています。類似するアナリスト予想引き下げ後の将来リターン中央値は、1カ月で-15.35%、3カ月で-30.40%。3カ月時点のP20は-57.38%でした。
 
-## Compelling（注目ポイント）
+ここで重要なのは、単に「予想が下がったから弱気」と見るのではなく、**過去の類似局面でどの程度の下方分布が生じていたかを確認したうえで、逆張りするのか、ショートを検討するのか、あるいは様子を見るのかを判断できること**です。
 
-Reflexivityはこのパターンの品質を8/8と評価し、過去16回の類似局面を定量化しています。類似するアナリスト予想引き下げ後のGUREの将来リターン中央値は1カ月で-15.35%、魅力的な時間軸とされた3カ月で-30.40%、P20は-57.38%でした。
+その後の検証材料としては、臭素価格と中国需要の変化を追えます。また、同じ化学品サイクルをより流動性の高い銘柄で確認する比較対象としてALBを使うこともできます。
 
-## Insight（インサイト）
+## Reflexivityで確認する
 
-PMは、予想引き下げを受けて逆張りするかショートするかを判断し、臭素価格と中国需要を追跡できます。また、同じ化学品サイクルの流動性の高い読み替え先としてALBを利用できます。
+[このインサイトをReflexivityで開く](https://reflexivity.com/app/stream/focus?activeDrawer=insights&entityTag=gure_nasd&activeInsight=1d6ec2d3-63bf-438b-b8bd-1b214f8f19af)
 
-## Resource
-
-- **Source document:** `Reflexivity Insights Proof Set — Sales Enablement.docx`
-- **Live Reflexivity insight:** [Reflexivityで開く](https://reflexivity.com/app/stream/focus?activeDrawer=insights&entityTag=gure_nasd&activeInsight=1d6ec2d3-63bf-438b-b8bd-1b214f8f19af)
+**出典:** `Reflexivity Insights Proof Set - Sales Enablement.docx`
 
 ---
 
 [← ヘッジファンド Tier 3](README.md) · [ユースケース一覧](../../README.md)
+
 ご質問や詳細については **gtm@reflexivity.com** までお問い合わせください。
