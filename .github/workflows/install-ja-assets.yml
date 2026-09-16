@@ -1,4 +1,4 @@
-name: Install Japanese KB assets
+name: Inspect staged Japanese KB asset archive
 
 on:
   push:
@@ -6,100 +6,28 @@ on:
       - '.github/workflows/install-ja-assets.yml'
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
-  install:
+  inspect:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Recover verified final asset bundle
+      - name: List staged archive members without modifying repository
         shell: python
         run: |
           from pathlib import Path
-          import base64, io, string, subprocess, zipfile
+          import hashlib, zipfile
 
-          root = Path('.tmp/final-assets')
-          parts = sorted(root.glob('chunk-*.b64'))
-          if not parts:
-              raise SystemExit('No final asset chunks found')
-
-          alphabet = set(string.ascii_letters + string.digits + '+/=')
-          clean_parts = []
-          boundaries = []
-          total = 0
-          for p in parts:
-              text = p.read_text(encoding='utf-8')
-              clean = ''.join(ch for ch in text if ch in alphabet)
-              clean_parts.append(clean)
-              total += len(clean)
-              boundaries.append(total)
-          text = ''.join(clean_parts)
-          print('parts', [(p.name, len(s)) for p,s in zip(parts,clean_parts)], 'total', len(text), 'mod4', len(text)%4)
-
-          def valid_zip(encoded):
-              try:
-                  raw = base64.b64decode(encoded, validate=True)
-              except Exception:
-                  return None
-              if not raw.startswith(b'PK'):
-                  return None
-              try:
-                  with zipfile.ZipFile(io.BytesIO(raw)) as z:
-                      if z.testzip() is not None:
-                          return None
-                      return raw, z.namelist()
-              except Exception:
-                  return None
-
-          recovered = valid_zip(text)
-          removed = None
-          if recovered is None:
-              candidates = set()
-              for b in boundaries[:-1]:
-                  for d in range(-32, 33):
-                      i = b + d
-                      if 0 <= i < len(text):
-                          candidates.add(i)
-              candidates.update(range(max(0, len(text)-128), len(text)))
-              for i in sorted(candidates):
-                  candidate = text[:i] + text[i+1:]
-                  recovered = valid_zip(candidate)
-                  if recovered is not None:
-                      removed = (i, text[i])
-                      break
-          if recovered is None:
-              raise SystemExit('Could not recover final asset archive')
-
-          raw, names = recovered
-          print('Recovered archive members:')
-          for name in names:
-              print(name)
-          if removed:
-              print('Recovered after removing one stray base64 character at', removed)
-
-          with zipfile.ZipFile(io.BytesIO(raw)) as z:
-              z.extractall('.')
-
-          webps = [Path(n) for n in names if n.lower().endswith('.webp')]
-          if not webps:
-              raise SystemExit('Archive contains no WebP assets')
-          for p in webps:
-              data = p.read_bytes()
-              if not (data[:4] == b'RIFF' and data[8:12] == b'WEBP'):
-                  raise SystemExit(f'Invalid WebP: {p}')
-              expected = int.from_bytes(data[4:8], 'little') + 8
-              if expected != len(data):
-                  raise SystemExit(f'Truncated WebP: {p}: expected {expected}, got {len(data)}')
-              print('Verified WebP', p, len(data))
-
-          subprocess.run(['git','config','user.name','Reflexivity KB automation'], check=True)
-          subprocess.run(['git','config','user.email','gtm@reflexivity.com'], check=True)
-          subprocess.run(['git','add','画像/ユースケース/quick'], check=True)
-          if subprocess.run(['git','diff','--cached','--quiet']).returncode == 0:
-              print('No asset changes needed.')
-              raise SystemExit(0)
-          subprocess.run(['git','commit','-m','Restore verified QUICK source visuals'], check=True)
-          subprocess.run(['git','push'], check=True)
-
-# Trigger final-assets recovery on 2026-09-16.
+          p = Path('.tmp/final-ja-assets.zip')
+          if not p.exists():
+              raise SystemExit('Missing .tmp/final-ja-assets.zip')
+          print('archive_sha256', hashlib.sha256(p.read_bytes()).hexdigest())
+          with zipfile.ZipFile(p) as z:
+              bad = z.testzip()
+              print('testzip', bad)
+              for info in z.infolist():
+                  print(f'{info.filename}\tsize={info.file_size}\tcrc={info.CRC:08x}')
+                  if not info.is_dir():
+                      data = z.read(info.filename)
+                      print('  sha256=' + hashlib.sha256(data).hexdigest())
