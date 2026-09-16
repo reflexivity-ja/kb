@@ -6,7 +6,9 @@
 
 - [債券市場の動きが株式の先行リターンと関係するか検証する](bond-signals-vs-forward-equity-returns.md)
 - [金融政策のタカ派転換から恩恵を受ける資産・業種・企業をたどる](hawkish-policy-beneficiaries-knowledge-graph.md)
+- [今日のニュースフローから検討すべき投資アイデアを5件抽出する](newsflow-top-five-investment-ideas.md)
 - [フランス国債の信用不安から相対価値トレードを構築する](../債券/french-sovereign-corporate-yield-inversion-trade-ideas.md)
+- [EUR/USDの動きとEUR・USDスワップ差の動きを比較する](../債券/eurusd-vs-eur-usd-swap-spread.md)
 - [EUR/USDの投資判断を体系的なチェックリストに落とし込む](../FX/eurusd-systematic-investment-checklist.md)
 - [「米国景気は強い」という投資仮説を反証方向から検証する](../マクロ/challenge-strong-us-economy-thesis.md)
 - [市場ナラティブとハードデータの乖離を複数市場から検証する](../マクロ/market-narrative-vs-hard-data-breadth.md)
