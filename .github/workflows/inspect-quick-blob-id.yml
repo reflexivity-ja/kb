@@ -20,24 +20,6 @@ jobs:
           sudo apt-get update -qq
           sudo apt-get install -y -qq tesseract-ocr tesseract-ocr-jpn imagemagick
 
-          echo '===== VALID ZIP MEMBERS ====='
-          python - <<'PY'
-          from pathlib import Path
-          import hashlib, zipfile
-
-          def git_blob_sha(data: bytes) -> str:
-              header = f'blob {len(data)}\0'.encode()
-              return hashlib.sha1(header + data).hexdigest()
-
-          zpath = Path('.tmp/final-ja-assets.zip')
-          with zipfile.ZipFile(zpath) as z:
-              for name in z.namelist():
-                  if name.endswith('/'):
-                      continue
-                  data = z.read(name)
-                  print(f'{name}\tsize={len(data)}\tgit_blob={git_blob_sha(data)}')
-          PY
-
           echo '===== STAGED BLOB HASHES ====='
           for f in .tmp/blob-id/*.webp; do
             printf '%s\t' "$f"
@@ -51,7 +33,9 @@ jobs:
             file "$f"
             identify "$f" || true
             out="/tmp/quick-ocr/$(basename "$f")-up.png"
-            convert "$f" -resize 300% -sharpen 0x1 "$out"
-            echo '--- OCR jpn+eng ---'
-            tesseract "$out" stdout -l jpn+eng --psm 6 2>/dev/null | head -n 120 || true
+            convert "$f" -resize 400% -colorspace Gray -contrast-stretch 1%x1% -sharpen 0x1 "$out"
+            echo '--- OCR jpn+eng psm6 ---'
+            tesseract "$out" stdout -l jpn+eng --psm 6 2>/dev/null | head -n 160 || true
+            echo '--- OCR jpn+eng psm11 ---'
+            tesseract "$out" stdout -l jpn+eng --psm 11 2>/dev/null | head -n 160 || true
           done
