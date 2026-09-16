@@ -23,7 +23,7 @@ jobs:
           mkdir -p "$(dirname "$target")"
           git show '2f0588384e3f5c684dbd1a587096b3525e151d58:画像/ユースケース/quick/RX-USECASE-0053/01.webp.b64' | tr -d '\r\n' | base64 -d > "$target"
 
-          file "$target"
+          file "$target" | grep -q 'Web/P image'
           python - <<'PY'
           from pathlib import Path
           p = Path('画像/ユースケース/quick/RX-USECASE-0053/source-visuals.webp')
@@ -32,9 +32,8 @@ jobs:
           assert data[8:12] == b'WEBP', data[:16]
           expected = int.from_bytes(data[4:8], 'little') + 8
           assert expected == len(data), (expected, len(data))
-          print('RIFF/WebP length verified:', len(data))
+          print('Verified WebP bytes:', len(data))
           PY
-          identify "$target"
 
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
