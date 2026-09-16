@@ -13,31 +13,43 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - name: Trace WebP blobs through repository history
-        shell: bash
+      - name: Find recoverable staged asset bundles
+        shell: python
         run: |
-          set -euo pipefail
-          echo '===== CURRENT STAGED BLOBS ====='
-          for f in .tmp/blob-id/*.webp; do
-            printf '%s\t' "$f"
-            git hash-object "$f"
-          done
+          from pathlib import Path
+          import base64, io, zipfile
 
-          echo '===== ALL HISTORICAL PATHS FOR THESE BLOBS ====='
-          git rev-list --objects --all > /tmp/all-objects.txt
-          for sha in \
-            a9d0b10ce9d2bc55d95ff21f1d65f1b7fc440ebe \
-            a24be6ccb6a4132d0ed1f03046f682d8af12c0d5 \
-            afefaae72b2881be17f9a6b44b5ed7e6a458d62e \
-            95ae7b7cbb90b260095f1e8575ad219c4154c7e9 \
-            b781e6719b09601f674e19d980e1cfbd9e1fd463 \
-            3d88dff346123ef92f5272046d5b8d4bd787aad8 \
-            e695b54f0822b5906282040f190d40402f07ea34; do
-              echo "--- $sha ---"
-              grep "^$sha " /tmp/all-objects.txt || true
-          done
+          def cleaned_bytes(parts):
+              return b''.join(p.read_bytes() for p in parts).replace(b'\n', b'').replace(b'\r', b'')
 
-          echo '===== HISTORICAL QUICK WEBP PATHS ====='
-          git log --all --name-only --pretty=format: -- '画像/ユースケース/quick/**/*.webp' | sed '/^$/d' | sort -u || true
+          def try_one_deleted_char(label, encoded):
+              print(f'===== {label} =====')
+              print('encoded length', len(encoded), 'mod4', len(encoded) % 4)
+              if len(encoded) % 4 != 1:
+                  print('unexpected length; skipping one-character deletion search')
+                  return
+              for i in range(len(encoded)):
+                  candidate = encoded[:i] + encoded[i+1:]
+                  try:
+                      raw = base64.b64decode(candidate, validate=True)
+                  except Exception:
+                      continue
+                  if not raw.startswith(b'PK\x03\x04'):
+                      continue
+                  try:
+                      with zipfile.ZipFile(io.BytesIO(raw)) as z:
+                          if z.testzip() is not None:
+                              continue
+                          names = z.namelist()
+                  except Exception:
+                      continue
+                  print('RECOVERED deletion_index=', i, 'deleted_byte=', repr(encoded[i:i+1]), 'zip_size=', len(raw))
+                  for name in names:
+                      print(name)
+                  return
+              print('NO_VALID_SINGLE_DELETION_RECOVERY')
+
+          final_root = Path('.tmp/final-assets')
+          today_root = Path('.tmp/today-assets')
+          try_one_deleted_char('final-assets', cleaned_bytes(sorted(final_root.glob('chunk-*.b64'))))
+          try_one_deleted_char('today-assets', cleaned_bytes(sorted(today_root.glob('chunk-*.b64')) + sorted(today_root.glob('rem-*.b64'))))
