@@ -17,22 +17,52 @@ jobs:
         with:
           fetch-depth: 0
       - name: Inspect historical source bundles
-        shell: bash
+        shell: python
         run: |
-          set -euo pipefail
-          ref=b577ed679e6df81dbb174b2e3287351c86818f7e
-          mkdir -p /tmp/publication-bundle
-          git show "$ref:.tmp/publication-micro/chunk-00.b64" > /tmp/publication-bundle/micro.b64
-          git show "$ref:.tmp/publication-micro/chunk-01.b64" >> /tmp/publication-bundle/micro.b64
-          base64 -d /tmp/publication-bundle/micro.b64 > /tmp/publication-bundle/micro.zip
-          echo '=== MICRO ZIP CONTENTS ==='
-          unzip -l /tmp/publication-bundle/micro.zip
-          echo '=== REBUILD SCRIPT ==='
-          unzip -p /tmp/publication-bundle/micro.zip publication_rebuild_micro_bundle/rebuild.py | sed -n '1,260p'
-          echo '=== SECOND BUNDLE ==='
-          git show "$ref:.tmp/publication-rebuild/chunk-00.b64" > /tmp/publication-bundle/rebuild.b64
-          if base64 -d /tmp/publication-bundle/rebuild.b64 > /tmp/publication-bundle/rebuild.zip 2>/tmp/publication-bundle/decode.err; then
-            unzip -l /tmp/publication-bundle/rebuild.zip || true
-          else
-            cat /tmp/publication-bundle/decode.err
-          fi
+          import base64
+          import subprocess
+          import zipfile
+          from io import BytesIO
+
+          ref = 'b577ed679e6df81dbb174b2e3287351c86818f7e'
+          def old(path):
+              return subprocess.check_output(['git','show',f'{ref}:{path}']).decode('ascii').strip()
+
+          c0 = old('.tmp/publication-micro/chunk-00.b64')
+          c1 = old('.tmp/publication-micro/chunk-01.b64')
+          print('micro chunk lengths', len(c0), len(c1))
+          print('chunk0 head/tail', c0[:24], c0[-24:])
+          print('chunk1 head/tail', c1[:24], c1[-24:])
+
+          candidates = {
+              'concat': c0 + c1,
+              'chunk0': c0,
+              'chunk1': c1,
+          }
+          for name, data in candidates.items():
+              try:
+                  raw = base64.b64decode(data + '=' * (-len(data) % 4), validate=False)
+                  print(name, 'decoded bytes', len(raw), 'magic', raw[:8])
+                  try:
+                      z = zipfile.ZipFile(BytesIO(raw))
+                      print(name, 'ZIP FILES')
+                      for n in z.namelist():
+                          print(n)
+                      if 'publication_rebuild_micro_bundle/rebuild.py' in z.namelist():
+                          print('=== REBUILD SCRIPT ===')
+                          print(z.read('publication_rebuild_micro_bundle/rebuild.py').decode('utf-8')[:30000])
+                  except Exception as e:
+                      print(name, 'not complete zip:', repr(e))
+              except Exception as e:
+                  print(name, 'decode error:', repr(e))
+
+          r0 = old('.tmp/publication-rebuild/chunk-00.b64')
+          print('rebuild chunk length', len(r0), 'head/tail', r0[:24], r0[-24:])
+          try:
+              raw = base64.b64decode(r0 + '=' * (-len(r0) % 4), validate=False)
+              print('rebuild decoded bytes', len(raw), 'magic', raw[:8])
+              z = zipfile.ZipFile(BytesIO(raw))
+              print('=== REBUILD ZIP FILES ===')
+              for n in z.namelist(): print(n)
+          except Exception as e:
+              print('rebuild decode/zip error:', repr(e))
