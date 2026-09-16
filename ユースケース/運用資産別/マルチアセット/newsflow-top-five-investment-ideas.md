@@ -1,5 +1,5 @@
 <!--
-id: RX-USECASE-0060
+id: RX-USECASE-0061
 type: use-case
 language: ja
 locale: ja
