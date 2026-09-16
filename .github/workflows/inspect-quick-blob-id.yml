@@ -13,29 +13,31 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Inspect staged source visuals
+        with:
+          fetch-depth: 0
+      - name: Trace WebP blobs through repository history
         shell: bash
         run: |
           set -euo pipefail
-          sudo apt-get update -qq
-          sudo apt-get install -y -qq tesseract-ocr tesseract-ocr-jpn imagemagick
-
-          echo '===== STAGED BLOB HASHES ====='
+          echo '===== CURRENT STAGED BLOBS ====='
           for f in .tmp/blob-id/*.webp; do
             printf '%s\t' "$f"
             git hash-object "$f"
           done
 
-          echo '===== OCR ====='
-          mkdir -p /tmp/quick-ocr
-          for f in .tmp/blob-id/*.webp; do
-            echo "===== $f ====="
-            file "$f"
-            identify "$f" || true
-            out="/tmp/quick-ocr/$(basename "$f")-up.png"
-            convert "$f" -resize 400% -colorspace Gray -contrast-stretch 1%x1% -sharpen 0x1 "$out"
-            echo '--- OCR jpn+eng psm6 ---'
-            tesseract "$out" stdout -l jpn+eng --psm 6 2>/dev/null | head -n 160 || true
-            echo '--- OCR jpn+eng psm11 ---'
-            tesseract "$out" stdout -l jpn+eng --psm 11 2>/dev/null | head -n 160 || true
+          echo '===== ALL HISTORICAL PATHS FOR THESE BLOBS ====='
+          git rev-list --objects --all > /tmp/all-objects.txt
+          for sha in \
+            a9d0b10ce9d2bc55d95ff21f1d65f1b7fc440ebe \
+            a24be6ccb6a4132d0ed1f03046f682d8af12c0d5 \
+            afefaae72b2881be17f9a6b44b5ed7e6a458d62e \
+            95ae7b7cbb90b260095f1e8575ad219c4154c7e9 \
+            b781e6719b09601f674e19d980e1cfbd9e1fd463 \
+            3d88dff346123ef92f5272046d5b8d4bd787aad8 \
+            e695b54f0822b5906282040f190d40402f07ea34; do
+              echo "--- $sha ---"
+              grep "^$sha " /tmp/all-objects.txt || true
           done
+
+          echo '===== HISTORICAL QUICK WEBP PATHS ====='
+          git log --all --name-only --pretty=format: -- '画像/ユースケース/quick/**/*.webp' | sed '/^$/d' | sort -u || true
