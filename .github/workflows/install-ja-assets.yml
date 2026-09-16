@@ -1,4 +1,4 @@
-name: Restore verified RX-USECASE-0054 source visuals
+name: Restore verified RX-USECASE-0059 risk-return visual
 
 on:
   push:
@@ -13,30 +13,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Restore verified 0054 theme and market visuals
+      - name: Extract and verify original 0059 risk-return WebP
         shell: python
         run: |
           from pathlib import Path
-          import base64, binascii, string, struct, subprocess
+          import binascii, struct, subprocess, zlib
 
-          expected = {
-              '画像/ユースケース/quick/RX-USECASE-0054/02-theme-performance.webp',
-              '画像/ユースケース/quick/RX-USECASE-0054/03-usdjpy-nikkei.webp',
-          }
-          root = Path('.tmp/today-assets')
-          chunks = sorted(root.glob('chunk-*.b64'))
-          rems = sorted(root.glob('rem-*.b64'))
-          alphabet = set(string.ascii_letters + string.digits + '+/=')
-          text = ''
-          for p in chunks + rems:
-              s = p.read_text(encoding='utf-8', errors='ignore')
-              text += ''.join(ch for ch in s if ch in alphabet)
-          text += '=' * ((4 - len(text) % 4) % 4)
-          data = base64.b64decode(text, validate=False)
-
-          found = {}
+          target = '画像/ユースケース/quick/RX-USECASE-0059/03-risk-return-map.webp'
+          data = Path('.tmp/final-ja-assets.zip').read_bytes()
           sig = b'PK\x03\x04'
           pos = 0
+          raw = None
           while True:
               i = data.find(sig, pos)
               if i < 0:
@@ -52,36 +39,39 @@ jobs:
                   name = data[ns:ne].decode('utf-8')
               except UnicodeDecodeError:
                   continue
-              if name not in expected:
+              if name != target:
                   continue
-              if method != 0:
-                  raise SystemExit(f'Unexpected compression method for {name}: {method}')
-              raw = data[ds:ds+csize]
-              if len(raw) != csize or len(raw) != usize:
-                  raise SystemExit(f'Truncated asset {name}: {len(raw)} / {usize}')
+              payload = data[ds:ds+csize]
+              if len(payload) != csize:
+                  raise SystemExit(f'Truncated compressed payload: {len(payload)} / {csize}')
+              if method == 8:
+                  raw = zlib.decompress(payload, -15)
+              elif method == 0:
+                  raw = payload
+              else:
+                  raise SystemExit(f'Unsupported compression method: {method}')
+              if len(raw) != usize:
+                  raise SystemExit(f'Uncompressed size mismatch: {len(raw)} / {usize}')
               if (binascii.crc32(raw) & 0xffffffff) != crc:
-                  raise SystemExit(f'CRC mismatch for {name}')
+                  raise SystemExit('CRC mismatch')
               if not (raw[:4] == b'RIFF' and raw[8:12] == b'WEBP'):
-                  raise SystemExit(f'Invalid WebP header for {name}')
+                  raise SystemExit('Invalid WebP header')
               if int.from_bytes(raw[4:8], 'little') + 8 != len(raw):
-                  raise SystemExit(f'Invalid RIFF length for {name}')
-              found[name] = raw
-              print('VERIFIED', name, len(raw), 'bytes')
+                  raise SystemExit('Invalid RIFF length')
+              print('VERIFIED', target, len(raw), 'bytes')
+              break
 
-          missing = expected - found.keys()
-          if missing:
-              raise SystemExit('Missing expected assets: ' + ', '.join(sorted(missing)))
+          if raw is None:
+              raise SystemExit('Target asset not found')
 
-          for name, raw in found.items():
-              p = Path(name)
-              p.parent.mkdir(parents=True, exist_ok=True)
-              p.write_bytes(raw)
-
+          p = Path(target)
+          p.parent.mkdir(parents=True, exist_ok=True)
+          p.write_bytes(raw)
           subprocess.run(['git','config','user.name','Reflexivity KB automation'], check=True)
           subprocess.run(['git','config','user.email','gtm@reflexivity.com'], check=True)
-          subprocess.run(['git','add', *sorted(expected)], check=True)
+          subprocess.run(['git','add',target], check=True)
           if subprocess.run(['git','diff','--cached','--quiet']).returncode == 0:
-              print('No asset changes needed.')
+              print('No asset change needed.')
               raise SystemExit(0)
-          subprocess.run(['git','commit','-m','Restore verified RX-USECASE-0054 source visuals'], check=True)
+          subprocess.run(['git','commit','-m','Restore verified RX-USECASE-0059 risk-return visual'], check=True)
           subprocess.run(['git','push'], check=True)
