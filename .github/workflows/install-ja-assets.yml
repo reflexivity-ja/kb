@@ -1,4 +1,4 @@
-name: Inspect staged Japanese KB asset fragments
+name: Restore RX-USECASE-0053 source visuals
 
 on:
   push:
@@ -6,88 +6,86 @@ on:
       - '.github/workflows/install-ja-assets.yml'
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
-  inspect:
+  restore:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Scan decoded staging fragments for ZIP member paths
+      - name: Extract and verify original 0053 WebP assets
         shell: python
         run: |
           from pathlib import Path
-          import base64, re, string, struct
+          import base64, string, struct, subprocess
+
+          root = Path('.tmp/today-assets')
+          parts = sorted(root.glob('*.b64'))
+          if not parts:
+              raise SystemExit('Missing today-assets staging fragments')
 
           alphabet = set(string.ascii_letters + string.digits + '+/=')
+          text = ''
+          for p in parts:
+              raw = p.read_text(encoding='utf-8', errors='ignore')
+              text += ''.join(ch for ch in raw if ch in alphabet)
+          text += '=' * ((4 - len(text) % 4) % 4)
+          data = base64.b64decode(text, validate=False)
 
-          def clean_b64(path):
-              text = path.read_text(encoding='utf-8', errors='ignore')
-              text = ''.join(ch for ch in text if ch in alphabet)
-              text += '=' * ((4 - len(text) % 4) % 4)
-              try:
-                  return base64.b64decode(text, validate=False)
-              except Exception as e:
-                  print(path, 'decode_error', repr(e))
-                  return b''
-
-          def scan(label, data):
-              print('\n###', label, 'decoded_bytes', len(data))
-              sig = b'PK\x03\x04'
-              start = 0
-              seen = 0
-              while True:
-                  i = data.find(sig, start)
-                  if i < 0:
-                      break
-                  start = i + 4
-                  if i + 30 > len(data):
-                      continue
-                  try:
-                      fields = struct.unpack_from('<IHHHHHIIIHH', data, i)
-                  except struct.error:
-                      continue
-                  _, ver, flags, method, mtime, mdate, crc, csize, usize, nlen, xlen = fields
-                  ns = i + 30
-                  ne = ns + nlen
-                  if ne > len(data) or nlen == 0 or nlen > 500:
-                      continue
-                  nameb = data[ns:ne]
-                  try:
-                      name = nameb.decode('utf-8')
-                  except Exception:
-                      continue
-                  if 'RX-USECASE-' in name or name.startswith('画像/'):
-                      print(f'local_header offset={i} csize={csize} usize={usize} name={name}')
-                      seen += 1
-              for m in re.finditer(rb'RX-USECASE-[0-9]{4}', data):
-                  lo = max(0, m.start()-80); hi = min(len(data), m.end()+160)
-                  snippet = data[lo:hi]
-                  printable = ''.join(chr(b) if 32 <= b < 127 else '.' for b in snippet)
-                  print('ascii_hit', m.group().decode(), 'offset', m.start(), printable)
-              print('headers_seen', seen)
-
-          zip_path = Path('.tmp/final-ja-assets.zip')
-          if zip_path.exists():
-              scan(str(zip_path), zip_path.read_bytes())
-
-          for root in [Path('.tmp/final-assets'), Path('.tmp/today-assets')]:
-              for p in sorted(root.glob('*.b64')):
-                  scan(str(p), clean_b64(p))
-
-          # Also concatenate each family after cleaning; even a partially damaged stream may retain local headers.
-          for root in [Path('.tmp/final-assets'), Path('.tmp/today-assets')]:
-              parts = sorted(root.glob('*.b64'))
-              if not parts:
+          expected = {
+              '画像/ユースケース/quick/RX-USECASE-0053/01-maturity-yield-changes.webp',
+              '画像/ユースケース/quick/RX-USECASE-0053/02-yield-curve-current-vs-3m.webp',
+              '画像/ユースケース/quick/RX-USECASE-0053/03-2s10s-fed-funds-history.webp',
+          }
+          found = {}
+          sig = b'PK\x03\x04'
+          pos = 0
+          while True:
+              i = data.find(sig, pos)
+              if i < 0:
+                  break
+              pos = i + 4
+              if i + 30 > len(data):
                   continue
-              text = ''
-              for p in parts:
-                  raw = p.read_text(encoding='utf-8', errors='ignore')
-                  text += ''.join(ch for ch in raw if ch in alphabet)
-              text += '=' * ((4 - len(text) % 4) % 4)
-              try:
-                  data = base64.b64decode(text, validate=False)
-              except Exception as e:
-                  print(root, 'concat_decode_error', repr(e))
+              _, ver, flags, method, mtime, mdate, crc, csize, usize, nlen, xlen = struct.unpack_from('<IHHHHHIIIHH', data, i)
+              ns = i + 30
+              ne = ns + nlen
+              extra_end = ne + xlen
+              if extra_end > len(data) or nlen == 0 or nlen > 500:
                   continue
-              scan(str(root) + '/CONCAT', data)
+              try:
+                  name = data[ns:ne].decode('utf-8')
+              except UnicodeDecodeError:
+                  continue
+              if name not in expected:
+                  continue
+              if method != 0:
+                  raise SystemExit(f'Unexpected compression method for {name}: {method}')
+              payload = data[extra_end:extra_end+csize]
+              if len(payload) != csize or len(payload) != usize:
+                  raise SystemExit(f'Truncated payload for {name}: {len(payload)} / {csize}')
+              if not (payload[:4] == b'RIFF' and payload[8:12] == b'WEBP'):
+                  raise SystemExit(f'Invalid WebP header for {name}')
+              declared = int.from_bytes(payload[4:8], 'little') + 8
+              if declared != len(payload):
+                  raise SystemExit(f'Invalid RIFF length for {name}: declared {declared}, actual {len(payload)}')
+              found[name] = payload
+
+          missing = expected - found.keys()
+          if missing:
+              raise SystemExit('Missing expected assets: ' + ', '.join(sorted(missing)))
+
+          for name in sorted(expected):
+              p = Path(name)
+              p.parent.mkdir(parents=True, exist_ok=True)
+              p.write_bytes(found[name])
+              print('Verified', name, len(found[name]), 'bytes')
+
+          subprocess.run(['git','config','user.name','Reflexivity KB automation'], check=True)
+          subprocess.run(['git','config','user.email','gtm@reflexivity.com'], check=True)
+          subprocess.run(['git','add', *sorted(expected)], check=True)
+          if subprocess.run(['git','diff','--cached','--quiet']).returncode == 0:
+              print('No asset changes needed.')
+              raise SystemExit(0)
+          subprocess.run(['git','commit','-m','Restore RX-USECASE-0053 source visuals'], check=True)
+          subprocess.run(['git','push'], check=True)
