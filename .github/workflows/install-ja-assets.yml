@@ -13,14 +13,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Recover staged source visuals and clean staging
+      - name: Recover verified final asset bundle
         shell: python
         run: |
           from pathlib import Path
           import base64, io, string, subprocess, zipfile
 
+          root = Path('.tmp/final-assets')
+          parts = sorted(root.glob('chunk-*.b64'))
+          if not parts:
+              raise SystemExit('No final asset chunks found')
+
           alphabet = set(string.ascii_letters + string.digits + '+/=')
-          parts = sorted(Path('.tmp/today-assets').glob('chunk-*.b64')) + sorted(Path('.tmp/today-assets').glob('rem-*.b64'))
           clean_parts = []
           boundaries = []
           total = 0
@@ -33,54 +37,69 @@ jobs:
           text = ''.join(clean_parts)
           print('parts', [(p.name, len(s)) for p,s in zip(parts,clean_parts)], 'total', len(text), 'mod4', len(text)%4)
 
-          candidates = set()
-          for b in boundaries[:-1]:
-              for d in range(-8, 9):
-                  i = b + d
-                  if 0 <= i < len(text):
-                      candidates.add(i)
-          candidates.update(range(max(0,len(text)-32), len(text)))
-
-          recovered = None
-          recovered_pos = None
-          for i in sorted(candidates):
-              trial = text[:i] + text[i+1:]
+          def valid_zip(encoded):
               try:
-                  raw = base64.b64decode(trial, validate=True)
+                  raw = base64.b64decode(encoded, validate=True)
               except Exception:
-                  continue
+                  return None
               if not raw.startswith(b'PK'):
-                  continue
+                  return None
               try:
                   with zipfile.ZipFile(io.BytesIO(raw)) as z:
                       if z.testzip() is not None:
-                          continue
-                      names = z.namelist()
-                      if not names:
-                          continue
-                      recovered = raw
-                      recovered_pos = i
-                      print('RECOVERED by removing char at', i, 'char', repr(text[i]), 'members', names)
-                      z.extractall('.')
-                      break
+                          return None
+                      return raw, z.namelist()
               except Exception:
-                  continue
-          if recovered is None:
-              raise SystemExit('Could not recover staged source visual archive near chunk boundaries')
+                  return None
 
-          Path('画像/ユースケース/quick/RX-USECASE-0053/01.webp.b64').unlink(missing_ok=True)
-          subprocess.run(['rm','-rf','.tmp'], check=True)
-          for path in [
-              Path('.github/workflows/install-ja-assets.yml'),
-              Path('.github/workflows/install-today-onboarding-assets.yml'),
-              Path('.github/workflows/inspect-publication-source-bundle.yml'),
-          ]:
-              path.unlink(missing_ok=True)
+          recovered = valid_zip(text)
+          removed = None
+          if recovered is None:
+              candidates = set()
+              for b in boundaries[:-1]:
+                  for d in range(-32, 33):
+                      i = b + d
+                      if 0 <= i < len(text):
+                          candidates.add(i)
+              candidates.update(range(max(0, len(text)-128), len(text)))
+              for i in sorted(candidates):
+                  candidate = text[:i] + text[i+1:]
+                  recovered = valid_zip(candidate)
+                  if recovered is not None:
+                      removed = (i, text[i])
+                      break
+          if recovered is None:
+              raise SystemExit('Could not recover final asset archive')
+
+          raw, names = recovered
+          print('Recovered archive members:')
+          for name in names:
+              print(name)
+          if removed:
+              print('Recovered after removing one stray base64 character at', removed)
+
+          with zipfile.ZipFile(io.BytesIO(raw)) as z:
+              z.extractall('.')
+
+          webps = [Path(n) for n in names if n.lower().endswith('.webp')]
+          if not webps:
+              raise SystemExit('Archive contains no WebP assets')
+          for p in webps:
+              data = p.read_bytes()
+              if not (data[:4] == b'RIFF' and data[8:12] == b'WEBP'):
+                  raise SystemExit(f'Invalid WebP: {p}')
+              expected = int.from_bytes(data[4:8], 'little') + 8
+              if expected != len(data):
+                  raise SystemExit(f'Truncated WebP: {p}: expected {expected}, got {len(data)}')
+              print('Verified WebP', p, len(data))
 
           subprocess.run(['git','config','user.name','Reflexivity KB automation'], check=True)
           subprocess.run(['git','config','user.email','gtm@reflexivity.com'], check=True)
-          subprocess.run(['git','add','-A'], check=True)
-          subprocess.run(['git','commit','-m','Restore Japanese KB source visuals and clean staging'], check=True)
+          subprocess.run(['git','add','画像/ユースケース/quick'], check=True)
+          if subprocess.run(['git','diff','--cached','--quiet']).returncode == 0:
+              print('No asset changes needed.')
+              raise SystemExit(0)
+          subprocess.run(['git','commit','-m','Restore verified QUICK source visuals'], check=True)
           subprocess.run(['git','push'], check=True)
 
-# Triggered to finalize staged public assets and cleanup on 2026-09-16.
+# Trigger final-assets recovery on 2026-09-16.
