@@ -1,4 +1,4 @@
-name: Inspect staged Japanese KB assets
+name: Install Japanese KB assets
 
 on:
   push:
@@ -6,23 +6,79 @@ on:
       - '.github/workflows/install-ja-assets.yml'
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
-  inspect:
+  install:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Inspect chunk boundaries
+      - name: Recover staged source visuals and clean staging
         shell: python
         run: |
           from pathlib import Path
-          import string
+          import base64, io, string, subprocess, zipfile
+
           alphabet = set(string.ascii_letters + string.digits + '+/=')
-          for group in [Path('.tmp/final-assets'), Path('.tmp/today-assets')]:
-              print('GROUP', group)
-              for p in sorted(group.glob('*.b64')):
-                  text = p.read_text(encoding='utf-8')
-                  clean = ''.join(ch for ch in text if ch in alphabet)
-                  eq = [i for i,ch in enumerate(clean) if ch == '=']
-                  print(p.name, 'raw', len(text), 'clean', len(clean), 'start', clean[:24], 'end', clean[-24:], 'eq_count', len(eq), 'first_eq', eq[0] if eq else None, 'last_eq', eq[-1] if eq else None)
+          parts = sorted(Path('.tmp/today-assets').glob('chunk-*.b64')) + sorted(Path('.tmp/today-assets').glob('rem-*.b64'))
+          clean_parts = []
+          boundaries = []
+          total = 0
+          for p in parts:
+              text = p.read_text(encoding='utf-8')
+              clean = ''.join(ch for ch in text if ch in alphabet)
+              clean_parts.append(clean)
+              total += len(clean)
+              boundaries.append(total)
+          text = ''.join(clean_parts)
+          print('parts', [(p.name, len(s)) for p,s in zip(parts,clean_parts)], 'total', len(text), 'mod4', len(text)%4)
+
+          candidates = set()
+          for b in boundaries[:-1]:
+              for d in range(-8, 9):
+                  i = b + d
+                  if 0 <= i < len(text):
+                      candidates.add(i)
+          candidates.update(range(max(0,len(text)-32), len(text)))
+
+          recovered = None
+          recovered_pos = None
+          for i in sorted(candidates):
+              trial = text[:i] + text[i+1:]
+              try:
+                  raw = base64.b64decode(trial, validate=True)
+              except Exception:
+                  continue
+              if not raw.startswith(b'PK'):
+                  continue
+              try:
+                  with zipfile.ZipFile(io.BytesIO(raw)) as z:
+                      if z.testzip() is not None:
+                          continue
+                      names = z.namelist()
+                      if not names:
+                          continue
+                      recovered = raw
+                      recovered_pos = i
+                      print('RECOVERED by removing char at', i, 'char', repr(text[i]), 'members', names)
+                      z.extractall('.')
+                      break
+              except Exception:
+                  continue
+          if recovered is None:
+              raise SystemExit('Could not recover staged source visual archive near chunk boundaries')
+
+          Path('画像/ユースケース/quick/RX-USECASE-0053/01.webp.b64').unlink(missing_ok=True)
+          subprocess.run(['rm','-rf','.tmp'], check=True)
+          for path in [
+              Path('.github/workflows/install-ja-assets.yml'),
+              Path('.github/workflows/install-today-onboarding-assets.yml'),
+              Path('.github/workflows/inspect-publication-source-bundle.yml'),
+          ]:
+              path.unlink(missing_ok=True)
+
+          subprocess.run(['git','config','user.name','Reflexivity KB automation'], check=True)
+          subprocess.run(['git','config','user.email','gtm@reflexivity.com'], check=True)
+          subprocess.run(['git','add','-A'], check=True)
+          subprocess.run(['git','commit','-m','Restore Japanese KB source visuals and clean staging'], check=True)
+          subprocess.run(['git','push'], check=True)
