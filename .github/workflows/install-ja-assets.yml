@@ -21,22 +21,18 @@ jobs:
           import base64, io, string, subprocess, zipfile
 
           alphabet = set(string.ascii_letters + string.digits + '+/=')
-
-          def restore(label, parts):
-              text = ''.join(p.read_text(encoding='utf-8') for p in parts)
-              clean = ''.join(ch for ch in text if ch in alphabet)
-              clean += '=' * (-len(clean) % 4)
-              print(label, 'parts=', [p.name for p in parts], 'raw=', len(text), 'clean+padded=', len(clean), 'mod4=', len(clean) % 4)
-              raw = base64.b64decode(clean, validate=True)
-              with zipfile.ZipFile(io.BytesIO(raw)) as z:
-                  bad = z.testzip()
-                  if bad:
-                      raise RuntimeError(f'{label}: corrupt member {bad}')
-                  print(label, 'members=', z.namelist())
-                  z.extractall('.')
-
-          restore('final-assets', sorted(Path('.tmp/final-assets').glob('chunk-*.b64')))
-          restore('today-assets', sorted(Path('.tmp/today-assets').glob('chunk-*.b64')) + sorted(Path('.tmp/today-assets').glob('rem-*.b64')))
+          parts = sorted(Path('.tmp/today-assets').glob('chunk-*.b64')) + sorted(Path('.tmp/today-assets').glob('rem-*.b64'))
+          text = ''.join(p.read_text(encoding='utf-8') for p in parts)
+          clean = ''.join(ch for ch in text if ch in alphabet)
+          clean += '=' * (-len(clean) % 4)
+          print('parts=', [p.name for p in parts], 'raw=', len(text), 'clean+padded=', len(clean))
+          raw = base64.b64decode(clean, validate=True)
+          with zipfile.ZipFile(io.BytesIO(raw)) as z:
+              bad = z.testzip()
+              if bad:
+                  raise RuntimeError(f'corrupt member {bad}')
+              print('members=', z.namelist())
+              z.extractall('.')
 
           Path('画像/ユースケース/quick/RX-USECASE-0053/01.webp.b64').unlink(missing_ok=True)
           subprocess.run(['rm','-rf','.tmp'], check=True)
