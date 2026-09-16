@@ -1,4 +1,4 @@
-name: Restore RX-USECASE-0053 source visuals
+name: Restore RX-USECASE-0054 source visuals
 
 on:
   push:
@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Extract and verify original 0053 WebP assets
+      - name: Extract and verify original 0054 WebP assets
         shell: python
         run: |
           from pathlib import Path
@@ -33,9 +33,9 @@ jobs:
           data = base64.b64decode(text, validate=False)
 
           expected = {
-              '画像/ユースケース/quick/RX-USECASE-0053/01-maturity-yield-changes.webp',
-              '画像/ユースケース/quick/RX-USECASE-0053/02-yield-curve-current-vs-3m.webp',
-              '画像/ユースケース/quick/RX-USECASE-0053/03-2s10s-fed-funds-history.webp',
+              '画像/ユースケース/quick/RX-USECASE-0054/01-us-japan-long-yields.webp',
+              '画像/ユースケース/quick/RX-USECASE-0054/02-theme-performance.webp',
+              '画像/ユースケース/quick/RX-USECASE-0054/03-usdjpy-nikkei.webp',
           }
           found = {}
           sig = b'PK\x03\x04'
@@ -87,5 +87,5 @@ jobs:
           if subprocess.run(['git','diff','--cached','--quiet']).returncode == 0:
               print('No asset changes needed.')
               raise SystemExit(0)
-          subprocess.run(['git','commit','-m','Restore RX-USECASE-0053 source visuals'], check=True)
+          subprocess.run(['git','commit','-m','Restore RX-USECASE-0054 source visuals'], check=True)
           subprocess.run(['git','push'], check=True)
