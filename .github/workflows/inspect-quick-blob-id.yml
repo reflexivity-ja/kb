@@ -13,43 +13,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Find recoverable staged asset bundles
-        shell: python
+        with:
+          fetch-depth: 0
+      - name: Trace target QUICK assets across git history
+        shell: bash
         run: |
-          from pathlib import Path
-          import base64, io, zipfile
+          set -euo pipefail
+          git rev-list --objects --all > /tmp/all-objects.txt
+          for id in 0049 0053 0054 0055 0057 0059; do
+            echo "===== RX-USECASE-$id ====="
+            grep "画像/ユースケース/quick/RX-USECASE-$id/" /tmp/all-objects.txt || true
+          done
 
-          def cleaned_bytes(parts):
-              return b''.join(p.read_bytes() for p in parts).replace(b'\n', b'').replace(b'\r', b'')
-
-          def try_one_deleted_char(label, encoded):
-              print(f'===== {label} =====')
-              print('encoded length', len(encoded), 'mod4', len(encoded) % 4)
-              if len(encoded) % 4 != 1:
-                  print('unexpected length; skipping one-character deletion search')
-                  return
-              for i in range(len(encoded)):
-                  candidate = encoded[:i] + encoded[i+1:]
-                  try:
-                      raw = base64.b64decode(candidate, validate=True)
-                  except Exception:
-                      continue
-                  if not raw.startswith(b'PK\x03\x04'):
-                      continue
-                  try:
-                      with zipfile.ZipFile(io.BytesIO(raw)) as z:
-                          if z.testzip() is not None:
-                              continue
-                          names = z.namelist()
-                  except Exception:
-                      continue
-                  print('RECOVERED deletion_index=', i, 'deleted_byte=', repr(encoded[i:i+1]), 'zip_size=', len(raw))
-                  for name in names:
-                      print(name)
-                  return
-              print('NO_VALID_SINGLE_DELETION_RECOVERY')
-
-          final_root = Path('.tmp/final-assets')
-          today_root = Path('.tmp/today-assets')
-          try_one_deleted_char('final-assets', cleaned_bytes(sorted(final_root.glob('chunk-*.b64'))))
-          try_one_deleted_char('today-assets', cleaned_bytes(sorted(today_root.glob('chunk-*.b64')) + sorted(today_root.glob('rem-*.b64'))))
+          echo '===== TARGET PATH HISTORY ====='
+          git log --all --name-status --pretty='format:COMMIT %H %s' -- '画像/ユースケース/quick/RX-USECASE-0049/**' '画像/ユースケース/quick/RX-USECASE-0053/**' '画像/ユースケース/quick/RX-USECASE-0054/**' '画像/ユースケース/quick/RX-USECASE-0055/**' '画像/ユースケース/quick/RX-USECASE-0057/**' '画像/ユースケース/quick/RX-USECASE-0059/**' || true
