@@ -1,4 +1,4 @@
-name: Inspect staged QUICK source visuals
+name: Restore verified RX-USECASE-0053 source visual
 
 on:
   push:
@@ -6,24 +6,42 @@ on:
       - '.github/workflows/inspect-quick-blob-id.yml'
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
-  inspect:
+  restore:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Trace target QUICK assets across git history
+      - name: Restore and verify source visual
         shell: bash
         run: |
           set -euo pipefail
-          git rev-list --objects --all > /tmp/all-objects.txt
-          for id in 0049 0053 0054 0055 0057 0059; do
-            echo "===== RX-USECASE-$id ====="
-            grep "画像/ユースケース/quick/RX-USECASE-$id/" /tmp/all-objects.txt || true
-          done
+          target='画像/ユースケース/quick/RX-USECASE-0053/source-visuals.webp'
+          mkdir -p "$(dirname "$target")"
+          git show '2f0588384e3f5c684dbd1a587096b3525e151d58:画像/ユースケース/quick/RX-USECASE-0053/01.webp.b64' | tr -d '\r\n' | base64 -d > "$target"
 
-          echo '===== TARGET PATH HISTORY ====='
-          git log --all --name-status --pretty='format:COMMIT %H %s' -- '画像/ユースケース/quick/RX-USECASE-0049/**' '画像/ユースケース/quick/RX-USECASE-0053/**' '画像/ユースケース/quick/RX-USECASE-0054/**' '画像/ユースケース/quick/RX-USECASE-0055/**' '画像/ユースケース/quick/RX-USECASE-0057/**' '画像/ユースケース/quick/RX-USECASE-0059/**' || true
+          file "$target"
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('画像/ユースケース/quick/RX-USECASE-0053/source-visuals.webp')
+          data = p.read_bytes()
+          assert data[:4] == b'RIFF', data[:16]
+          assert data[8:12] == b'WEBP', data[:16]
+          expected = int.from_bytes(data[4:8], 'little') + 8
+          assert expected == len(data), (expected, len(data))
+          print('RIFF/WebP length verified:', len(data))
+          PY
+          identify "$target"
+
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add "$target"
+          if git diff --cached --quiet; then
+            echo 'No asset change needed.'
+            exit 0
+          fi
+          git commit -m 'Restore RX-USECASE-0053 source visual'
+          git push
