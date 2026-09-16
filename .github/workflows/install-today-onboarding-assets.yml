@@ -14,34 +14,55 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Rebuild and install WebP assets
-        shell: bash
+      - name: Verify staged chunks and install WebP assets
+        shell: python
         run: |
-          set -euo pipefail
-          cat \
-            .tmp/today-assets/chunk-00.b64 \
-            .tmp/today-assets/chunk-01.b64 \
-            .tmp/today-assets/chunk-02.b64 \
-            .tmp/today-assets/chunk-03.b64 \
-            .tmp/today-assets/rem-00.b64 \
-            .tmp/today-assets/rem-01.b64 \
-            .tmp/today-assets/rem-02.b64 \
-            .tmp/today-assets/rem-03.b64 \
-            .tmp/today-assets/rem-04.b64 \
-            .tmp/today-assets/rem-05.b64 \
-            .tmp/today-assets/rem-06.b64 \
-            .tmp/today-assets/rem-07.b64 > /tmp/today-assets.b64
-          base64 -d /tmp/today-assets.b64 > /tmp/today-assets.zip
-          unzip -t /tmp/today-assets.zip
-          unzip -o /tmp/today-assets.zip -d .
-          rm -f '画像/ユースケース/quick/RX-USECASE-0053/01.webp.b64'
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add '画像/ユースケース/quick/RX-USECASE-0053' '画像/ユースケース/quick/RX-USECASE-0054'
-          git add -u '画像/ユースケース/quick/RX-USECASE-0053'
-          if git diff --cached --quiet; then
-            echo 'No asset changes to commit.'
-          else
-            git commit -m 'Restore Sep 16 onboarding source visuals'
-            git push
-          fi
+          from pathlib import Path
+          import base64, hashlib, subprocess, zipfile, io
+
+          expected = {
+            'chunk-00.b64': (8000, '3736932cd4279e5bdc406feda421aaf3fdf5b48231e55894aee0f2f18a307675'),
+            'chunk-01.b64': (8000, '50b862ee607a480c5e03625082169d264a32887e6ae370abe961d1c10037082b'),
+            'chunk-02.b64': (8000, 'fb64d44a7515cd8f4f653aa484598fc397f7c4d9f1e4388c10e6994cfe519906'),
+            'chunk-03.b64': (8000, '71a7030585ca912e84232940f83ecb41ea6d3372e53f49a44d3e1645fe07ccdf'),
+            'rem-00.b64': (4000, 'cc50b81e8879d3fe16cdfd06db98b2f4621d2ee945970a2112f4af6d1ceec1de'),
+            'rem-01.b64': (4000, '5b9e88897fa7f9c5df033b2fbf2f7b1baf54a367fc20b95a549cbfb4b365da96'),
+            'rem-02.b64': (4000, '3529df34667cb7995b62b8cef54f174e1fd2c3e7fd982efac1a42c702df90f90'),
+            'rem-03.b64': (4000, 'b8f59d2fe89db2cab8c2244507e6acbeb830e1d67f56f618b1110741f4479483'),
+            'rem-04.b64': (4000, '6e06018660fdd907aeb28bdb1badc49acfb471462d6c5d76957fbc545ff33ce0'),
+            'rem-05.b64': (4000, 'a21c3171f461406347db0c1e4cb6b32d84e91965432f338246208a40d44fa49c'),
+            'rem-06.b64': (4000, '7b061604d32a59de8cd036360ddbed03c72577bef90f433bc02a647c067b3c33'),
+            'rem-07.b64': (2944, '12d3d795509f093514b667ec6206c7ff06b8b6b71789b84402bc067e29611bd4'),
+          }
+          root = Path('.tmp/today-assets')
+          parts = []
+          bad = []
+          for name, (size, sha) in expected.items():
+              p = root / name
+              data = p.read_bytes()
+              got = hashlib.sha256(data).hexdigest()
+              print(name, len(data), got)
+              if len(data) != size or got != sha:
+                  bad.append(name)
+              parts.append(data)
+          if bad:
+              raise SystemExit('Chunk mismatch: ' + ', '.join(bad))
+
+          encoded = b''.join(parts)
+          raw = base64.b64decode(encoded, validate=True)
+          print('zip bytes', len(raw), 'sha256', hashlib.sha256(raw).hexdigest())
+          z = zipfile.ZipFile(io.BytesIO(raw))
+          print('zip files:', *z.namelist(), sep='\n')
+          z.extractall('.')
+          old = Path('画像/ユースケース/quick/RX-USECASE-0053/01.webp.b64')
+          if old.exists(): old.unlink()
+
+          subprocess.run(['git','config','user.name','github-actions[bot]'], check=True)
+          subprocess.run(['git','config','user.email','41898282+github-actions[bot]@users.noreply.github.com'], check=True)
+          subprocess.run(['git','add','画像/ユースケース/quick/RX-USECASE-0053','画像/ユースケース/quick/RX-USECASE-0054'], check=True)
+          subprocess.run(['git','add','-u','画像/ユースケース/quick/RX-USECASE-0053'], check=True)
+          if subprocess.run(['git','diff','--cached','--quiet']).returncode == 0:
+              print('No asset changes to commit.')
+          else:
+              subprocess.run(['git','commit','-m','Restore Sep 16 onboarding source visuals'], check=True)
+              subprocess.run(['git','push'], check=True)
