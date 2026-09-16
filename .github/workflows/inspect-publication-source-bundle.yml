@@ -1,0 +1,38 @@
+name: Inspect publication source bundle
+
+on:
+  push:
+    paths:
+      - '.github/workflows/inspect-publication-source-bundle.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Inspect historical source bundles
+        shell: bash
+        run: |
+          set -euo pipefail
+          ref=b577ed679e6df81dbb174b2e3287351c86818f7e
+          mkdir -p /tmp/publication-bundle
+          git show "$ref:.tmp/publication-micro/chunk-00.b64" > /tmp/publication-bundle/micro.b64
+          git show "$ref:.tmp/publication-micro/chunk-01.b64" >> /tmp/publication-bundle/micro.b64
+          base64 -d /tmp/publication-bundle/micro.b64 > /tmp/publication-bundle/micro.zip
+          echo '=== MICRO ZIP CONTENTS ==='
+          unzip -l /tmp/publication-bundle/micro.zip
+          echo '=== REBUILD SCRIPT ==='
+          unzip -p /tmp/publication-bundle/micro.zip publication_rebuild_micro_bundle/rebuild.py | sed -n '1,260p'
+          echo '=== SECOND BUNDLE ==='
+          git show "$ref:.tmp/publication-rebuild/chunk-00.b64" > /tmp/publication-bundle/rebuild.b64
+          if base64 -d /tmp/publication-bundle/rebuild.b64 > /tmp/publication-bundle/rebuild.zip 2>/tmp/publication-bundle/decode.err; then
+            unzip -l /tmp/publication-bundle/rebuild.zip || true
+          else
+            cat /tmp/publication-bundle/decode.err
+          fi
