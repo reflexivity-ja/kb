@@ -24,7 +24,13 @@ publication_mode: faithful-source-preserving
 
 原資料は「EUR/USDを調べて」と曖昧に依頼するのではなく、**PMが毎回確認したい論点をチェックリスト化し、同じ順番で調査を更新する**例です。原資料のLast Updatedは **2025-08-28** です。
 
+為替の方向感は、ひとつの指標だけで決めると判断が偏りやすくなります。このチェックリストでは、まず市場参加者の偏りをポジショニングで確認し、次に景気・インフレの相対差、金利差、バリュエーション、リスクセンチメント、中央銀行、テクニカルへ進みます。最後に、それまでの材料が同じ方向を示しているか、どの条件で見方が変わるかをシナリオとして整理します。
+
+この順番にすることで、**市場がすでにどちらに傾いているか → ファンダメンタルズがそれを支持するか → 金利・政策が価格差を説明するか → バリュエーションやテクニカルが反証しないか → どのシナリオで判断を変えるか**を一貫して確認できます。
+
 ## I. ポジショニング
+
+最初にポジショニングを見るのは、同じ材料でも市場がすでに大きく傾いている場合と、まだ織り込まれていない場合で価格反応が変わるためです。
 
 - CFTC EUR Futures Net: **-15,000 contracts (Net Short)**
 - 1か月変化: **-2,000 contracts**
@@ -33,6 +39,8 @@ publication_mode: faithful-source-preserving
 - ECB/Fedによる明示的な為替介入・USD targetingは限定的と整理
 
 ## II. 経済ファンダメンタルズ
+
+ポジショニングの偏りを確認したら、その方向に実体経済の相対差があるかを見ます。市場の持ち高だけでは持続性を判断できないためです。
 
 ### PMI格差
 
@@ -44,6 +52,8 @@ publication_mode: faithful-source-preserving
 原資料は失業率、雇用、Core Inflationの差を比較し、単独の指標ではなく**米欧の相対的なMomentum**として評価しています。
 
 ## III. 金利差
+
+景気・インフレの相対差が見えたら、その差が金融政策と金利にどう反映されているかを確認します。為替では相対的な金利差が保有コストや資金フローを通じて価格に直接つながりやすいためです。
 
 - German 10Y Bund: **2.69%**
 - US 10Y Treasury: **4.24%**
@@ -58,14 +68,19 @@ publication_mode: faithful-source-preserving
 - Beta: **-0.1125**
 - Model Predicted EUR/USD: **1.1270**
 - 当時のActualとのGap: **+0.0369**
+
 原資料は、この差を「Rate Differentialモデル対比でEURが約3.7cent割高」と解釈しています。
 
 ## IV. バリュエーションと交易条件
+
+金利差だけで説明すると、短期の政策差を長期的な適正価値と混同する可能性があります。そこでREERやエネルギー輸入条件を見て、現在の価格水準が構造的に割高・割安なのかを別軸で確認します。
 
 - EUR REERはTrading Partners対比で概ねFair Value
 - Brent **$68.05**で、EURのEnergy Import Costには中立〜やや支援的と評価
 
 ## V. リスクセンチメントとボラティリティ
+
+次に、マクロ・金利差で説明できる方向がリスクオン／オフやドル全体の動きでも整合しているかを確認します。
 
 - EUR/USD 1M Implied Vol: **7.6%**、Historical約40th percentile
 - VIX: **16.9**
@@ -77,7 +92,11 @@ publication_mode: faithful-source-preserving
 
 原資料はFedをData-dependentかつ相対的にHawkish、ECBをよりAccommodation寄りと整理し、**Policy DivergenceをUSD支援要因**としています。
 
+ここでは、これまで確認した景気・金利差が一時的な市場ノイズなのか、中央銀行の政策方向と整合した持続要因なのかを確認します。
+
 ## VII. テクニカル分析
+
+最後に価格そのものを見て、ファンダメンタルズの方向と足元のトレンド・サポート／レジスタンスが一致しているかを確認します。ファンダメンタルズが正しくても、エントリー水準や短期の逆行余地は別問題だからです。
 
 - EUR/USD Spot: **1.1639**
 - 20D MA: **1.1632**
@@ -86,6 +105,8 @@ publication_mode: faithful-source-preserving
 - Major Resistance: **1.1806**
 
 ## VIII. シナリオ分析
+
+ここまでの材料をひとつの方向予想に固定せず、どの前提が変われば見方を修正するかをシナリオに落とします。
 
 | Scenario | Target | 原資料のProbability | 主なCatalyst |
 |---|---:|---:|---|
@@ -96,7 +117,12 @@ publication_mode: faithful-source-preserving
 ## 元資料の総合評価
 
 原資料は当時の方向感を**Bearish EUR**、確信度をHigh、想定期間を3〜6か月と整理し、Rate Differential、US優位のEconomic Momentum、Regression上のEUR割高、Policy Divergence、Technical、Risk Sentimentを同じ方向の根拠として並べています。
+
 原資料には具体的なPosition Size、Stop、Target、Trade Recommendationも含まれますが、これらは**2025-08-28時点のResearch出力の記録**であり、現在の投資助言ではありません。
+
+## 運用上の読み方
+
+このチェックリストの価値は、毎回同じ結論を出すことではありません。同じ順番で更新することで、「前回から何が変わったか」「どの根拠だけが崩れたか」「シナリオ確率を変えるべきか」を比較しやすくすることにあります。
 
 ## このユースケースで確認できること
 
