@@ -1,4 +1,4 @@
-name: Restore RX-USECASE-0054 source visuals
+name: Verify historical Sep 16 onboarding asset archive
 
 on:
   push:
@@ -6,86 +6,51 @@ on:
       - '.github/workflows/install-ja-assets.yml'
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
-  restore:
+  verify:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Extract and verify original 0054 WebP assets
+        with:
+          fetch-depth: 0
+      - name: Rebuild archive from repaired historical snapshot
         shell: python
         run: |
           from pathlib import Path
-          import base64, string, struct, subprocess
+          import base64, hashlib, io, subprocess, zipfile
 
-          root = Path('.tmp/today-assets')
-          parts = sorted(root.glob('*.b64'))
-          if not parts:
-              raise SystemExit('Missing today-assets staging fragments')
+          ref = 'e256ead2887bd96b05f768bcb97966238f262f93'
+          names = [
+              'chunk-00.b64','chunk-01.b64','chunk-02.b64','chunk-03.b64',
+              'rem-00.b64','rem-01.b64','rem-02.b64','rem-03.b64',
+              'rem-04.b64','rem-05.b64','rem-06.b64','rem-07.b64',
+          ]
+          parts = []
+          for name in names:
+              path = f'.tmp/today-assets/{name}'
+              data = subprocess.check_output(['git','show',f'{ref}:{path}'])
+              print(name, len(data), hashlib.sha256(data).hexdigest())
+              parts.append(data)
 
-          alphabet = set(string.ascii_letters + string.digits + '+/=')
-          text = ''
-          for p in parts:
-              raw = p.read_text(encoding='utf-8', errors='ignore')
-              text += ''.join(ch for ch in raw if ch in alphabet)
-          text += '=' * ((4 - len(text) % 4) % 4)
-          data = base64.b64decode(text, validate=False)
-
-          expected = {
-              '画像/ユースケース/quick/RX-USECASE-0054/01-us-japan-long-yields.webp',
-              '画像/ユースケース/quick/RX-USECASE-0054/02-theme-performance.webp',
-              '画像/ユースケース/quick/RX-USECASE-0054/03-usdjpy-nikkei.webp',
-          }
-          found = {}
-          sig = b'PK\x03\x04'
-          pos = 0
-          while True:
-              i = data.find(sig, pos)
-              if i < 0:
-                  break
-              pos = i + 4
-              if i + 30 > len(data):
-                  continue
-              _, ver, flags, method, mtime, mdate, crc, csize, usize, nlen, xlen = struct.unpack_from('<IHHHHHIIIHH', data, i)
-              ns = i + 30
-              ne = ns + nlen
-              extra_end = ne + xlen
-              if extra_end > len(data) or nlen == 0 or nlen > 500:
-                  continue
-              try:
-                  name = data[ns:ne].decode('utf-8')
-              except UnicodeDecodeError:
-                  continue
-              if name not in expected:
-                  continue
-              if method != 0:
-                  raise SystemExit(f'Unexpected compression method for {name}: {method}')
-              payload = data[extra_end:extra_end+csize]
-              if len(payload) != csize or len(payload) != usize:
-                  raise SystemExit(f'Truncated payload for {name}: {len(payload)} / {csize}')
-              if not (payload[:4] == b'RIFF' and payload[8:12] == b'WEBP'):
-                  raise SystemExit(f'Invalid WebP header for {name}')
-              declared = int.from_bytes(payload[4:8], 'little') + 8
-              if declared != len(payload):
-                  raise SystemExit(f'Invalid RIFF length for {name}: declared {declared}, actual {len(payload)}')
-              found[name] = payload
-
-          missing = expected - found.keys()
-          if missing:
-              raise SystemExit('Missing expected assets: ' + ', '.join(sorted(missing)))
-
-          for name in sorted(expected):
-              p = Path(name)
-              p.parent.mkdir(parents=True, exist_ok=True)
-              p.write_bytes(found[name])
-              print('Verified', name, len(found[name]), 'bytes')
-
-          subprocess.run(['git','config','user.name','Reflexivity KB automation'], check=True)
-          subprocess.run(['git','config','user.email','gtm@reflexivity.com'], check=True)
-          subprocess.run(['git','add', *sorted(expected)], check=True)
-          if subprocess.run(['git','diff','--cached','--quiet']).returncode == 0:
-              print('No asset changes needed.')
-              raise SystemExit(0)
-          subprocess.run(['git','commit','-m','Restore RX-USECASE-0054 source visuals'], check=True)
-          subprocess.run(['git','push'], check=True)
+          encoded = b''.join(parts)
+          raw = base64.b64decode(encoded, validate=True)
+          print('zip_bytes', len(raw), 'sha256', hashlib.sha256(raw).hexdigest())
+          with zipfile.ZipFile(io.BytesIO(raw)) as z:
+              bad = z.testzip()
+              print('testzip', bad)
+              print('members:')
+              for info in z.infolist():
+                  print(info.filename, info.file_size, f'{info.CRC:08x}')
+              if bad is not None:
+                  raise SystemExit('Archive failed CRC at ' + bad)
+              for info in z.infolist():
+                  if info.filename.startswith('画像/ユースケース/quick/RX-USECASE-0054/') and info.filename.endswith('.webp'):
+                      data = z.read(info.filename)
+                      if not (data[:4] == b'RIFF' and data[8:12] == b'WEBP'):
+                          raise SystemExit('Invalid WebP header: ' + info.filename)
+                      declared = int.from_bytes(data[4:8], 'little') + 8
+                      if declared != len(data):
+                          raise SystemExit(f'Invalid RIFF length {info.filename}: {declared} vs {len(data)}')
+                      print('verified_webp', info.filename, len(data), hashlib.sha256(data).hexdigest())
