@@ -13,21 +13,48 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: List staged archive members without modifying repository
+      - name: Read local ZIP headers without modifying repository
         shell: python
         run: |
           from pathlib import Path
-          import hashlib, zipfile
+          import hashlib, struct
 
           p = Path('.tmp/final-ja-assets.zip')
-          if not p.exists():
-              raise SystemExit('Missing .tmp/final-ja-assets.zip')
-          print('archive_sha256', hashlib.sha256(p.read_bytes()).hexdigest())
-          with zipfile.ZipFile(p) as z:
-              bad = z.testzip()
-              print('testzip', bad)
-              for info in z.infolist():
-                  print(f'{info.filename}\tsize={info.file_size}\tcrc={info.CRC:08x}')
-                  if not info.is_dir():
-                      data = z.read(info.filename)
-                      print('  sha256=' + hashlib.sha256(data).hexdigest())
+          data = p.read_bytes()
+          print('bytes', len(data))
+          print('sha256', hashlib.sha256(data).hexdigest())
+
+          sig = b'PK\x03\x04'
+          pos = 0
+          found = 0
+          while True:
+              i = data.find(sig, pos)
+              if i < 0:
+                  break
+              if i + 30 > len(data):
+                  print('truncated_header_at', i)
+                  break
+              fields = struct.unpack_from('<IHHHHHIIIHH', data, i)
+              _, ver, flags, method, mtime, mdate, crc, csize, usize, nlen, xlen = fields
+              name_start = i + 30
+              name_end = name_start + nlen
+              extra_end = name_end + xlen
+              if extra_end > len(data):
+                  print('truncated_name_at', i)
+                  break
+              name_bytes = data[name_start:name_end]
+              try:
+                  name = name_bytes.decode('utf-8')
+              except UnicodeDecodeError:
+                  name = name_bytes.decode('cp437', errors='replace')
+              print(f'entry[{found}] offset={i} method={method} csize={csize} usize={usize} flags={flags:#x} name={name}')
+              found += 1
+              if flags & 0x08:
+                  pos = extra_end + 1
+              else:
+                  pos = extra_end + csize
+              if pos <= i:
+                  pos = i + 4
+          print('local_header_count', found)
+          if found == 0:
+              raise SystemExit('No local ZIP headers found')
