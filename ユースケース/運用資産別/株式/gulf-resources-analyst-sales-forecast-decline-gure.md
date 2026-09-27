@@ -11,7 +11,7 @@ published: 2026-08-11
 drafted: 2026-09-07
 revised: 2026-09-27
 status: draft
-canonical_path: "use-cases/hedge-fund-tier-3/gulf-resources-analyst-sales-forecast-decline-gure.md"
+canonical_path: "usecases/byasset/equities/gulf-resources-analyst-sales-forecast-decline-gure.md"
 translation_status: review-needed
 editorial_reviewed: 2026-09-27
 resource: "Reflexivity Insights Proof Set — Sales Enablement.docx"
@@ -19,11 +19,11 @@ resource: "Reflexivity Insights Proof Set — Sales Enablement.docx"
 
 # Gulf Resources：アナリスト売上予想の低下 (GURE) - 弱気シグナル
 
-[← ヘッジファンド Tier 3](README.md) · [ユースケース一覧](../../README.md)
+[← 株式ユースケース](README.md) · [ユースケース一覧](../../README.md)
 
 > 以下は対象日時点のプラットフォーム出力をもとにした例です。現在の投資判断に使う場合は、最新の市場データとあわせて確認してください。
 
-**想定運用者:** ヘッジファンド Tier 3（小規模・新興）  
+**対象ユーザー:** ヘッジファンド Tier 3（小規模・新興）  
 **インサイトの種類:** シナリオ・インサイト  
 **シグナル:** 弱気  
 **対象日:** 2026年8月11日
@@ -45,6 +45,6 @@ Reflexivityはこの局面について、過去16回の類似パターンを比�
 
 ---
 
-[← ヘッジファンド Tier 3](README.md) · [ユースケース一覧](../../README.md)
+[← 株式ユースケース](README.md) · [ユースケース一覧](../../README.md)
 
 ご質問や詳細については **gtm@reflexivity.com** までお問い合わせください。
