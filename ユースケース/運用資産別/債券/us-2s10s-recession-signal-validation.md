@@ -7,6 +7,8 @@ author: Reflexivity Research
 published: 2026-09-15
 status: published
 translation_status: local-only
+revised: 2026-09-27
+editorial_reviewed: 2026-09-27
 original_language: en
 source_text_status: faithful_japanese_rendering_from_platform_research
 publication_mode: faithful-source-preserving
@@ -76,11 +78,11 @@ publication_mode: faithful-source-preserving
 - 3か月・10年、1年・10年など別のカーブ定義を試す
 - 2008年前後、特にQE導入前後で関係が変化したかを局面別に確認する
 
-ここでは「逆イールドは正しい／間違い」と断定することより、**市場で常識になっている経験則を長期データで検証し、偽陽性や定義の弱点まで見る**ことがユースケースの中心です。
+ここで重要なのは「逆イールドは正しい／間違い」と断定することではなく、**市場で広く使われている経験則を長期データで検証し、偽陽性や定義上の弱点まで確認する**ことです。
 
 ## このユースケースで確認できること
 
-この調査は、最終結論だけでなく、**どの問いから始め、どのデータを組み合わせ、途中で何を支持・反証材料とし、どの前提・留意点を明示したか**まで含めて再利用できる調査プロセスとして掲載しています。
+このページでは、よく知られた市場シグナルをそのまま受け入れず、**先行期間、偽陽性、見逃し、定義の妥当性**まで分解して検証する流れを確認できます。別のイールドカーブ指標や景気指標と比較するときにも同じ考え方を使えます。
 
 ---
 
