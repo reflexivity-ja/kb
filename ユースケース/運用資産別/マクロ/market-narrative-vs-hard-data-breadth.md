@@ -22,6 +22,9 @@ publication_mode: faithful-source-preserving
 **分析タイプ:** ナラティブ分析、クロスアセット分析、市場モニタリング
 > 本ページは、Reflexivity上で実際に生成された調査結果を日本語で読みやすくしたものです。結論だけに要約せず、問い、データ、途中の判断、反証、前提・留意点、最終的な読みまで元のストーリーをできる限り保持しています。数値・市場環境は元の調査を実行した時点のものです。
 
+
+**[Reflexivityで元の調査を開く →](https://app.reflexivity.com/app/alfred?mode=research&conversationId=e8b51919-b5fa-4222-b350-d41f1049c62e&scrollTo=top)**
+
 ## 調査の問い
 
 **「米国景気は強い」という市場の語りは、本当に幅広い証拠に支えられて裾野が広がっているのか、それとも一部の強い見出しに依存しているのか。**

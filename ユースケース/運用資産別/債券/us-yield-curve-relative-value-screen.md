@@ -23,6 +23,9 @@ publication_mode: faithful-source-preserving
 
 > 本ページは、Reflexivity上で実際に生成された調査結果を日本語で読みやすくしたものです。結論だけに要約せず、問い、データ、途中の判断、反証、前提・留意点、最終的な読みまで、元のストーリーをできる限り保持しています。数値・市場環境は元の調査を実行した時点のものです。
 
+
+**[Reflexivityで元の調査を開く →](https://app.reflexivity.com/app/alfred?conversationId=7a3cccb2-8503-4530-b85b-34386f208480&mode=research&activeHistorySidebarCategory=all)**
+
 ## この原資料の位置づけ
 
 原資料は調査全体ではなく、**前の出力で判定表示とロジックが一致していなかった点を訂正したフォローアップ**です。そのため、本ページでは提供された訂正表と判断ロジックに範囲を限定して掲載しています。

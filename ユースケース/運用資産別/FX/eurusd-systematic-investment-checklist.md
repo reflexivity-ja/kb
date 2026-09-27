@@ -22,6 +22,9 @@ publication_mode: faithful-source-preserving
 **分析タイプ:** マクロ分析、投資判断、シナリオ分析
 > 本ページは、Reflexivity上で実際に生成された調査結果を日本語で読みやすくしたものです。結論だけに要約せず、問い、データ、途中の判断、反証、前提・留意点、最終的な読みまで元のストーリーをできる限り保持しています。数値・市場環境は元の調査を実行した時点のものです。
 
+
+**[Reflexivityで元の調査を開く →](https://app.reflexivity.com/app/alfred?conversationId=dec65b17-3831-4913-a3f0-bf988fd5c238&mode=research&activeHistorySidebarCategory=all)**
+
 ## 調査の狙い
 
 原資料は「EUR/USDを調べて」と曖昧に依頼するのではなく、**PMが毎回確認したい論点をチェックリスト化し、同じ順番で調査を更新する**例です。原資料の最終更新日は **2025-08-28** です。

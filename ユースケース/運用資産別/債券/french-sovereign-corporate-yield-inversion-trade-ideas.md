@@ -23,6 +23,9 @@ publication_mode: faithful-source-preserving
 
 > 本ページは、Reflexivity上で実際に生成された調査結果を日本語で読みやすくしたものです。結論だけに要約せず、問い、データ、途中の判断、反証、前提・留意点、最終的な読みまで、元のストーリーをできる限り保持しています。数値・市場環境は元の調査を実行した時点のものです。
 
+
+**[Reflexivityで元の調査を開く →](https://app.reflexivity.com/app/alfred?conversationId=62abd0eb-38bd-4d1d-87b7-035405f55d14&mode=research&activeHistorySidebarCategory=all)**
+
 ## 調査の起点
 
 原資料は、フランス国債と高品質フランス企業社債の利回り関係に異常が生じ、同時に政治リスクが高まっている状況を起点に、**その見方をどの市場でどう表現できるか**を具体的なトレード候補として整理した調査です。

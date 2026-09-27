@@ -23,6 +23,9 @@ publication_mode: faithful-source-preserving
 
 > 本ページは、Reflexivity上で実際に生成された調査結果を日本語で読みやすくしたものです。結論だけに要約せず、問い、データ、途中の判断、反証、前提・留意点、最終的な読みまで、元のストーリーをできる限り保持しています。数値・市場環境は元の調査を実行した時点のものです。
 
+
+**[Reflexivityで元の調査を開く →](https://app.reflexivity.com/app/alfred?conversationId=1ae89f55-bd78-4dfe-a303-65f8d4843d05&mode=research&activeHistorySidebarCategory=all)**
+
 ## 実際に検証したこと
 
 「債券側のスプレッドが大きく動いたとき、その後のS&P 500リターンに傾向があるか」を、**現在値を過去分布の中に置く**形で検証した調査です。
