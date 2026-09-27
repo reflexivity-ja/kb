@@ -14,6 +14,8 @@ resource: Reflexivity Research conversation approved by content owner
 
 # その日のニュースフローから検討すべき投資アイデアを5件抽出する
 
+[← マルチアセットユースケース](README.md) · [マクロユースケース](../マクロ/README.md) · [ユースケース一覧](../../README.md)
+
 **著者:** Reflexivity Research  
 **主な運用資産:** マルチアセット、マクロ、株式、債券
 
