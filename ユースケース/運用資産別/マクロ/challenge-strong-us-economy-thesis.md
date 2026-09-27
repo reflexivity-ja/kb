@@ -16,6 +16,8 @@ publication_mode: faithful-source-preserving
 
 # 「米国景気は強い」という投資仮説を反証方向から検証する
 
+[← 運用資産別ユースケース](../README.md) · [ユースケース一覧](../../README.md)
+
 **著者:** Reflexivity Research  
 **主な運用資産:** マクロ、複数資産  
 **想定利用者:** CIO、マクロPM、マルチアセットPM、ストラテジスト  
