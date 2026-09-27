@@ -3,7 +3,6 @@ id: RX-USECASE-0046
 type: use-case
 language: ja
 locale: ja
-author: 株式会社QUICK
 provider: 株式会社QUICK
 provided: 2026-09-11
 status: published
@@ -18,10 +17,9 @@ publication_mode: faithful-source-preserving
 
 # 新型iPhone発表前後のAAPL株価を過去5年で検証する
 
-**著者:** 株式会社QUICK  
 **提供日:** 2026-09-11  
 **主な運用資産:** 株式  
-**想定利用者:** ウェルスマネジメント / RIA、ロングオンリー・アセットマネージャー、ヘッジファンド Tier 2、ヘッジファンド Tier 3
+**対象ユーザー:** ウェルスマネジメント / RIA、ロングオンリー・アセットマネージャー、ヘッジファンド Tier 2、ヘッジファンド Tier 3
 > 本ページは株式会社QUICKから提供されたユースケースを、顧客名・宛先・メールアドレス・署名・非公開URL等を除き、質問から分析・結論へ進む元のストーリーを可能な限り保持して掲載しています。数値・市場環境は提供日時点のものです。
 
 ## 元の質問
@@ -101,3 +99,6 @@ publication_mode: faithful-source-preserving
 ここに掲載した数値や市場判断は提供日時点のスナップショットです。過去のイベントパターンを基準に今回の反応を比較し、差分の要因と次に検証すべき業績データへつなげるイベント分析の例です。
 
 [← ユースケース一覧](../../README.md)
+
+
+**ご提供元:** 株式会社QUICK
