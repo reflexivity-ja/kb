@@ -16,6 +16,8 @@ publication_mode: faithful-source-preserving
 
 # 金融政策のタカ派転換から恩恵を受ける資産・業種・企業をたどる
 
+[← 運用資産別ユースケース](../README.md) · [ユースケース一覧](../../README.md)
+
 **著者:** Reflexivity Research  
 **主な運用資産:** 株式、債券、FX、複数資産  
 **想定利用者:** マクロPM、マルチアセットPM、株式PM  
