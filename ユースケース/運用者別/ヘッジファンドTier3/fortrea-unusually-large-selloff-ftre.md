@@ -9,16 +9,17 @@ language: ja
 locale: ja-JP
 published: 2026-08-04
 drafted: 2026-09-07
-revised: 2026-09-16
+revised: 2026-09-27
 status: draft
 canonical_path: "use-cases/hedge-fund-tier-3/fortrea-unusually-large-selloff-ftre.md"
 translation_status: review-needed
+editorial_reviewed: 2026-09-27
 resource: "Reflexivity Insights Proof Set — Sales Enablement.docx"
 -->
 
 # Fortrea：異例の大幅下落 (FTRE) - 弱気シグナル
 
-> **レビュー用ドラフト** - 以下は対象日時点のプラットフォーム出力をもとにした例です。現在の投資判断に使う場合は、最新の市場データとあわせて確認してください。
+> 以下は対象日時点のプラットフォーム出力をもとにした例です。現在の投資判断に使う場合は、最新の市場データとあわせて確認してください。
 
 **想定運用者:** ヘッジファンド Tier 3（小規模・新興）  
 **インサイトの種類:** シナリオ・インサイト  
@@ -31,13 +32,13 @@ Reflexivityは過去14回の類似局面を抽出し、パターン品質を5/8�
 
 この結果は「下がったからさらに下がる」と断定するものではありません。むしろ、**逆張りする前に、過去の類似局面では下方リスクがどの程度残っていたかを定量的に確認する**ための材料です。
 
-PMはこの分布を見たうえで、すぐに逆張りするのか、底固めや新しいファンダメンタル材料を待つのかを判断できます。単一の値動きをストーリーに変えるのではなく、履歴上の位置づけを先に確認することがこのユースケースのポイントです。
+PMはこの分布を見たうえで、すぐに逆張りするのか、底固めや新たなファンダメンタル材料を待つのかを判断できます。単一の値動きをストーリーに変えるのではなく、履歴上の位置づけを先に確認することがこのユースケースのポイントです。
 
 ## Reflexivityで確認する
 
 [このインサイトをReflexivityで開く](https://reflexivity.com/app/kg-insight?insightId=a5e0b764-a45f-4f90-a3be-ad2c9109f241)
 
-**出典:** `Reflexivity Insights Proof Set - Sales Enablement.docx`
+**出典:** Reflexivity提供のインサイト事例
 
 ---
 
