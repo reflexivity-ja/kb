@@ -3,7 +3,6 @@ id: RX-USECASE-0055
 type: use-case
 language: ja
 locale: ja
-author: 株式会社QUICK
 provider: 株式会社QUICK
 provided: 2026-08-17
 status: published
@@ -18,10 +17,9 @@ publication_mode: faithful-source-preserving
 
 # ニュースからテーマ・国・企業への影響を追う
 
-**著者:** 株式会社QUICK  
 **提供日:** 2026-08-17  
 **主な運用資産:** 株式、マクロ、マルチアセット  
-**想定利用者:** ウェルスマネジメント / RIA、ロングオンリー・アセットマネージャー、ヘッジファンド Tier 1、ヘッジファンド Tier 2
+**対象ユーザー:** ウェルスマネジメント / RIA、ロングオンリー・アセットマネージャー、ヘッジファンド Tier 1、ヘッジファンド Tier 2
 > 本ページは株式会社QUICKから提供されたユースケースを、顧客名・宛先・メールアドレス・署名・非公開URL等を除き、元資料の説明順を可能な限り保持して掲載しています。数値・市場環境は提供日時点のものです。
 
 ## 元資料で紹介された使い方
@@ -65,3 +63,6 @@ publication_mode: faithful-source-preserving
 ニュースを単に要約するのではなく、ニュースから影響テーマ、国、企業へ関係をたどり、次の調査対象を見つけるワークフローの例です。
 
 [← ユースケース一覧](../../README.md)
+
+
+**ご提供元:** 株式会社QUICK
