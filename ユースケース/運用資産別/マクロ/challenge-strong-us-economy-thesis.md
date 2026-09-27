@@ -98,6 +98,8 @@ publication_mode: faithful-source-preserving
 
 このページでは、「米国景気は強い」という見方をそのまま補強するのではなく、**需要、雇用、実質賃金、景況感、信用、金利**を順に確認し、どこに弱さが出ているかを反証方向から検証する流れを確認できます。
 
+[Reflexivityで開く](https://app.reflexivity.com/app/alfred?mode=research&conversationId=4fa62dde-58f4-4b3b-b433-837634dc84fb&scrollTo=top)
+
 ---
 
 [← 運用資産別ユースケース](../README.md) · [ユースケース一覧](../../README.md)

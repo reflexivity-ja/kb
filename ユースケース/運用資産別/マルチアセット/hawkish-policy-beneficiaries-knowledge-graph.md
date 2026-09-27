@@ -74,6 +74,8 @@ publication_mode: faithful-source-preserving
 
 このページでは、政策テーマをマクロの伝達経路、セクター、個別企業へ段階的に分解し、**次に詳しく調べる企業群を作る**流れを確認できます。グラフ上の関連度を、そのまま利益感応度とみなさない点も重要です。
 
+[Reflexivityで開く](https://app.reflexivity.com/app/alfred?conversationId=9e6182f9-1853-4fdd-8ec4-f5b2a42fcfab&mode=research&activeHistorySidebarCategory=all)
+
 ---
 
 [← 運用資産別ユースケース](../README.md) · [ユースケース一覧](../../README.md)

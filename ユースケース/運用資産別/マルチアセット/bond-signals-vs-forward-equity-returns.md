@@ -66,6 +66,8 @@ publication_mode: faithful-source-preserving
 
 このページでは、債券側のシグナルを株式の先行リターンと結び付ける仮説を、散布図と相関で検証する流れを確認できます。**関係が弱いという結果もそのまま残し、仮説に都合のよい結論へ寄せない**点がこの例の要点です。
 
+[Reflexivityで開く](https://app.reflexivity.com/app/alfred?conversationId=1ae89f55-bd78-4dfe-a303-65f8d4843d05&mode=research&activeHistorySidebarCategory=all)
+
 ---
 
 [← 運用資産別ユースケース](../README.md) · [ユースケース一覧](../../README.md)

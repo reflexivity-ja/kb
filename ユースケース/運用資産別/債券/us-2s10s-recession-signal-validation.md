@@ -84,6 +84,8 @@ publication_mode: faithful-source-preserving
 
 このページでは、よく知られた市場シグナルをそのまま受け入れず、**先行期間、偽陽性、見逃し、定義の妥当性**まで分解して検証する流れを確認できます。別のイールドカーブ指標や景気指標と比較するときにも同じ考え方を使えます。
 
+[Reflexivityで開く](https://app.reflexivity.com/app/alfred?conversationId=5c412f9a-ea78-4c81-8911-f0419ddeefd8&mode=research&activeHistorySidebarCategory=all)
+
 ---
 
 [← 運用資産別ユースケース](../README.md) · [ユースケース一覧](../../README.md)

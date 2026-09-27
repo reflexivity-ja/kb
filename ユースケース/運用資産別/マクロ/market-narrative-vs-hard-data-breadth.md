@@ -89,6 +89,8 @@ publication_mode: faithful-source-preserving
 
 このページでは、見出しの印象だけで市場環境を判断せず、**雇用、金融政策の織り込み、株式市場の広がり、ニュースの論調、成長指標**を並べて、同じ物語を支持しているかを確かめる流れを確認できます。
 
+[Reflexivityで開く](https://app.reflexivity.com/app/alfred?mode=research&conversationId=e8b51919-b5fa-4222-b350-d41f1049c62e&scrollTo=top)
+
 ---
 
 [← 運用資産別ユースケース](../README.md) · [ユースケース一覧](../../README.md)
