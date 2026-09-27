@@ -3,7 +3,6 @@ id: RX-USECASE-0057
 type: use-case
 language: ja
 locale: ja
-author: 株式会社QUICK
 provider: 株式会社QUICK
 provided: 2026-09-04
 status: published
@@ -18,10 +17,9 @@ publication_mode: faithful-source-preserving
 
 # 企業カタリストでNVIDIA関連ニュースの株価影響を確認する
 
-**著者:** 株式会社QUICK  
 **提供日:** 2026-09-04  
 **主な運用資産:** 株式  
-**想定利用者:** ウェルスマネジメント / RIA、ロングオンリー・アセットマネージャー、ヘッジファンド Tier 1、ヘッジファンド Tier 2、ヘッジファンド Tier 3
+**対象ユーザー:** ウェルスマネジメント / RIA、ロングオンリー・アセットマネージャー、ヘッジファンド Tier 1、ヘッジファンド Tier 2、ヘッジファンド Tier 3
 > 本ページは株式会社QUICKから提供されたユースケースを、顧客名・宛先・メールアドレス・署名・非公開URL等を除き、元資料のストーリーを可能な限り保持して掲載しています。数値・市場環境は提供日時点のものです。
 
 Company Catalystでは、ニュースの要点から市場への波及まで順番に確認できます。
@@ -79,3 +77,6 @@ Company Catalystは、見出しの内容を短く知るためだけのもので�
 Company Catalystを単なるニュース要約として見るのではなく、重要ポイント、経営陣発言、ネットワーク波及、地域エクスポージャーへ順番に掘り下げる例です。
 
 [← ユースケース一覧](../../README.md)
+
+
+**ご提供元:** 株式会社QUICK
