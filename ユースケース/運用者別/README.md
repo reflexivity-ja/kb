@@ -4,9 +4,7 @@ Reflexivityのユースケースを、利用者や運用スタイルから探せ
 同じユースケースが複数の運用者タイプや資産クラスに関係する場合は、それぞれのページから同じ記事をご案内しています。
 
 - [ウェルスマネジメント / RIA](ウェルスマネジメントRIA/)
-- [ヘッジファンド Tier 1](ヘッジファンドTier1/)
-- [ヘッジファンド Tier 2](ヘッジファンドTier2/)
-- [ヘッジファンド Tier 3（小規模・新興）](ヘッジファンドTier3/)
+- [ヘッジファンド](ヘッジファンド/) — Tier 1 / 2 / 3 は対象ユーザーの目安として一覧内で表示
 - [ロングオンリー・アセットマネージャー](ロングオンリーアセットマネージャー/)
 
 ## パートナー提供のユースケース
@@ -20,32 +18,11 @@ Reflexivityのユースケースを、利用者や運用スタイルから探せ
 - [新型iPhone発表前後のAAPL株価を過去5年で検証する](../運用資産別/株式/iphone-launch-and-aapl-price-pattern.md) — QUICK提供
 - [イラン攻撃シナリオの原油・金・株式・ドルへの影響を分析する](../運用資産別/マルチアセット/iran-attack-cross-asset-impact.md) — QUICK提供
 
-### ヘッジファンド Tier 1
+### ヘッジファンド
 
-- [米国株と日本株の市場けん引テーマを比較する](../運用資産別/株式/us-japan-market-leading-themes.md) — QUICK提供
-- [FOMC前に利上げシナリオと市場への波及を整理する](../運用資産別/マクロ/fomc-rate-hike-scenarios.md) — QUICK提供
-- [急速な円高の背景と他通貨への広がりを分析する](../運用資産別/FX/yen-strength-background-outlook.md) — QUICK提供
-- [原油高の原因を局面別に比較し、影響業種までたどる](../運用資産別/マルチアセット/oil-price-surge-regime-comparison.md) — QUICK提供
-- [米国ハイパースケーラーの簿外債務を整理する](../運用資産別/マルチアセット/hyperscaler-off-balance-sheet-debt.md) — QUICK提供
-- [米30年金利上昇をイールドカーブ全体で読み解く](../運用資産別/債券/us-30y-yield-curve-bear-steepening.md) — QUICK提供
-- [ジャクソンホール前に発言シナリオと市場反応を整理する](../運用資産別/マクロ/jackson-hole-scenario-analysis.md) — QUICK提供
+[ヘッジファンド向けユースケースを見る →](ヘッジファンド/README.md)
 
-### ヘッジファンド Tier 2
-
-- [先週上昇した株式テーマの共通点を探す](../運用資産別/株式/weekly-rising-themes.md) — QUICK提供
-- [米国IPO市場を実績と今後の大型案件から分析する](../運用資産別/株式/us-ipo-market-analysis.md) — QUICK提供
-- [S&P 500とRussell 2000を比較し、小型株の上昇銘柄を特定する](../運用資産別/株式/sp500-vs-russell2000-leaders.md) — QUICK提供
-- [Robinhood株とビットコインの価格連動性を検証する](../運用資産別/マルチアセット/robinhood-bitcoin-correlation.md) — QUICK提供
-- [米長期金利上昇が日本の金利・景気・株式へどう波及するか分析する](../運用資産別/マルチアセット/us-rates-impact-on-japan.md) — QUICK提供
-
-### ヘッジファンド Tier 3
-
-- [先週上昇した株式テーマの共通点を探す](../運用資産別/株式/weekly-rising-themes.md) — QUICK提供
-- [注目テーマから米国・日本の関連企業をピックアップする](../運用資産別/株式/top-themes-and-us-japan-company-picks.md) — QUICK提供
-- [米国IPO市場を実績と今後の大型案件から分析する](../運用資産別/株式/us-ipo-market-analysis.md) — QUICK提供
-- [S&P 500とRussell 2000を比較し、小型株の上昇銘柄を特定する](../運用資産別/株式/sp500-vs-russell2000-leaders.md) — QUICK提供
-- [米小売企業の決算予定を起点に調査を組み立てる](../運用資産別/株式/us-retail-earnings-calendar-workflow.md) — QUICK提供
-- [Company CatalystでNVIDIA関連ニュースの株価影響を確認する](../運用資産別/株式/company-catalyst-nvidia-example.md) — QUICK提供
+Tier 1 / 2 / 3 は対象ユーザーの目安として一覧内で確認できます。記事本文は運用資産別の1か所に置き、ここでは重複掲載しません。
 
 ### ロングオンリー・アセットマネージャー
 
