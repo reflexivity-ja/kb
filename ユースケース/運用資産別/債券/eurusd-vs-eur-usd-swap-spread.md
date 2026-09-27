@@ -7,6 +7,8 @@ author: Reflexivity Research
 kb_imported: 2026-09-16
 status: published
 translation_status: local-only
+revised: 2026-09-27
+editorial_reviewed: 2026-09-27
 resource: Reflexivity Research conversation approved by content owner
 -->
 
@@ -25,14 +27,14 @@ EUR/USDの値動きと、EURスワップとUSDスワップの金利差の動き�
 
 ## このユースケースで確認できること
 
-- 為替だけを見るのではなく、EURとUSDの金利市場を同じ分析に入れる
+- 為替だけを見るのではなく、EURとUSDの金利市場を同じ枠組みで確認する
 - EURスワップとUSDスワップの差を、EUR/USDの方向性と並べて比較する
-- FXと金利の関係をクロスアセットの問いとして組み立てる
-- 金利差と為替の動きが一致する局面・乖離する局面を追加調査の出発点にする
+- FXと金利の関係を複数市場にまたがる問いとして組み立てる
+- 金利差と為替の動きが一致する局面・乖離する局面を見つけ、追加調査の対象を絞る
 
 ## 使いどころ
 
-EUR/USDの動きを中央銀行やマクロ材料だけで説明せず、金利市場の相対的な変化と照合したいときに使えます。債券・金利担当者にとっては、スワップ市場の変化をFXまでつなげて見る入口になり、マルチアセット担当者にとっては同じ仮説を複数市場で検証する例になります。
+EUR/USDの動きを中央銀行やマクロ材料だけで説明せず、金利市場の相対的な変化と照合したいときに使えます。債券・金利担当者にとっては、スワップ市場の変化とFXの関係まで確認する手掛かりになり、マルチアセット担当者にとっては同じ仮説を複数市場で検証する例になります。
 
 [Reflexivityで開く](https://app.reflexivity.com/app/alfred?conversationId=13b510d0-1f45-45bd-bbbf-c2c978fd3b9a&mode=research&activeHistorySidebarCategory=all)
 
