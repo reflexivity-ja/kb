@@ -22,8 +22,7 @@ publication_mode: faithful-source-preserving
 **分析タイプ:** バックテスト、ウォークフォワード分析、頑健性検証
 > 本ページは、Reflexivity上で実際に生成された調査結果を日本語で読みやすくしたものです。結論だけに要約せず、問い、データ、途中の判断、反証、前提・留意点、最終的な読みまで元のストーリーをできる限り保持しています。数値・市場環境は元の調査を実行した時点のものです。
 
-
-**[Reflexivityで元の調査を開く →](https://app.reflexivity.com/app/alfred?mode=research&conversationId=ad0d9afd-4ff6-4197-9bee-7075996df654&scrollTo=top)**
+**[Reflexivityでこの調査例を開く →](https://app.reflexivity.com/app/alfred?mode=research&conversationId=ad0d9afd-4ff6-4197-9bee-7075996df654&scrollTo=top)**
 
 ## この調査で確かめたいこと
 
@@ -96,7 +95,6 @@ EUR/USDのスポットレートで、RSIだけを使う平均回帰戦略を2年
 
 この調査は、最終結論だけでなく、**どの問いから始め、どのデータを組み合わせ、途中で何を支持・反証材料とし、どの前提・留意点を明示したか**まで含めて再利用できる調査プロセスとして掲載しています。
 
-[Reflexivityで開く](https://app.reflexivity.com/app/alfred?mode=research&conversationId=ad0d9afd-4ff6-4197-9bee-7075996df654&scrollTo=top)
 
 ---
 

@@ -15,7 +15,9 @@ resource: Reflexivity Research conversation approved by content owner
 # EUR/USDの動きとEUR・USDスワップ差の動きを比較する
 
 **著者:** Reflexivity Research  
-**主な運用資産:** 債券、金利、FX、マルチアセット  
+**主な運用資産:** 債券、金利、FX、マルチアセット
+
+**[Reflexivityでこの調査例を開く →](https://app.reflexivity.com/app/alfred?conversationId=13b510d0-1f45-45bd-bbbf-c2c978fd3b9a&mode=research&activeHistorySidebarCategory=all)**
 
 ## 調査の問い
 
@@ -36,6 +38,5 @@ EUR/USDの値動きと、EURスワップとUSDスワップの金利差の動き�
 
 EUR/USDの動きを中央銀行やマクロ材料だけで説明せず、金利市場の相対的な変化と照合したいときに使えます。債券・金利担当者にとっては、スワップ市場の変化とFXの関係まで確認する手掛かりになり、マルチアセット担当者にとっては同じ仮説を複数市場で検証する例になります。
 
-[Reflexivityで開く](https://app.reflexivity.com/app/alfred?conversationId=13b510d0-1f45-45bd-bbbf-c2c978fd3b9a&mode=research&activeHistorySidebarCategory=all)
 
 [← 債券ユースケース](README.md) · [マルチアセットユースケース](../マルチアセット/README.md) · [マクロユースケース](../マクロ/README.md) · [ユースケース一覧](../../README.md)

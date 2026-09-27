@@ -34,9 +34,10 @@ Reflexivityは過去14回の類似局面を抽出し、パターン品質を5/8�
 
 PMはこの分布を見たうえで、すぐに逆張りするのか、底固めや新たなファンダメンタル材料を待つのかを判断できます。単一の値動きをストーリーに変えるのではなく、履歴上の位置づけを先に確認することがこのユースケースのポイントです。
 
+**[Reflexivityでこの調査例を開く →](https://reflexivity.com/app/kg-insight?insightId=a5e0b764-a45f-4f90-a3be-ad2c9109f241)**
+
 ## Reflexivityで確認する
 
-[このインサイトをReflexivityで開く](https://reflexivity.com/app/kg-insight?insightId=a5e0b764-a45f-4f90-a3be-ad2c9109f241)
 
 **出典:** Reflexivity提供のインサイト事例
 

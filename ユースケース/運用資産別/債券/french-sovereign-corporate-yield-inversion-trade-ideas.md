@@ -23,8 +23,7 @@ publication_mode: faithful-source-preserving
 
 > 本ページは、Reflexivity上で実際に生成された調査結果を日本語で読みやすくしたものです。結論だけに要約せず、問い、データ、途中の判断、反証、前提・留意点、最終的な読みまで、元のストーリーをできる限り保持しています。数値・市場環境は元の調査を実行した時点のものです。
 
-
-**[Reflexivityで元の調査を開く →](https://app.reflexivity.com/app/alfred?conversationId=62abd0eb-38bd-4d1d-87b7-035405f55d14&mode=research&activeHistorySidebarCategory=all)**
+**[Reflexivityでこの調査例を開く →](https://app.reflexivity.com/app/alfred?conversationId=62abd0eb-38bd-4d1d-87b7-035405f55d14&mode=research&activeHistorySidebarCategory=all)**
 
 ## 調査の起点
 
@@ -94,7 +93,6 @@ EUR/USD、EUR/CHF、EUR/JPYのショートを候補化し、オプションを�
 
 このページでは、最終結論だけでなく、**どの問いから始め、どのデータを組み合わせ、何を支持材料・反証材料として扱い、どの前提や留意点を置いたか**まで追えるようにしています。相対価値の着想を、債券だけでなくFX・株式・クレジットまで検討する流れを確認できます。
 
-[Reflexivityで開く](https://app.reflexivity.com/app/alfred?conversationId=62abd0eb-38bd-4d1d-87b7-035405f55d14&mode=research&activeHistorySidebarCategory=all)
 
 ---
 

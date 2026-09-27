@@ -22,8 +22,7 @@ publication_mode: faithful-source-preserving
 **分析タイプ:** 反証分析、投資仮説検証、シナリオ分析
 > 本ページは、Reflexivity上で実際に生成された調査結果を日本語で読みやすくしたものです。結論だけに要約せず、問い、データ、途中の判断、反証、前提・留意点、最終的な読みまで元のストーリーをできる限り保持しています。数値・市場環境は元の調査を実行した時点のものです。
 
-
-**[Reflexivityで元の調査を開く →](https://app.reflexivity.com/app/alfred?mode=research&conversationId=4fa62dde-58f4-4b3b-b433-837634dc84fb&scrollTo=top)**
+**[Reflexivityでこの調査例を開く →](https://app.reflexivity.com/app/alfred?mode=research&conversationId=4fa62dde-58f4-4b3b-b433-837634dc84fb&scrollTo=top)**
 
 ## 調査の出発点
 
@@ -101,7 +100,6 @@ publication_mode: faithful-source-preserving
 
 このページでは、「米国景気は強い」という見方をそのまま補強するのではなく、**需要、雇用、実質賃金、景況感、信用、金利**を順に確認し、どこに弱さが出ているかを反証方向から検証する流れを確認できます。
 
-[Reflexivityで開く](https://app.reflexivity.com/app/alfred?mode=research&conversationId=4fa62dde-58f4-4b3b-b433-837634dc84fb&scrollTo=top)
 
 ---
 

@@ -34,9 +34,10 @@ VIPERは、設置時に大がかりなスペース変更を必要とせず、60�
 
 今後見るべきポイントは、ディーラーグループへの導入状況、設置台数、そしてサービスレーンからの車両仕入れがACVのマーケットプレイス取引量にどの程度つながるかです。株価下落にすぐ逆張りするかどうかよりも、製品展開が実際のKPIに変わる過程を追うことがこのユースケースの中心です。
 
+**[Reflexivityでこの調査例を開く →](https://reflexivity.com/app/kg-insight?insightId=f045e1af-ddc4-4f13-8d2c-6ccf806a49f1)**
+
 ## Reflexivityで確認する
 
-[このインサイトをReflexivityで開く](https://reflexivity.com/app/kg-insight?insightId=f045e1af-ddc4-4f13-8d2c-6ccf806a49f1)
 
 **出典:** Reflexivity提供のインサイト事例
 

@@ -23,8 +23,7 @@ publication_mode: faithful-source-preserving
 
 > 本ページは、Reflexivity上で実際に生成された調査結果を日本語で読みやすくしたものです。結論だけに要約せず、問い、データ、途中の判断、反証、前提・留意点、最終的な読みまで、元のストーリーをできる限り保持しています。数値・市場環境は元の調査を実行した時点のものです。
 
-
-**[Reflexivityで元の調査を開く →](https://app.reflexivity.com/app/alfred?conversationId=5c412f9a-ea78-4c81-8911-f0419ddeefd8&mode=research&activeHistorySidebarCategory=all)**
+**[Reflexivityでこの調査例を開く →](https://app.reflexivity.com/app/alfred?conversationId=5c412f9a-ea78-4c81-8911-f0419ddeefd8&mode=research&activeHistorySidebarCategory=all)**
 
 ## 実際の問い
 
@@ -87,7 +86,6 @@ publication_mode: faithful-source-preserving
 
 このページでは、よく知られた市場シグナルをそのまま受け入れず、**先行期間、偽陽性、見逃し、定義の妥当性**まで分解して検証する流れを確認できます。別のイールドカーブ指標や景気指標と比較するときにも同じ考え方を使えます。
 
-[Reflexivityで開く](https://app.reflexivity.com/app/alfred?conversationId=5c412f9a-ea78-4c81-8911-f0419ddeefd8&mode=research&activeHistorySidebarCategory=all)
 
 ---
 

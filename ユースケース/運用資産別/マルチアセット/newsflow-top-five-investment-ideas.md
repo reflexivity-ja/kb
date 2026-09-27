@@ -15,7 +15,9 @@ resource: Reflexivity Research conversation approved by content owner
 # その日のニュースフローから検討すべき投資アイデアを5件抽出する
 
 **著者:** Reflexivity Research  
-**主な運用資産:** マルチアセット、マクロ、株式、債券  
+**主な運用資産:** マルチアセット、マクロ、株式、債券
+
+**[Reflexivityでこの調査例を開く →](https://app.reflexivity.com/app/alfred?mode=research&conversationId=98829b32-be9b-4e02-8064-0901c5b6d28b&scrollTo=top)**
 
 ## 調査の問い
 
@@ -36,6 +38,5 @@ resource: Reflexivity Research conversation approved by content owner
 
 朝会前や市場オープン前のニュース確認、日中に新しいテーマを探すとき、あるいは担当資産以外も含めて調査候補を広げたいときに使えます。マクロ材料、政策、企業ニュース、コモディティ、金利、FXなどを一度に見渡し、その後の調査テーマに優先順位を付ける出発点になります。
 
-[Reflexivityで開く](https://app.reflexivity.com/app/alfred?mode=research&conversationId=98829b32-be9b-4e02-8064-0901c5b6d28b&scrollTo=top)
 
 [← マルチアセットユースケース](README.md) · [マクロユースケース](../マクロ/README.md) · [ユースケース一覧](../../README.md)

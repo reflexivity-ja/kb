@@ -34,9 +34,10 @@ Arpalusは棚情報を把握する技術を持ち、買収発表では95%超と�
 
 その後は、Arpalusの技術がInstacartの既存顧客基盤にどの程度導入されるか、店舗運営向け機能が利用拡大につながるかを追うことで、買収の意味を継続的に検証できます。
 
+**[Reflexivityでこの調査例を開く →](https://reflexivity.com/app/kg-insight?insightId=0b72cda9-18ac-423b-86d4-8b04b7fe2394)**
+
 ## Reflexivityで確認する
 
-[このインサイトをReflexivityで開く](https://reflexivity.com/app/kg-insight?insightId=0b72cda9-18ac-423b-86d4-8b04b7fe2394)
 
 **出典:** Reflexivity提供のインサイト事例
 

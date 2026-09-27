@@ -34,9 +34,10 @@ Reflexivityはこの局面について、過去16回の類似パターンを比�
 
 その後の検証材料としては、臭素価格と中国需要の変化を追えます。また、同じ化学品サイクルをより流動性の高い銘柄で確認する比較対象としてALBを使うこともできます。
 
+**[Reflexivityでこの調査例を開く →](https://reflexivity.com/app/stream/focus?activeDrawer=insights&entityTag=gure_nasd&activeInsight=1d6ec2d3-63bf-438b-b8bd-1b214f8f19af)**
+
 ## Reflexivityで確認する
 
-[このインサイトをReflexivityで開く](https://reflexivity.com/app/stream/focus?activeDrawer=insights&entityTag=gure_nasd&activeInsight=1d6ec2d3-63bf-438b-b8bd-1b214f8f19af)
 
 **出典:** Reflexivity提供のインサイト事例
 

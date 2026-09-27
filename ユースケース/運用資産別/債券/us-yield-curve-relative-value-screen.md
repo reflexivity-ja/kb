@@ -23,8 +23,7 @@ publication_mode: faithful-source-preserving
 
 > 本ページは、Reflexivity上で実際に生成された調査結果を日本語で読みやすくしたものです。結論だけに要約せず、問い、データ、途中の判断、反証、前提・留意点、最終的な読みまで、元のストーリーをできる限り保持しています。数値・市場環境は元の調査を実行した時点のものです。
 
-
-**[Reflexivityで元の調査を開く →](https://app.reflexivity.com/app/alfred?conversationId=7a3cccb2-8503-4530-b85b-34386f208480&mode=research&activeHistorySidebarCategory=all)**
+**[Reflexivityでこの調査例を開く →](https://app.reflexivity.com/app/alfred?conversationId=7a3cccb2-8503-4530-b85b-34386f208480&mode=research&activeHistorySidebarCategory=all)**
 
 ## この原資料の位置づけ
 
@@ -62,7 +61,6 @@ publication_mode: faithful-source-preserving
 
 このページでは、相対価値候補を**過去分布上の位置だけで選ばず、キャリーやロールダウンを加えて判断を修正する**流れを確認できます。シグナルと保有コストが反対方向を示すときに、候補を見送る判断まで含めて検討する例です。
 
-[Reflexivityで開く](https://app.reflexivity.com/app/alfred?conversationId=7a3cccb2-8503-4530-b85b-34386f208480&mode=research&activeHistorySidebarCategory=all)
 
 ---
 

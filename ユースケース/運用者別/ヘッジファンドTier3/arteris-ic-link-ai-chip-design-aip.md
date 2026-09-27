@@ -32,9 +32,10 @@ Arterisのようにアナリストカバレッジが薄い小型株では、AI�
 
 投資仮説を検証する際には、まず新規ライセンスの獲得が実際に増えるかを確認し、その後にロイヤルティ収入へつながるかを追います。**ニュースを即座に売上として扱わず、新規案件の獲得から収益化までを段階に分けて見る**ことが、このユースケースの中心です。
 
+**[Reflexivityでこの調査例を開く →](https://reflexivity.com/app/kg-insight?insightId=c91f4ed8-e44b-4520-87d4-596f49b66cfe)**
+
 ## Reflexivityで確認する
 
-[このインサイトをReflexivityで開く](https://reflexivity.com/app/kg-insight?insightId=c91f4ed8-e44b-4520-87d4-596f49b66cfe)
 
 **出典:** Reflexivity提供のインサイト事例
 
