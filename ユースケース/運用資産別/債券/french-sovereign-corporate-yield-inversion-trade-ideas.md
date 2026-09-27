@@ -91,6 +91,8 @@ EUR/USD、EUR/CHF、EUR/JPYのショートを候補化し、オプションを�
 
 このページでは、最終結論だけでなく、**どの問いから始め、どのデータを組み合わせ、何を支持材料・反証材料として扱い、どの前提や留意点を置いたか**まで追えるようにしています。相対価値の着想を、債券だけでなくFX・株式・クレジットまで検討する流れを確認できます。
 
+[Reflexivityで開く](https://app.reflexivity.com/app/alfred?conversationId=62abd0eb-38bd-4d1d-87b7-035405f55d14&mode=research&activeHistorySidebarCategory=all)
+
 ---
 
 [← 運用資産別ユースケース](../README.md) · [ユースケース一覧](../../README.md)
