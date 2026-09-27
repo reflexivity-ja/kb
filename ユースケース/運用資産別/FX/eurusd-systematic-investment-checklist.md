@@ -16,6 +16,8 @@ publication_mode: faithful-source-preserving
 
 # EUR/USDの投資判断を体系的なチェックリストに落とし込む
 
+[← 運用資産別ユースケース](../README.md) · [ユースケース一覧](../../README.md)
+
 **著者:** Reflexivity Research  
 **主な運用資産:** FX（EUR/USD）  
 **想定利用者:** FX PM、マクロPM、マルチアセット運用者  
