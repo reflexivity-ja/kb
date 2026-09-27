@@ -11,7 +11,7 @@ published: 2026-08-04
 drafted: 2026-09-07
 revised: 2026-09-27
 status: draft
-canonical_path: "use-cases/hedge-fund-tier-3/fortrea-unusually-large-selloff-ftre.md"
+canonical_path: "usecases/byasset/equities/fortrea-unusually-large-selloff-ftre.md"
 translation_status: review-needed
 editorial_reviewed: 2026-09-27
 resource: "Reflexivity Insights Proof Set — Sales Enablement.docx"
@@ -19,11 +19,11 @@ resource: "Reflexivity Insights Proof Set — Sales Enablement.docx"
 
 # Fortrea：異例の大幅下落 (FTRE) - 弱気シグナル
 
-[← ヘッジファンド Tier 3](README.md) · [ユースケース一覧](../../README.md)
+[← 株式ユースケース](README.md) · [ユースケース一覧](../../README.md)
 
 > 以下は対象日時点のプラットフォーム出力をもとにした例です。現在の投資判断に使う場合は、最新の市場データとあわせて確認してください。
 
-**想定運用者:** ヘッジファンド Tier 3（小規模・新興）  
+**対象ユーザー:** ヘッジファンド Tier 3（小規模・新興）  
 **インサイトの種類:** シナリオ・インサイト  
 **シグナル:** 弱気  
 **対象日:** 2026年8月4日
@@ -45,6 +45,6 @@ PMはこの分布を見たうえで、すぐに逆張りするのか、底固め
 
 ---
 
-[← ヘッジファンド Tier 3](README.md) · [ユースケース一覧](../../README.md)
+[← 株式ユースケース](README.md) · [ユースケース一覧](../../README.md)
 
 ご質問や詳細については **gtm@reflexivity.com** までお問い合わせください。
