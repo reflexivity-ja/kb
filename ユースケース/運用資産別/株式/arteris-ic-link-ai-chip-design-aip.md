@@ -11,7 +11,7 @@ published: 2026-07-08
 drafted: 2026-09-07
 revised: 2026-09-27
 status: draft
-canonical_path: "use-cases/hedge-fund-tier-3/arteris-ic-link-ai-chip-design-aip.md"
+canonical_path: "usecases/byasset/equities/arteris-ic-link-ai-chip-design-aip.md"
 translation_status: review-needed
 editorial_reviewed: 2026-09-27
 resource: "Reflexivity Insights Proof Set — Sales Enablement.docx"
@@ -19,11 +19,11 @@ resource: "Reflexivity Insights Proof Set — Sales Enablement.docx"
 
 # Arteris / IC-Link：AIチップ設計 (AIP) - 強気
 
-[← ヘッジファンド Tier 3](README.md) · [ユースケース一覧](../../README.md)
+[← 株式ユースケース](README.md) · [ユースケース一覧](../../README.md)
 
 > 以下は対象日時点のプラットフォーム出力をもとにした例です。現在の投資判断に使う場合は、最新の市場データとあわせて確認してください。
 
-**想定運用者:** ヘッジファンド Tier 3（小規模・新興）  
+**対象ユーザー:** ヘッジファンド Tier 3（小規模・新興）  
 **インサイトの種類:** 企業カタリスト  
 **シグナル:** 強気  
 **対象日:** 2026年7月8日
@@ -43,6 +43,6 @@ Arterisのようにアナリストカバレッジが薄い小型株では、AI�
 
 ---
 
-[← ヘッジファンド Tier 3](README.md) · [ユースケース一覧](../../README.md)
+[← 株式ユースケース](README.md) · [ユースケース一覧](../../README.md)
 
 ご質問や詳細については **gtm@reflexivity.com** までお問い合わせください。
