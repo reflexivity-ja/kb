@@ -15,14 +15,14 @@
 
 ## パートナー提供のユースケース
 
-- [原油高の原因を局面別に比較し、影響業種までたどる](oil-price-surge-regime-comparison.md) - 著者: QUICK | 提供日: 2026-09-14
-- [Robinhood株とビットコインの価格連動性を検証する](robinhood-bitcoin-correlation.md) - 著者: QUICK | 提供日: 2026-08-24
-- [米国ハイパースケーラーの簿外債務を整理する](hyperscaler-off-balance-sheet-debt.md) - 著者: QUICK | 提供日: 2026-08-05
-- [米長期金利上昇が日本の金利・景気・株式へどう波及するか分析する](us-rates-impact-on-japan.md) - 著者: QUICK | 提供日: 2026-08-20
-- [ニュースからテーマ・国・企業への影響を追う](market-catalyst-news-to-themes-countries-companies.md) - 著者: QUICK | 提供日: 2026-08-17
-- [住宅・貴金属・個別株・信用不安をAlfredで調査する](alfred-cross-asset-question-examples.md) - 著者: QUICK | 提供日: 2026-02-12
-- [イラン攻撃シナリオの原油・金・株式・ドルへの影響を分析する](iran-attack-cross-asset-impact.md) - 著者: QUICK | 提供日: 2026-03-02
-- [米国株と日本株の市場けん引テーマを比較する](../株式/us-japan-market-leading-themes.md) - 著者: QUICK | 提供日: 2026-05-15
-- [FOMC前に利上げシナリオと市場への波及を整理する](../マクロ/fomc-rate-hike-scenarios.md) - 著者: QUICK | 提供日: 2026-09-15
+- [原油高の原因を局面別に比較し、影響業種までたどる](oil-price-surge-regime-comparison.md) — QUICK提供 | 2026-09-14
+- [Robinhood株とビットコインの価格連動性を検証する](robinhood-bitcoin-correlation.md) — QUICK提供 | 2026-08-24
+- [米国ハイパースケーラーの簿外債務を整理する](hyperscaler-off-balance-sheet-debt.md) — QUICK提供 | 2026-08-05
+- [米長期金利上昇が日本の金利・景気・株式へどう波及するか分析する](us-rates-impact-on-japan.md) — QUICK提供 | 2026-08-20
+- [ニュースからテーマ・国・企業への影響を追う](market-catalyst-news-to-themes-countries-companies.md) — QUICK提供 | 2026-08-17
+- [住宅・貴金属・個別株・信用不安をAlfredで調査する](alfred-cross-asset-question-examples.md) — QUICK提供 | 2026-02-12
+- [イラン攻撃シナリオの原油・金・株式・ドルへの影響を分析する](iran-attack-cross-asset-impact.md) — QUICK提供 | 2026-03-02
+- [米国株と日本株の市場けん引テーマを比較する](../株式/us-japan-market-leading-themes.md) — QUICK提供 | 2026-05-15
+- [FOMC前に利上げシナリオと市場への波及を整理する](../マクロ/fomc-rate-hike-scenarios.md) — QUICK提供 | 2026-09-15
 
 [← 運用資産別](../README.md) · [ユースケース一覧](../../README.md)
