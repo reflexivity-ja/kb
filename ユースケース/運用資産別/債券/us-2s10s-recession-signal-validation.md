@@ -16,6 +16,8 @@ publication_mode: faithful-source-preserving
 
 # 2年・10年金利差は本当に景気後退を予測できるか検証する
 
+[← 運用資産別ユースケース](../README.md) · [ユースケース一覧](../../README.md)
+
 **著者:** Reflexivity Research  
 **主な運用資産:** 債券（米国金利）、マクロ  
 **想定利用者:** 債券PM、マクロストラテジスト、アセットアロケーター  
