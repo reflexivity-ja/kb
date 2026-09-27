@@ -14,6 +14,8 @@
 
 ## パートナー提供のユースケース
 
+- [米中首脳会談の前後でS&P500がどう動いたか確認する](us-china-summit-sp500-impact.md) — QUICK提供 | 2026-09-24
+
 - [長い調査指示で複雑なテーマを構造化する](structured-long-form-research-prompts.md) — QUICK提供 | 2026-06-18
 - [FOMC前に利上げシナリオと市場への波及を整理する](fomc-rate-hike-scenarios.md) — QUICK提供 | 2026-09-15
 - [今週の米国市場イベントを重要度順に整理する](weekly-us-market-events.md) — QUICK提供 | 2026-09-08
