@@ -3,7 +3,6 @@ id: RX-USECASE-0049
 type: use-case
 language: ja
 locale: ja
-author: 株式会社QUICK
 provider: 株式会社QUICK
 provided: 2026-09-03
 status: published
@@ -18,10 +17,9 @@ publication_mode: faithful-source-preserving
 
 # ベージュブックをマーケットカタリストから確認する
 
-**著者:** 株式会社QUICK  
 **提供日:** 2026-09-03  
 **主な運用資産:** マクロ、株式、債券  
-**想定利用者:** ウェルスマネジメント / RIA、ロングオンリー・アセットマネージャー、ヘッジファンド Tier 1
+**対象ユーザー:** ウェルスマネジメント / RIA、ロングオンリー・アセットマネージャー、ヘッジファンド Tier 1
 > 本ページは株式会社QUICKから提供されたユースケースを、顧客名・宛先・メールアドレス・署名・非公開URL等を除き、元資料の説明順を可能な限り保持して掲載しています。
 
 ## 元資料で紹介された使い方
@@ -56,3 +54,6 @@ publication_mode: faithful-source-preserving
 ニュースを単に一覧で読むのではなく、マーケットカタリストから重要イベントの分析へ入り、対象国・地域・テーマを自分の担当領域に合わせて切り替えるワークフローの例です。
 
 [← ユースケース一覧](../../README.md)
+
+
+**ご提供元:** 株式会社QUICK
