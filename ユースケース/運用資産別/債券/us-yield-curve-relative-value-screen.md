@@ -16,6 +16,8 @@ publication_mode: faithful-source-preserving
 
 # 米国イールドカーブからスティープナー／フラットナー候補をスクリーニングする
 
+[← 運用資産別ユースケース](../README.md) · [ユースケース一覧](../../README.md)
+
 **著者:** Reflexivity Research  
 **主な運用資産:** 債券（米国金利）  
 **想定利用者:** 債券PM、金利運用者、相対価値運用  
