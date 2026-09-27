@@ -9,23 +9,24 @@ language: ja
 locale: ja-JP
 published: 2026-07-16
 drafted: 2026-09-07
-revised: 2026-09-16
+revised: 2026-09-27
 status: draft
 canonical_path: "use-cases/hedge-fund-tier-3/instacart-buys-arpalus-to-deepen-shelf-intelligence-stack-cart.md"
 translation_status: review-needed
+editorial_reviewed: 2026-09-27
 resource: "Reflexivity Insights Proof Set — Sales Enablement.docx"
 -->
 
 # Instacart：Arpalus買収で棚情報インテリジェンスを強化 (CART) - 強気
 
-> **レビュー用ドラフト** - 以下は対象日時点のプラットフォーム出力をもとにした例です。現在の投資判断に使う場合は、最新の市場データとあわせて確認してください。
+> 以下は対象日時点のプラットフォーム出力をもとにした例です。現在の投資判断に使う場合は、最新の市場データとあわせて確認してください。
 
 **想定運用者:** ヘッジファンド Tier 3（小規模・新興）  
 **インサイトの種類:** 企業カタリスト  
 **シグナル:** 強気  
 **対象日:** 2026年7月16日
 
-InstacartによるArpalus買収は規模の大きな案件ではありませんが、事業の見方を変える可能性があります。配送事業の延長として見るだけではなく、**小売店向けのソフトウェアと店舗運営ワークフローへどこまで入り込めるか**という観点で整理します。
+InstacartによるArpalus買収は規模の大きな案件ではありませんが、事業の見方を変える可能性があります。配送事業の延長として見るだけではなく、**小売店向けソフトウェアと店舗運営業務へどこまで入り込めるか**という観点で整理します。
 
 Arpalusは棚情報を把握する技術を持ち、買収発表では95%超とされる精度、2,200超のバナーにまたがる約10万店舗という規模が示されました。これをInstacartの既存ネットワークと組み合わせることで、配送だけでなく、小売現場の在庫・棚管理に関わるサービスへ展開できる可能性があります。
 
@@ -37,7 +38,7 @@ Arpalusは棚情報を把握する技術を持ち、買収発表では95%超と�
 
 [このインサイトをReflexivityで開く](https://reflexivity.com/app/kg-insight?insightId=0b72cda9-18ac-423b-86d4-8b04b7fe2394)
 
-**出典:** `Reflexivity Insights Proof Set - Sales Enablement.docx`
+**出典:** Reflexivity提供のインサイト事例
 
 ---
 
