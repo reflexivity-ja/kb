@@ -19,6 +19,8 @@ resource: "Reflexivity Insights Proof Set — Sales Enablement.docx"
 
 # Fortrea：異例の大幅下落 (FTRE) - 弱気シグナル
 
+[← ヘッジファンド Tier 3](README.md) · [ユースケース一覧](../../README.md)
+
 > 以下は対象日時点のプラットフォーム出力をもとにした例です。現在の投資判断に使う場合は、最新の市場データとあわせて確認してください。
 
 **想定運用者:** ヘッジファンド Tier 3（小規模・新興）  
