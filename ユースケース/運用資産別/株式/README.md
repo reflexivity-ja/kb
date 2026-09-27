@@ -15,6 +15,9 @@
 
 ## パートナー提供のユースケース
 
+- [マグニフィセント7の財務体力と金利耐性を比較する](magnificent-seven-financial-comparison.md) — QUICK提供 | 2026-09-17
+- [上昇中の米国株から関連する日本企業を探す](rising-us-stocks-related-japanese-companies.md) — QUICK提供 | 2026-09-18
+
 - [米国株と日本株の市場けん引テーマを比較する](us-japan-market-leading-themes.md) — QUICK提供 | 2026-05-15
 - [先週上昇した株式テーマの共通点を探す](weekly-rising-themes.md) — QUICK提供 | 2026-08-03
 - [新型iPhone発表前後のAAPL株価を過去5年で検証する](iphone-launch-and-aapl-price-pattern.md) — QUICK提供 | 2026-09-11
